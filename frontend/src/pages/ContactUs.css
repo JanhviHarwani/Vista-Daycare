@@ -1,0 +1,50 @@
+.whole_contact {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 100px;
+    margin: 100px;
+}
+
+.contact_column {
+    flex: 1;
+    margin: 10px;
+    min-width: 300px;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+
+.map{
+    padding-top: 30px;
+}
+
+.contact_column ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.operating-hours-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.day {
+    flex: 1;
+    text-align: left;
+}
+
+.time {
+    flex: 1;
+    text-align: right;
+}
+
+.contact_column h2 {
+    text-align: left;
+    margin-left: 0;
+    font-size: 30px;
+}

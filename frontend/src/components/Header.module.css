@@ -4,7 +4,9 @@
   top: 0;
   left: 0;
   right: 0;
-  background-color: rgba(162, 132, 94, 0.14);
+  /*background-color: rgba(162, 132, 94, 0.14);*/
+  background-color: #F2EEE8;
+  z-index: 1000;
 }
 /* Navbar.module.css */
 .select {
@@ -54,10 +56,14 @@
 .logo_text {
   margin-top: 0px;
 }
-.logo_wrapper {
+
+.logo_wrapper img {
+  width: 270px;
+  height: auto;
   display: flex;
   flex-direction: column;
 }
+
 .nav_wrapper {
   display: flex;
   width: 40%;
