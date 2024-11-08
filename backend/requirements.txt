@@ -1,0 +1,11 @@
+
+Flask==2.2.3
+boto3==1.26.9
+botocore==1.29.9
+PyJWT==2.7.0
+python-dotenv==0.21.0
+werkzeug==2.2.3
+flask-bcrypt
+spacy
+dateparser
+nltk
