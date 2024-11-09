@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import css from "./Header.module.css";
 import { Link, useNavigate } from "react-router-dom";
+
 function Header() {
   const navigate = useNavigate();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const path = event.target.value;
@@ -11,6 +13,7 @@ function Header() {
       navigate(path);
     }
   };
+
   const handleContactClick = () => {
     navigate("/contactus");
   };
@@ -19,12 +22,13 @@ function Header() {
     <header className={css.main_header_div}>
       <div className={css.header_wrapper}>
         <div className={css.logo_wrapper}>
-          <div>
+          <>
             <img src={logo} alt="logo" />
-          </div>
+          </>
           <h3 className={css.logo_text}>ADULT DAY HEALTH CARE</h3>
         </div>
-        <nav className={css.nav_wrapper}>
+
+        <nav className={`${css.nav_wrapper} ${isMobileMenuOpen ? css.open : ''}`}>
           <Link className={css.nav_links} to="/">
             Home
           </Link>
@@ -48,10 +52,20 @@ function Header() {
             <option value="/activities">Events Calendar</option>
             <option value="/eligibility">Eligibility & Insurance</option>
           </select>
+          <div className={css.button_wrapper_custom}>
+            <button onClick={handleContactClick}>Contact Us</button>
+          </div>
         </nav>
-        <div className={css.button_wrapper}>
-          <button onClick={handleContactClick}>Contact Us</button>
-        </div>
+
+        <button 
+          className={css.mobile_menu_button}
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </header>
   );

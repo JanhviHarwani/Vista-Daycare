@@ -8,6 +8,7 @@ import Eligibility from './pages/Eligibility'
 import AboutUs from './pages/AboutUs'
 import ContactUs from './pages/ContactUs'
 import NotFound from './pages/NotFound'
+import './index.css'
 
 function App() {
 
