@@ -26,6 +26,7 @@ export const AddMealForm = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
             onChange={(value) => setFormData({ ...formData, mealType: value })}
             placeholder="Enter meal type (e.g., Breakfast, Lunch)"
             required
+            aria-describedby="mealTypeDescription"
           />
           <FormInput
             label="Menu Description"
@@ -34,6 +35,7 @@ export const AddMealForm = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
             onChange={(value) => setFormData({ ...formData, menu: value })}
             placeholder="Enter menu details"
             required
+            aria-describedby="menuDescription"
           />
           <FormInput
             label="Date"
@@ -43,10 +45,10 @@ export const AddMealForm = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
             required
           />
           <div style={formStyles.buttons}>
-            <button type="button" onClick={onClose} style={formStyles.cancelBtn}>
+            <button type="button" onClick={onClose} style={formStyles.cancelBtn} aria-label="Cancel meal creation">
               Cancel
             </button>
-            <button type="submit" style={formStyles.submitBtn}>
+            <button type="submit" style={formStyles.submitBtn} aria-label="Submit meal details">
               Add Meal
             </button>
           </div>
@@ -78,6 +80,7 @@ export const AddEventForm = ({ isOpen, onClose }: { isOpen: boolean; onClose: ()
             onChange={(value) => setFormData({ ...formData, name: value })}
             placeholder="Enter event name"
             required
+            aria-describedby="eventNameDescription"
           />
           <FormInput
             label="Date"
@@ -94,10 +97,10 @@ export const AddEventForm = ({ isOpen, onClose }: { isOpen: boolean; onClose: ()
             required
           />
           <div style={formStyles.buttons}>
-            <button type="button" onClick={onClose} style={formStyles.cancelBtn}>
+            <button type="button" onClick={onClose} style={formStyles.cancelBtn} aria-label="Cancel event creation">
               Cancel
             </button>
-            <button type="submit" style={formStyles.submitBtn}>
+            <button type="submit" style={formStyles.submitBtn} aria-label="Submit event details">
               Add Event
             </button>
           </div>

@@ -144,6 +144,11 @@ export const formStyles = {
       color: '#374151',
       marginBottom: '0.5rem'
     },
+    error: {
+      color: "#dc2626",
+      fontSize: "0.875rem",
+      marginTop: "0.25rem",
+    },
     input: {
     width: '30rem',
       padding: '0.75rem 1rem',

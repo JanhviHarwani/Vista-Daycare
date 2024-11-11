@@ -23,19 +23,20 @@ const MapView: React.FC = () => {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="Vista Day Care Location"
+              aria-label="Google Maps location for Vista Day Care"
             />
           </div>
-          <div className={css.location_highlights}>
-            <div className={css.highlight_item}>
-              <div className={css.icon}>📍</div>
+          <div className={css.location_highlights} >
+            <div className={css.highlight_item} aria-label="Location Highlight">
+              <div className={css.icon} role="img" aria-label="Map Pin">📍</div>
               <p>Conveniently located in Maywood</p>
             </div>
-            <div className={css.highlight_item}>
-              <div className={css.icon}>🚌</div>
+            <div className={css.highlight_item} aria-label="Transport Highlight">
+              <div className={css.icon} role="img" aria-label="Bus">🚌</div>
               <p>Transportation service available</p>
             </div>
-            <div className={css.highlight_item}>
-              <div className={css.icon}>🅿️</div>
+            <div className={css.highlight_item} aria-label="Parking Highlight">
+              <div className={css.icon} role="img" aria-label="Parking">🅿️</div>
               <p>Ample parking available</p>
             </div>
           </div>

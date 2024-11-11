@@ -17,4 +17,6 @@ export interface FormInputProps {
   onChange: (value: string) => void;
   placeholder?: string;
   required?: boolean;
+  error?: string;
+  id?: string;
 }

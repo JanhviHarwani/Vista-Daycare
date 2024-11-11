@@ -23,12 +23,12 @@ function Header() {
       <div className={css.header_wrapper}>
         <div className={css.logo_wrapper}>
           <>
-            <img src={logo} alt="logo" />
+            <img src={logo} alt="Logo of Adult Day Health Care" />
           </>
           <h3 className={css.logo_text}>ADULT DAY HEALTH CARE</h3>
         </div>
 
-        <nav className={`${css.nav_wrapper} ${isMobileMenuOpen ? css.open : ''}`}>
+        <nav className={`${css.nav_wrapper} ${isMobileMenuOpen ? css.open : ''}`} aria-label="Main navigation">
           <Link className={css.nav_links} to="/">
             Home
           </Link>
@@ -45,6 +45,7 @@ function Header() {
             onChange={handleChange}
             defaultValue=""
             className={css.select}
+            aria-label="Additional navigation options"
           >
             <option value="" disabled>
               More
@@ -53,7 +54,7 @@ function Header() {
             <option value="/eligibility">Eligibility & Insurance</option>
           </select>
           <div className={css.button_wrapper_custom}>
-            <button onClick={handleContactClick}>Contact Us</button>
+            <button onClick={handleContactClick}aria-label="Go to the contact us page">Contact Us</button>
           </div>
         </nav>
 
@@ -61,6 +62,7 @@ function Header() {
           className={css.mobile_menu_button}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
+          aria-expanded={isMobileMenuOpen ? "true" : "false"}
         >
           <span></span>
           <span></span>

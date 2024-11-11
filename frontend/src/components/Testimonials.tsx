@@ -35,9 +35,9 @@ const Testimonials: React.FC = () => {
   ];
 
   return (
-    <section className={css.testimonials_section}>
+    <section className={css.testimonials_section} aria-labelledby="testimonials-heading">
       <div className={css.content_wrapper}>
-      <h1 className={css.title}>
+      <h1 id="testimonials-heading" className={css.title}>
           Testimonials
           <div className={css.title_underline}></div>
         </h1>
@@ -48,14 +48,14 @@ const Testimonials: React.FC = () => {
               <div className={css.avatar}>
                 <img 
                   src={testimonial.image} 
-                  alt={`${testimonial.name}'s portrait`}
+                  alt={`Portrait of ${testimonial.name}, ${testimonial.role}`} 
                   className={css.avatar_image}
                   width={"75%"}
                 />
               </div>
               
               <div className={css.card_content}>
-                <div className={css.rating}>
+                <div className={css.rating} aria-label={`Rating: ${testimonial.rating} out of 5`}>
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <span key={i} className={css.star}>⭐</span>
                   ))}

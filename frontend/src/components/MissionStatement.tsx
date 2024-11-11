@@ -4,11 +4,11 @@ import css from './MissionStatement.module.css';
 
 const MissionStatement: React.FC = () => {
   return (
-    <section className={css.mission_section}>
+    <section className={css.mission_section} aria-labelledby="mission-heading">
       <div className={css.background_decor}></div>
       
       <div className={css.content_wrapper}>
-      <h1 className={css.title}>
+      <h1 id="mission-heading" className={css.title}>
           Mission Statement
           <div className={css.title_underline}></div>
         </h1>
@@ -20,9 +20,9 @@ const MissionStatement: React.FC = () => {
         <div className={css.cards_container}>
           <div className={css.card}>
             <div className={css.card_content}>
-              <div className={css.icon_wrapper}>
+              <div className={css.icon_wrapper} role="img" aria-label="Care and support icon">
                 {/* You can use an actual icon here */}
-                <svg viewBox="0 0 24 24" className={css.icon}>
+                <svg viewBox="0 0 24 24" className={css.icon} aria-hidden="true">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm4.17-5.24l-1.1-1.1c.71-1.33.53-3.01-.59-4.13-1.33-1.33-3.47-1.33-4.8 0s-1.33 3.47 0 4.8 3.47 1.33 4.8 0l1.1 1.1c.76.76 2 .76 2.76 0 .76-.76.76-2 0-2.76z"/>
                 </svg>
               </div>
