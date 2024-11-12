@@ -1,49 +1,45 @@
-// VideoCarousel.tsx
-import React, { useState, useRef } from 'react';
-import css from './videoCarousel.module.css';
+import React, { useState, useRef, useEffect } from 'react';
+import { getSignedMediaUrl } from '../lib/aws-config';
+import css from './VideoCarousel.module.css';
+import { mediaItems, MediaWithUrl } from '../types/common';
 
-// Define types for our media items
-type MediaItem = {
-  type: 'video' | 'image';
-  url: string;
-  caption: string;
-};
-
-const VideoCarousel: React.FC = () => {
+export const VideoCarousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [mediaUrls, setMediaUrls] = useState<MediaWithUrl[]>([]);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const mediaItems: MediaItem[] = [
-    {
-      type: 'video',
-      url: "/videos/full_day_care.MP4",
-      caption: "A Day in Life at Vista Adult Day Care",
-    },
-    {
-      type: 'video',
-      url: "/videos/Gym.MP4",
-      caption: "Our Modern Facilities",
-    },
-    {
-      type: 'image',
-      url: "/images/happy_faces.jpg", // Put your image in public/images/
-      caption: "Happy Faces",
-    },
-    {
-      type: 'image',
-      url: "/images/team.jpg", // Put your image in public/images/
-      caption: "Our Team",
-    }
-  ];
+  useEffect(() => {
+    const loadMediaUrls = async () => {
+      try {
+        setIsLoading(true);
+        const urls = await Promise.all(
+          mediaItems.map(async (item) => ({
+            type: item.type,
+            url: await getSignedMediaUrl(item.key),
+            caption: item.caption
+          }))
+        );
+        setMediaUrls(urls);
+        setError(null);
+      } catch (error) {
+        console.error('Error loading media:', error);
+        setError('Error loading media content');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadMediaUrls();
+  }, []);
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev === mediaItems.length - 1 ? 0 : prev + 1));
+    setCurrentIndex((prev) => (prev === mediaUrls.length - 1 ? 0 : prev + 1));
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev === 0 ? mediaItems.length - 1 : prev - 1));
+    setCurrentIndex((prev) => (prev === 0 ? mediaUrls.length - 1 : prev - 1));
   };
 
   const handleLoadStart = () => {
@@ -64,23 +60,21 @@ const VideoCarousel: React.FC = () => {
     setError('Error loading media. Please try again.');
   };
 
-  const handleImageLoad = () => {
-    setIsLoading(false);
-  };
-
   const renderMedia = () => {
-    const currentItem = mediaItems[currentIndex];
-
+    if (!mediaUrls.length) return null;
+    
+    const currentItem = mediaUrls[currentIndex];
+    
     if (currentItem.type === 'video') {
       return (
         <video 
           ref={videoRef}
           src={currentItem.url}
+          className={css.video}
           autoPlay 
           muted 
           loop 
           playsInline
-          className={css.video}
           onLoadStart={handleLoadStart}
           onLoadedData={handleLoadedData}
           onError={handleError}
@@ -94,12 +88,16 @@ const VideoCarousel: React.FC = () => {
           src={currentItem.url}
           alt={currentItem.caption}
           className={css.image}
-          onLoad={handleImageLoad}
+          onLoad={() => setIsLoading(false)}
           onError={handleError}
         />
       );
     }
   };
+
+  if (!mediaUrls.length) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={css.carouselContainer}>
@@ -119,10 +117,10 @@ const VideoCarousel: React.FC = () => {
         {renderMedia()}
 
         <div className={css.caption}>
-          {mediaItems[currentIndex].caption}
+          {mediaUrls[currentIndex].caption}
         </div>
 
-        {mediaItems.length > 1 && (
+        {mediaUrls.length > 1 && (
           <>
             <button 
               className={`${css.navButton} ${css.prevButton}`}
@@ -140,7 +138,7 @@ const VideoCarousel: React.FC = () => {
             </button>
 
             <div className={css.dots}>
-              {mediaItems.map((_, index) => (
+              {mediaUrls.map((_, index) => (
                 <button
                   key={index}
                   className={`${css.dot} ${index === currentIndex ? css.activeDot : ''}`}

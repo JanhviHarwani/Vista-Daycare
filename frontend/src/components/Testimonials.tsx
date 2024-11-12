@@ -1,38 +1,45 @@
 // Testimonials.tsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getSignedMediaUrl } from '../lib/aws-config';
 import css from './testimonials.module.css';
-// Import your images
-import pacoImage from '/images/Paco.jpg';
-import yolandaImage from '/images/yolanda.jpg';
-import raulImage from '/images/raul.jpg'
+import { testimonialData, type Testimonial } from '../types/common';
+
 
 const Testimonials: React.FC = () => {
-  const testimonials = [
-      // first recording
-    {
-      name: "Francisco(Paco) R.",
-      text: "I love everything here. I also have a best friend here at the center. The fondest memory of this place for me is when I won at Raffle game.",
-      rating: 5,
-      role: "Long-term Member",
-      image: pacoImage
-    },
-    // second recording
-    {
-      name: "Yolanda Perez",
-      text: "I've been coming here for 10 years now and have made so many friends. I keep coming back here because I feel regenerated and I feel good and like I did something. It just does good for me when I go back home!",
-      rating: 5,
-      role: "Long-term Member",
-      image: yolandaImage
-    },
-     // fifth recording
-    {
-      name: "Raul Moreno",
-      text: "This center has impacted me in a great way due to my accident in the past. They focused on taking care of me, making sure I was mentally, physically, and emotionally good. I have been here for 19 years and their care for me is unwavering.",
-      rating: 5,
-      role: "Long-term Member",
-      image: raulImage
-    }
-  ];
+  const [ testimonials, setTestimonials] = useState<(Testimonial & { imageUrl?: string })[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadImages = async () => {
+      try {
+        setIsLoading(true);
+        const testimonialsWithUrls = await Promise.all(
+          testimonialData.map(async (testimonial) => ({
+            ...testimonial,
+            imageUrl: await getSignedMediaUrl(testimonial.imageKey)
+          }))
+        );
+        setTestimonials(testimonialsWithUrls);
+        setError(null);
+      } catch (error) {
+        console.error('Error loading testimonial images:', error);
+        setError('Error loading images');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadImages();
+  }, []);
+
+  if (isLoading) {
+    return <div className={css.loading}>Loading testimonials...</div>;
+  }
+
+  if (error) {
+    return <div className={css.error}>{error}</div>;
+  }
 
   return (
     <section className={css.testimonials_section} aria-labelledby="testimonials-heading">
@@ -46,12 +53,17 @@ const Testimonials: React.FC = () => {
           {testimonials.map((testimonial, index) => (
             <div key={index} className={css.testimonial_card}>
               <div className={css.avatar}>
-                <img 
-                  src={testimonial.image} 
-                  alt={`Portrait of ${testimonial.name}, ${testimonial.role}`} 
-                  className={css.avatar_image}
-                  width={"75%"}
-                />
+                {testimonial.imageUrl && (
+                  <img 
+                    src={testimonial.imageUrl} 
+                    alt={`${testimonial.name}'s portrait`}
+                    className={css.avatar_image}
+                    width="75%"
+                    onError={(e) => {
+                      e.currentTarget.src = '/images/fallback-avatar.jpg'; // Add a fallback image
+                    }}
+                  />
+                )}
               </div>
               
               <div className={css.card_content}>
