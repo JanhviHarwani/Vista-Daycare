@@ -8,6 +8,9 @@ import Eligibility from './pages/Eligibility'
 import AboutUs from './pages/AboutUs'
 import ContactUs from './pages/ContactUs'
 import NotFound from './pages/NotFound'
+import './index.css'
+// import Admin from './pages/Admin'
+import AdminDashboard from './pages/AdminDashboard'
 
 function App() {
 
@@ -21,6 +24,7 @@ function App() {
           <Route path="/eligibility" element={<Eligibility />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/admin" element={<AdminDashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
 

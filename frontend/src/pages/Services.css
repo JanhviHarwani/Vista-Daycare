@@ -1,0 +1,106 @@
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f1eb; /* Light beige background */
+  margin: 0;
+  padding: 0;
+}
+
+.whole {
+  padding-top: 100px;
+  min-height: calc(100vh - 160px);
+  padding-bottom: 80px;
+  background-color: #f4f1eb;
+}
+
+.services-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.service-card {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  padding: 9px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.service-image {
+  width: 100%;
+  height: 180px;
+  border-radius: 15px; 
+  object-fit: cover;
+  margin-bottom: 20px;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.service-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.service-description {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+
+.card-divider {
+  border: 1px solid #ddd;
+  width: 50%;
+  margin: 20px auto;
+}
+
+/* Team Container Styles */
+.staff-container {
+  display: flex;
+  justify-content: center;
+  gap: 1.5em;
+  flex-wrap: wrap;
+  padding: 20px 0;
+}
+
+.staff_indiv {
+  width: 80px;
+  height: 80px;
+  background-color: #fff;
+  border-radius: 10%;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.staff_indiv img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Media Queries */
+@media (max-width: 991px) {
+  .services-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .service-card {
+    width: 90%;
+  }
+}

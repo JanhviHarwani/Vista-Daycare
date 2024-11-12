@@ -1,12 +1,22 @@
 .main_footer_div {
-  padding: 30px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(162, 132, 94, 0.14);
+  padding: 20px 0;
+  width: 100%;
+  background-color: #F2EEE8;
+  margin-top: 2rem;
+
+
 }
 .main_footer_wrapper {
   display: flex;
   flex-direction: column;
+}
+
+
+.header_wrapper {
+  /* max-width: 1200px; */
+  margin: 0 auto;
+  padding: 0 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

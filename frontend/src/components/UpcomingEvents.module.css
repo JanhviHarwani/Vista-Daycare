@@ -1,0 +1,207 @@
+
+/* upcomingEvents.module.css */
+.events_section {
+  padding: 80px 20px;
+  background-color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.content_wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #2D2D2D;
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.title_underline {
+  width: 100px;
+  height: 3px;
+  background: #a2845e;
+  margin: 20px auto 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.title_underline::after {
+  content: '';
+  position: absolute;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #d4b795, transparent);
+  animation: shimmer 2s infinite;
+}
+
+.events_container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  perspective: 1000px;
+}
+
+.event_card {
+  position: relative;
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: translateY(30px);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.event_card:nth-child(1) { animation: slideUp 0.6s 0.2s forwards; }
+.event_card:nth-child(2) { animation: slideUp 0.6s 0.4s forwards; }
+.event_card:nth-child(3) { animation: slideUp 0.6s 0.6s forwards; }
+
+.date_circle {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #F2EEE8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.circle_backdrop {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(162, 132, 94, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.date_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+}
+
+.month {
+  font-size: 0.9rem;
+  color: #a2845e;
+  font-weight: 600;
+  transition: transform 0.3s ease;
+}
+
+.day {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2D2D2D;
+  transition: transform 0.3s ease;
+}
+
+.icon {
+  font-size: 2rem;
+  transition: transform 0.3s ease;
+}
+
+.event_info {
+  flex-grow: 1;
+}
+
+.event_title {
+  font-size: 1.2rem;
+  color: #2D2D2D;
+  margin-bottom: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.event_time {
+  color: #666;
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+.hover_effect {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent, rgba(162, 132, 94, 0.03));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Hover animations */
+.event_card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.event_card:hover .date_circle {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.event_card:hover .circle_backdrop {
+  opacity: 1;
+}
+
+.event_card:hover .month {
+  transform: translateY(-2px);
+}
+
+.event_card:hover .day {
+  transform: translateY(2px);
+}
+
+.event_card:hover .icon {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.event_card:hover .hover_effect {
+  opacity: 1;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(30px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes shimmer {
+  100% { left: 100%; }
+}
+
+/* Media Queries */
+@media (max-width: 968px) {
+  .events_container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .events_container {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}

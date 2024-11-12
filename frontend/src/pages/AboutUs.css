@@ -1,0 +1,133 @@
+.whole{
+    padding-top: 100px;
+    min-height: calc(100vh - 160px);
+    padding-bottom: 80px;
+}
+
+.whole .parent-container {
+    text-align: left;
+    padding: 40px 90px;
+}
+
+.whole h2{
+    margin-top: 60px;
+}
+
+.whole hr{
+    width: 10%;
+    margin: 20px auto;
+    border: 1px solid #888888;
+    margin-bottom: 40px;
+}
+
+.whole img {
+    border-radius: 15px;
+}
+
+.staffs{
+    width: 100%;
+}
+
+.whole .section-heading {
+    display: inline-block;
+    text-align: left;
+    background-color: #f0f0f0;
+    padding: 10px 80px;
+    border-radius: 5px;
+    margin-left: 15px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+.staff-container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1em;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+.staff_indiv{
+    height: 260px;
+    width: auto;
+}
+
+
+@media (max-width: 991px){
+    .image {
+        position: relative;
+        width: 260px;
+        height: 260px;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 480px){
+    .image {
+        position: relative;
+        width: 260px;
+        height: 260px;
+        margin-top: 10px;
+    }
+}
+.wrapper {
+    display: block;
+    column-count: 4;
+    column-width: 200px;
+    padding: 0 12px;
+    margin-top: 20px;
+
+}
+.image {
+    position: relative;
+    width: 260px;
+    height: 260px;
+}
+
+.content_first{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 96%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: left;
+    align-items: self-end;
+    opacity: 0;
+    transition: opacity 0.6s;
+    padding-left: 10px;
+    border-radius: 15px;
+}
+.content{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 94%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: left;
+    align-items: self-end;
+    opacity: 0;
+    transition: opacity 0.6s;
+    padding-left: 1em;
+    border-radius: 15px;
+}
+
+.content:hover{
+    opacity: 1;
+}
+
+.content h1{
+    font-size: 55px;
+    color: #f0f0f0;
+}
+
+.content_first:hover{
+    opacity: 1;
+}
+
+.content_first h1{
+    font-size: 55px;
+    color: #f0f0f0;
+}
