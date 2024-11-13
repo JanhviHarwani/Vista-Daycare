@@ -1,42 +1,140 @@
-
-import  { useState } from 'react';
-import { dashboardStyles } from '../styles/styles';
-import { AddEventForm, AddMealForm } from '../components/AddForm';
+import { useState } from "react";
+import { dashboardStyles } from "../styles/styles";
+import { AddEventForm, AddMealForm } from "../components/AddForm";
+// import { AddEventForm, AddMealForm } from '';
 
 // SVG Icons
 const PlusIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+  >
     <path d="M12 5v14M5 12h14" />
   </svg>
 );
 
 const TrashIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+  >
     <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" />
   </svg>
 );
 
+interface Contact {
+  id: number;
+  name: string;
+  phone: string;
+  email: string;
+  date: string;
+}
+
+interface Event {
+  id: number;
+  name: string;
+  date: string;
+  time: string;
+  isHighlight: boolean;
+}
+
+interface Meal {
+  id: number;
+  menu: string;
+  servingsCount: string; // New field for quantity
+  date: string;
+}
 
 const AdminDashboard = () => {
-  const [activeTab, setActiveTab] = useState('contacts');
+  const [activeTab, setActiveTab] = useState("contacts");
   const [showEventForm, setShowEventForm] = useState(false);
   const [showMealForm, setShowMealForm] = useState(false);
 
-  const contacts = [
-    { id: 1, name: 'John Smith', phone: '(310) 555-0123', email: 'john@example.com', date: '2024-11-01' },
-    { id: 2, name: 'Maria Garcia', phone: '(323) 555-0456', email: 'maria@example.com', date: '2024-11-02' },
-  ];
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [contacts, setContacts] = useState<Contact[]>([
+    {
+      id: 1,
+      name: "John Smith",
+      phone: "(310) 555-0123",
+      email: "john@example.com",
+      date: "2024-11-01",
+    },
+    {
+      id: 2,
+      name: "Maria Garcia",
+      phone: "(323) 555-0456",
+      email: "maria@example.com",
+      date: "2024-11-02",
+    },
+  ]);
 
-  const events = [
-    { id: 1, name: 'Bingo', date: '2024-07-17', time: '10:00 AM' },
-    { id: 2, name: 'Group Exercises', date: '2024-07-20', time: '2:00 PM' },
-    { id: 3, name: 'Morning Orientation', date: '2024-07-25', time: '1:00 PM' },
-  ];
+  const [events, setEvents] = useState<Event[]>([
+    {
+      id: 1,
+      name: "Bingo",
+      date: "2024-07-17",
+      time: "10:00 AM",
+      isHighlight: false,
+    },
+    {
+      id: 2,
+      name: "Group Exercises",
+      date: "2024-07-20",
+      time: "2:00 PM",
+      isHighlight: true,
+    },
+    {
+      id: 3,
+      name: "Morning Orientation",
+      date: "2024-07-25",
+      time: "1:00 PM",
+      isHighlight: false,
+    },
+  ]);
 
-  const meals = [
-    { id: 1, name: 'Breakfast', menu: 'Oatmeal with fresh fruits', date: '2024-11-15' },
-    { id: 2, name: 'Lunch', menu: 'Grilled chicken with vegetables', date: '2024-11-15' },
-  ];
+  const [meals, setMeals] = useState<Meal[]>([
+    {
+      id: 1,
+      menu: "Oatmeal with fresh fruits",
+      servingsCount: "8 fl oz",
+      date: "2024-11-15",
+    },
+    {
+      id: 2,
+      menu: "Grilled chicken with vegetables",
+      servingsCount: "1pc",
+      date: "2024-11-15",
+    },
+  ]);
+
+  // Function to toggle highlight status
+  const toggleHighlight = (eventId: number) => {
+    setEvents(
+      events.map((event) =>
+        event.id === eventId
+          ? { ...event, isHighlight: !event.isHighlight }
+          : event
+      )
+    );
+  };
+
+  // Function to delete an event
+  const deleteEvent = (eventId: number) => {
+    setEvents(events.filter((event) => event.id !== eventId));
+  };
+
+  // Function to delete a meal
+  const deleteMeal = (mealId: number) => {
+    setMeals(meals.filter((meal) => meal.id !== mealId));
+  };
 
   return (
     <div style={dashboardStyles.container}>
@@ -46,13 +144,13 @@ const AdminDashboard = () => {
 
       <main style={dashboardStyles.mainContent}>
         <div style={dashboardStyles.tabList}>
-          {['contacts', 'events', 'meals'].map((tab) => (
+          {["contacts", "events", "meals"].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               style={{
                 ...dashboardStyles.tab,
-                ...(activeTab === tab ? dashboardStyles.activeTab : {})
+                ...(activeTab === tab ? dashboardStyles.activeTab : {}),
               }}
             >
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -61,12 +159,14 @@ const AdminDashboard = () => {
         </div>
 
         <div style={dashboardStyles.card}>
-          {activeTab === 'contacts' && (
+          {activeTab === "contacts" && (
             <>
               <div style={dashboardStyles.cardHeader}>
-                <h2 style={dashboardStyles.cardTitle}>Contact Form Submissions</h2>
+                <h2 style={dashboardStyles.cardTitle}>
+                  Contact Form Submissions
+                </h2>
               </div>
-              <div style={{ overflowX: 'auto' }}>
+              <div style={{ overflowX: "auto" }}>
                 <table style={dashboardStyles.table}>
                   <thead>
                     <tr>
@@ -91,20 +191,25 @@ const AdminDashboard = () => {
             </>
           )}
 
-          {activeTab === 'events' && (
+          {activeTab === "events" && (
             <>
               <div style={dashboardStyles.cardHeader}>
                 <h2 style={dashboardStyles.cardTitle}>Events Management</h2>
-                <button style={dashboardStyles.button} onClick={() => setShowEventForm(true)}>
+                <button
+                  style={dashboardStyles.button}
+                  onClick={() => setShowEventForm(true)}
+                  aria-label="Add new event"
+                >
                   <PlusIcon />
                   Add Event
                 </button>
               </div>
-              <div style={{ overflowX: 'auto' }}>
+              <div style={{ overflowX: "auto" }}>
                 <table style={dashboardStyles.table}>
                   <thead>
                     <tr>
                       <th style={dashboardStyles.th}>Event Name</th>
+                      <th style={dashboardStyles.th}>Highlight of Day</th>
                       <th style={dashboardStyles.th}>Date</th>
                       <th style={dashboardStyles.th}>Time</th>
                       <th style={dashboardStyles.th}>Actions</th>
@@ -114,10 +219,23 @@ const AdminDashboard = () => {
                     {events.map((event) => (
                       <tr key={event.id}>
                         <td style={dashboardStyles.td}>{event.name}</td>
+                        <td style={dashboardStyles.td}>
+                          <input
+                            type="checkbox"
+                            checked={event.isHighlight}
+                            onChange={() => toggleHighlight(event.id)}
+                            style={{ cursor: "pointer" }}
+                            aria-label={`Mark ${event.name} as highlight of the day`}
+                          />
+                        </td>
                         <td style={dashboardStyles.td}>{event.date}</td>
                         <td style={dashboardStyles.td}>{event.time}</td>
                         <td style={dashboardStyles.td}>
-                          <button style={dashboardStyles.deleteButton}>
+                          <button
+                            style={dashboardStyles.deleteButton}
+                            onClick={() => deleteEvent(event.id)}
+                            aria-label={`Delete ${event.name}`}
+                          >
                             <TrashIcon />
                           </button>
                         </td>
@@ -129,21 +247,25 @@ const AdminDashboard = () => {
             </>
           )}
 
-          {activeTab === 'meals' && (
+          {activeTab === "meals" && (
             <>
               <div style={dashboardStyles.cardHeader}>
                 <h2 style={dashboardStyles.cardTitle}>Meals Management</h2>
-                <button style={dashboardStyles.button} onClick={() => setShowMealForm(true)}>
+                <button
+                  style={dashboardStyles.button}
+                  onClick={() => setShowMealForm(true)}
+                  aria-label="Add new meal"
+                >
                   <PlusIcon />
                   Add Meal
                 </button>
               </div>
-              <div style={{ overflowX: 'auto' }}>
+              <div style={{ overflowX: "auto" }}>
                 <table style={dashboardStyles.table}>
                   <thead>
                     <tr>
-                      <th style={dashboardStyles.th}>Meal Type</th>
                       <th style={dashboardStyles.th}>Menu</th>
+                      <th style={dashboardStyles.th}>Servings</th>
                       <th style={dashboardStyles.th}>Date</th>
                       <th style={dashboardStyles.th}>Actions</th>
                     </tr>
@@ -151,11 +273,15 @@ const AdminDashboard = () => {
                   <tbody>
                     {meals.map((meal) => (
                       <tr key={meal.id}>
-                        <td style={dashboardStyles.td}>{meal.name}</td>
                         <td style={dashboardStyles.td}>{meal.menu}</td>
+                        <td style={dashboardStyles.td}>{meal.servingsCount}</td>
                         <td style={dashboardStyles.td}>{meal.date}</td>
                         <td style={dashboardStyles.td}>
-                          <button style={dashboardStyles.deleteButton}>
+                          <button
+                            style={dashboardStyles.deleteButton}
+                            onClick={() => deleteMeal(meal.id)}
+                            aria-label={`Delete ${meal.menu}`}
+                          >
                             <TrashIcon />
                           </button>
                         </td>
@@ -169,8 +295,14 @@ const AdminDashboard = () => {
         </div>
 
         {/* Modal Forms */}
-        <AddEventForm isOpen={showEventForm} onClose={() => setShowEventForm(false)} />
-        <AddMealForm isOpen={showMealForm} onClose={() => setShowMealForm(false)} />
+        <AddEventForm
+          isOpen={showEventForm}
+          onClose={() => setShowEventForm(false)}
+        />
+        <AddMealForm
+          isOpen={showMealForm}
+          onClose={() => setShowMealForm(false)}
+        />
       </main>
     </div>
   );
