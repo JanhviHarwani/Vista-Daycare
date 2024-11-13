@@ -4,8 +4,8 @@ import jwt
 import datetime
 from flask import Flask, jsonify, request
 from functools import wraps
-from core.meal_service import get_meals_for_date, insert_meal, delete_meal, update_meal
-from core.events_service import get_events_for_date, insert_event, delete_event, update_event
+from core.meal_service import get_meals_for_date, get_all_meals, insert_meal, delete_meal, update_meal
+from core.events_service import get_events_for_date, get_all_events, insert_event, delete_event, update_event
 from core.user_service import authenticate_user, create_user, create_superuser, create_token
 from core.contact_service import add_new_contact, get_all_contacts, delete_existing_contact
 from core.utils import is_valid_date, is_valid_time, get_current_date
@@ -72,13 +72,19 @@ def register(current_user, role):
     return jsonify(result), status_code
 
 # Meals Service
-@app.route('/meals/<meal_date>', methods=['GET'])
+@app.route('/meal/<meal_date>', methods=['GET'])
 def meals_for_date(meal_date):
     """Fetch meals for a specific date."""
-    if not is_valid_date(meal_date):
-        return jsonify({"error": "please enter date of format yyyy-mm-dd"}), 400
     meals = get_meals_for_date(meal_date)
+    if meals:
+        return jsonify(meals), 200
+    else:
+        return jsonify({"error": "No meals found for the specified date"}), 404
 
+@app.route('/meals/all', methods=['GET'])
+def get_all_meals_endpoint():
+    """Fetch all meals sorted by meal date."""
+    meals = get_all_meals()
     if meals:
         return jsonify(meals), 200
     return jsonify({"error": "No meals found"}), 404
@@ -96,11 +102,14 @@ def insert_meal_endpoint(current_user, role):
 
     meal_date = data['meal_date']
     meals = data['meal_name']
+    meal_type = data.get('meal_type', 'Breakfast')  # Default to 'Breakfast' if not provided
 
     if not is_valid_date(meal_date):
-        return jsonify({"error": "please enter date of format yyyy-mm-dd"}), 400
+        return jsonify({"error": "Please enter date in the format yyyy-mm-dd"}), 400
 
-    result, status_code = insert_meal(meal_date, meals)
+    meals_with_type = [{"meal_name": meal, "meal_type": meal_type} for meal in meals]
+
+    result, status_code = insert_meal(meal_date, meals_with_type)
     return jsonify(result), status_code
 
 @app.route('/meals', methods=['DELETE'])
@@ -117,12 +126,20 @@ def delete_meal_endpoint(current_user, role):
     meal_date = data['meal_date']
     meals = data['meal_name']
     if not is_valid_date(meal_date):
-        return jsonify({"error": "please enter date of format yyyy-mm-dd"}), 400
+        return jsonify({"error": "Please enter date in the format yyyy-mm-dd"}), 400
     result, status_code = delete_meal(meal_date, meals)
     return jsonify(result), status_code
 
 # Events service
-@app.route('/events/<event_date>', methods=['GET'])
+@app.route('/events/all', methods=['GET'])
+def get_all_events_endpoint():
+    events = get_all_events()
+    if events:
+        return jsonify(events), 200  # Return events sorted by date
+    else:
+        return jsonify({"error": "No events found in the database"}), 404
+
+@app.route('/event/<event_date>', methods=['GET'])
 def get_events(event_date):
     events = get_events_for_date(event_date)
     if events:
@@ -130,12 +147,12 @@ def get_events(event_date):
     else:
         return jsonify({"error": "No events found for the specified date"}), 404
 
-
 @app.route('/event', methods=['POST'])
 @token_required
 def create_event(current_user, role):
     if role not in ['superuser', 'admin']:
         return jsonify({"error": "Unauthorized"}), 403
+
     data = request.get_json()
 
     if not data or 'event_date' not in data or 'event_name' not in data or 'start_time' not in data or 'end_time' not in data:
@@ -145,15 +162,16 @@ def create_event(current_user, role):
     event_name = data['event_name']
     start_time = data['start_time']
     end_time = data['end_time']
+    is_highlight = data.get('isHighlight', False)  # Default to False if not provided
 
     if not is_valid_date(event_date):
-        return jsonify({"error": "please enter date of format yyyy-mm-dd"}), 400
+        return jsonify({"error": "Please enter date in format yyyy-mm-dd"}), 400
     if not is_valid_time(start_time):
-        return jsonify({"error": "please enter time of HH:MM"}), 400
+        return jsonify({"error": "Please enter start_time in HH:MM format"}), 400
     if not is_valid_time(end_time):
-        return jsonify({"error": "please enter time of HH:MM"}), 400
+        return jsonify({"error": "Please enter end_time in HH:MM format"}), 400
 
-    result = insert_event(event_date, event_name, start_time, end_time)
+    result = insert_event(event_date, event_name, start_time, end_time, is_highlight)
     if result['status'] == 'success':
         return jsonify(result), 201
     else:
@@ -165,6 +183,7 @@ def create_event(current_user, role):
 def delete_event_endpoint(current_user, role):
     if role not in ['superuser', 'admin']:
         return jsonify({"error": "Unauthorized"}), 403
+    
     data = request.get_json()
 
     if not data or 'event_date' not in data or 'event_name' not in data:
@@ -174,7 +193,7 @@ def delete_event_endpoint(current_user, role):
     event_name = data['event_name']
 
     if not is_valid_date(event_date):
-        return jsonify({"error": "please enter date of format yyyy-mm-dd"}), 400
+        return jsonify({"error": "Please enter date in format yyyy-mm-dd"}), 400
 
     result = delete_event(event_date, event_name)
     if result['status'] == 'success':
@@ -195,6 +214,8 @@ def update_event_endpoint(current_user, role):
     event_name = data['event_name']
     start_time = data['start_time']
     end_time = data['end_time']
+    is_highlight = data.get('isHighlight', False)
+
 
     if not is_valid_date(event_date):
         return jsonify({"error": "please enter date of format yyyy-mm-dd"}), 400
@@ -202,11 +223,12 @@ def update_event_endpoint(current_user, role):
         return jsonify({"error": "please enter time of HH:MM"}), 400
     if not is_valid_time(end_time):
         return jsonify({"error": "please enter time of HH:MM"}), 400
-    result = update_event(event_date, event_name, start_time, end_time)
+    result = update_event(event_date, event_name, start_time, end_time, is_highlight)
     if result['status'] == 'success':
         return jsonify(result), 200
     else:
         return jsonify(result), 500
+
 
 # Contacts
 @app.route('/contact', methods=['POST'])

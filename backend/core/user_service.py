@@ -11,6 +11,8 @@ def check_superuser_exists():
     """Check if a superuser exists, create one if not."""
     try:
         response = user_table.get_item(Key={'username': Config.SUPERUSER_USERNAME})
+
+
         if 'Item' not in response:
             # Superuser doesn't exist, create one
             create_user(Config.SUPERUSER_USERNAME, Config.SUPERUSER_PASSWORD, role='superuser')
