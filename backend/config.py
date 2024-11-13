@@ -13,6 +13,9 @@ class Config:
     SUPERUSER_PASSWORD = os.getenv('SUPERUSER_PASSWORD')
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
     AWS_REGION = os.getenv('AWS_REGION')
+    pinecone = os.getenv('pinecone')
+    openapi = os.getenv('openapi')
+    pinecone_index_name = "ai-health-thrapy"
 
     @staticmethod
     def init_meal_table():

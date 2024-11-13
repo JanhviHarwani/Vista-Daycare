@@ -9,3 +9,7 @@ flask-bcrypt
 spacy
 dateparser
 nltk
+pinecone-client
+transformers
+torch
+numpy

@@ -108,9 +108,8 @@ def insert_meal_endpoint(current_user, role):
     if not is_valid_date(meal_date):
         return jsonify({"error": "Please enter date in the format yyyy-mm-dd"}), 400
 
-    meals_with_type = [{"meal_name": meal, "quantity": quantity} for meal in meals]
 
-    result, status_code = insert_meal(meal_date, meals_with_type)
+    result, status_code = insert_meal(meal_date, meals, quantity)
     return jsonify(result), status_code
 
 @app.route('/meals', methods=['DELETE'])

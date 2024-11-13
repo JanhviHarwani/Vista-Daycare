@@ -23,22 +23,17 @@ def get_meals_for_date(meal_date):
         return []
 
 # Function to insert one or more meals into the database
-def insert_meal(meal_date, meals):
+def insert_meal(meal_date, meal_name, quantity):
     """Insert one or more meals into the database."""
-    if isinstance(meals, str):
-        meals = [meals]
 
-    # Merge new meals with existing ones
-    existing_meals = get_meals_for_date(meal_date)
-    merged_meals = set(existing_meals + meals)
 
     try:
-        for meal in merged_meals:
-            table.put_item(Item={
-                'meal_date': meal_date, 
-                'meal_name': meal['meal_name'], 
-                'quantity': meal.get('quantity', '1pc')  # Default to 'Breakfast' if not provided
-            })
+
+        table.put_item(Item={
+            'meal_date': meal_date, 
+            'meal_name': meal_name, 
+            'quantity': quantity
+        })
         return {"message": f"Meals inserted successfully"}, 201
     except ClientError as e:
         print(f"Error inserting meals into DynamoDB: {e}")
