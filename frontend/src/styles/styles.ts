@@ -1,4 +1,31 @@
 export const dashboardStyles = {
+  headerContent: {
+    display: 'flex',
+    justifyContent: "space-evenly",
+    alignItems: 'center',
+    maxWidth: '1200px',
+    margin: '0 auto',
+    width: '100%',
+    padding: '0 1rem'
+  },
+  
+  // Optional: Add hover state for logout button
+  logoutButton: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    padding: '0.5rem 1rem',
+    backgroundColor: 'rgb(162, 132, 94)',
+    color: 'white',
+    border: 'none',
+    borderRadius: '0.375rem',
+    cursor: 'pointer',
+    fontSize: '0.875rem',
+    fontWeight: '500',
+    transition: 'background-color 0.2s ease',
+    '&:hover': {
+      backgroundColor: '#b91c1c'
+    },},
     container: {
       minHeight: '100vh',
       backgroundColor: '#f5f2ef',

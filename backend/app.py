@@ -11,10 +11,11 @@ from core.contact_service import add_new_contact, get_all_contacts, delete_exist
 from core.utils import is_valid_date, is_valid_time, get_current_date
 from chatbot.entity_identifier import handle_new_message
 from config import Config
+from flask_cors import CORS  # Add this import
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 app.config['SECRET_KEY'] = Config.JWT_SECRET_KEY  # Use JWT_SECRET_KEY from .env file
-
 
 # Login
 def token_required(f):
@@ -259,4 +260,4 @@ def chat():
 
 if __name__ == '__main__':
     create_superuser()
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5001)
