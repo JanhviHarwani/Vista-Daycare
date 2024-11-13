@@ -52,6 +52,7 @@ function Header() {
             </option>
             <option value="/activities">Events Calendar</option>
             <option value="/eligibility">Eligibility & Insurance</option>
+            <option value="/admin">Admin Login</option>
           </select>
           <div className={css.button_wrapper_custom}>
             <button onClick={handleContactClick}aria-label="Go to the contact us page">Contact Us</button>

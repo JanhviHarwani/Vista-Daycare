@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { dashboardStyles } from "../styles/styles";
 import { AddEventForm, AddMealForm } from "../components/AddForm";
-// import { AddEventForm, AddMealForm } from '';
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+// import { format } from "date-fns"; 
 
 // SVG Icons
 const PlusIcon = () => (
@@ -27,6 +29,21 @@ const TrashIcon = () => (
     strokeWidth="2"
   >
     <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" />
+  </svg>
+);
+// Add Logout Icon
+const LogoutIcon = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+  >
+    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+    <polyline points="16 17 21 12 16 7" />
+    <line x1="21" y1="12" x2="9" y2="12" />
   </svg>
 );
 
@@ -57,7 +74,12 @@ const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("contacts");
   const [showEventForm, setShowEventForm] = useState(false);
   const [showMealForm, setShowMealForm] = useState(false);
+  const navigate = useNavigate();
+  const { logout } = useAuth();
 
+
+  
+  
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [contacts, setContacts] = useState<Contact[]>([
     {
@@ -125,21 +147,37 @@ const AdminDashboard = () => {
       )
     );
   };
-
-  // Function to delete an event
   const deleteEvent = (eventId: number) => {
     setEvents(events.filter((event) => event.id !== eventId));
   };
-
   // Function to delete a meal
   const deleteMeal = (mealId: number) => {
     setMeals(meals.filter((meal) => meal.id !== mealId));
+  };
+  const handleLogout = () => {
+    logout();
+    navigate("/");
   };
 
   return (
     <div style={dashboardStyles.container}>
       <header style={dashboardStyles.header}>
-        <h1 style={dashboardStyles.headerTitle}>Vista Day Care Admin Panel</h1>
+        <div
+          style={dashboardStyles.headerContent     
+          }
+        >
+          <h1 style={dashboardStyles.headerTitle}>
+            Vista Day Care Admin Panel
+          </h1>
+          <button
+            onClick={handleLogout}
+            style={dashboardStyles.logoutButton}
+            aria-label="Logout"
+          >
+            <LogoutIcon />
+            Logout
+          </button>
+        </div>
       </header>
 
       <main style={dashboardStyles.mainContent}>
@@ -193,57 +231,59 @@ const AdminDashboard = () => {
 
           {activeTab === "events" && (
             <>
-              <div style={dashboardStyles.cardHeader}>
-                <h2 style={dashboardStyles.cardTitle}>Events Management</h2>
-                <button
-                  style={dashboardStyles.button}
-                  onClick={() => setShowEventForm(true)}
-                  aria-label="Add new event"
-                >
-                  <PlusIcon />
-                  Add Event
-                </button>
-              </div>
-              <div style={{ overflowX: "auto" }}>
-                <table style={dashboardStyles.table}>
-                  <thead>
-                    <tr>
-                      <th style={dashboardStyles.th}>Event Name</th>
-                      <th style={dashboardStyles.th}>Highlight of Day</th>
-                      <th style={dashboardStyles.th}>Date</th>
-                      <th style={dashboardStyles.th}>Time</th>
-                      <th style={dashboardStyles.th}>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {events.map((event) => (
-                      <tr key={event.id}>
-                        <td style={dashboardStyles.td}>{event.name}</td>
-                        <td style={dashboardStyles.td}>
-                          <input
-                            type="checkbox"
-                            checked={event.isHighlight}
-                            onChange={() => toggleHighlight(event.id)}
-                            style={{ cursor: "pointer" }}
-                            aria-label={`Mark ${event.name} as highlight of the day`}
-                          />
-                        </td>
-                        <td style={dashboardStyles.td}>{event.date}</td>
-                        <td style={dashboardStyles.td}>{event.time}</td>
-                        <td style={dashboardStyles.td}>
-                          <button
-                            style={dashboardStyles.deleteButton}
-                            onClick={() => deleteEvent(event.id)}
-                            aria-label={`Delete ${event.name}`}
-                          >
-                            <TrashIcon />
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+             
+                  <div style={dashboardStyles.cardHeader}>
+                    <h2 style={dashboardStyles.cardTitle}>Events Management</h2>
+                    <button
+                      style={dashboardStyles.button}
+                      onClick={() => setShowEventForm(true)}
+                      aria-label="Add new event"
+                    >
+                      <PlusIcon />
+                      Add Event
+                    </button>
+                  </div>
+                  <div style={{ overflowX: "auto" }}>
+                    <table style={dashboardStyles.table}>
+                      <thead>
+                        <tr>
+                          <th style={dashboardStyles.th}>Event Name</th>
+                          <th style={dashboardStyles.th}>Highlight of Day</th>
+                          <th style={dashboardStyles.th}>Date</th>
+                          <th style={dashboardStyles.th}>Time</th>
+                          <th style={dashboardStyles.th}>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {events.map((event) => (
+                          <tr key={event.id}>
+                            <td style={dashboardStyles.td}>{event.name}</td>
+                            <td style={dashboardStyles.td}>
+                              <input
+                                type="checkbox"
+                                checked={event.isHighlight}
+                                onChange={() => toggleHighlight(event.id)}
+                                style={{ cursor: "pointer" }}
+                                aria-label={`Mark ${event.name} as highlight of the day`}
+                              />
+                            </td>
+                            <td style={dashboardStyles.td}>{event.date}</td>
+                            <td style={dashboardStyles.td}>{event.time}</td>
+                            <td style={dashboardStyles.td}>
+                              <button
+                                style={dashboardStyles.deleteButton}
+                                onClick={() => deleteEvent(event.id)}
+                                aria-label={`Delete ${event.name}`}
+                              >
+                                <TrashIcon />
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
             </>
           )}
 
