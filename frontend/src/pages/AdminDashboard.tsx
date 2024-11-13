@@ -1,141 +1,150 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { dashboardStyles } from "../styles/styles";
 import { AddEventForm, AddMealForm } from "../components/AddForm";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-// import { format } from "date-fns"; 
-
-// SVG Icons
-const PlusIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-  >
-    <path d="M12 5v14M5 12h14" />
-  </svg>
-);
-
-const TrashIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-  >
-    <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" />
-  </svg>
-);
-// Add Logout Icon
-const LogoutIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-  >
-    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
-    <polyline points="16 17 21 12 16 7" />
-    <line x1="21" y1="12" x2="9" y2="12" />
-  </svg>
-);
-
-interface Contact {
-  id: number;
-  name: string;
-  phone: string;
-  email: string;
-  date: string;
-}
-
-interface Event {
-  id: number;
-  name: string;
-  date: string;
-  time: string;
-  isHighlight: boolean;
-}
-
-interface Meal {
-  id: number;
-  menu: string;
-  servingsCount: string; // New field for quantity
-  date: string;
-}
+import axiosInstance from "../lib/axiosInstance";
+import {
+  getErrorMessage,
+  handleAuthError,
+  isAuthError,
+  isNetworkError,
+} from "../lib/errorHandling";
+import { toast } from "react-toastify"; // You'll need to install this package
+import { showError, showSuccess, authErrorMessages } from "../lib/toast";
+import { Contact, Event, Meal } from "../types/common";
+import { LogoutIcon, PlusIcon, TrashIcon } from "../components/SVGs";
+// import { format } from "date-fns";
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("contacts");
   const [showEventForm, setShowEventForm] = useState(false);
   const [showMealForm, setShowMealForm] = useState(false);
+  const [meals, setMeals] = useState<Meal[]>([]);
+  const [events, setEvents] = useState<Event[]>([]);
+  const [contacts, setContacts] = useState<Contact[]>([]);
+
   const navigate = useNavigate();
   const { logout } = useAuth();
 
+  useEffect(() => {
+    if (activeTab === "events") {
+      fetchEvents();
+    }
+  }, [activeTab]);
 
-  
-  
+  // Fetch events from backend using Axios
+  const fetchEvents = async () => {
+    try {
+      const response = await axiosInstance.get<Event[]>("/events/all");
+      setEvents(response.data);
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      toast.error(errorMessage);
+      handleAuthError(error, logout, () => navigate("/"));
+    }
+  };
+
+  // Delete event
+  const deleteEvent = async (eventId: number) => {
+    try {
+      const eventToDelete = events.find((e) => e.id === eventId);
+      if (!eventToDelete) {
+        showError("Event not found");
+        return;
+      }
+      const response = await axiosInstance({
+        method: "DELETE",
+        url: "/event",
+        data: {
+          // This is the correct way to send data with DELETE
+          event_date: eventToDelete.event_date,
+          event_name: eventToDelete.event_name,
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.status === 200) {
+        fetchEvents();
+        showSuccess("Event deleted successfully");
+      }
+    } catch (error) {
+      if (isAuthError(error)) {
+        showError(authErrorMessages.sessionExpired);
+        // logout();
+        // navigate("/login");
+      } else if (isNetworkError(error)) {
+        showError(authErrorMessages.networkError);
+      } else {
+        showError(getErrorMessage(error));
+      }
+    }
+  };
+// contact section
+// Add fetchContacts function
+const fetchContacts = async () => {
+  try {
+    const response = await axiosInstance.get<Contact[]>("/contact");
+    setContacts(response.data);
+  } catch (error) {
+    const errorMessage = getErrorMessage(error);
+    showError(errorMessage);
+    handleAuthError(error, logout, () => navigate("/"));
+  }
+};
+  // Meal section
+  useEffect(() => {
+    if (activeTab === "contacts") {
+      fetchContacts();
+    }
+  }, [activeTab]);
+  // Add fetchMeals function
+  const fetchMeals = async () => {
+    try {
+      const response = await axiosInstance.get<Meal[]>("/meals/all");
+      setMeals(response.data);
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      showError(errorMessage);
+      handleAuthError(error, logout, () => navigate("/"));
+    }
+  };
+
+  // Add useEffect for meals
+  useEffect(() => {
+    if (activeTab === "meals") {
+      fetchMeals();
+    }
+  }, [activeTab]);
+
+  // Update deleteMeal function
+  const deleteMeal = async (mealDate: string, mealName: string) => {
+    try {
+      const response = await axiosInstance({
+        method: "DELETE",
+        url: "/meals",
+        data: {
+          meal_date: mealDate,
+          meal_name: [mealName],
+        },
+      });
+
+      if (response.status === 200) {
+        fetchMeals();
+        showSuccess("Meal deleted successfully");
+      }
+    } catch (error) {
+      if (isAuthError(error)) {
+        showError(authErrorMessages.sessionExpired);
+      } else if (isNetworkError(error)) {
+        showError(authErrorMessages.networkError);
+      } else {
+        showError(getErrorMessage(error));
+      }
+    }
+  };
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [contacts, setContacts] = useState<Contact[]>([
-    {
-      id: 1,
-      name: "John Smith",
-      phone: "(310) 555-0123",
-      email: "john@example.com",
-      date: "2024-11-01",
-    },
-    {
-      id: 2,
-      name: "Maria Garcia",
-      phone: "(323) 555-0456",
-      email: "maria@example.com",
-      date: "2024-11-02",
-    },
-  ]);
-
-  const [events, setEvents] = useState<Event[]>([
-    {
-      id: 1,
-      name: "Bingo",
-      date: "2024-07-17",
-      time: "10:00 AM",
-      isHighlight: false,
-    },
-    {
-      id: 2,
-      name: "Group Exercises",
-      date: "2024-07-20",
-      time: "2:00 PM",
-      isHighlight: true,
-    },
-    {
-      id: 3,
-      name: "Morning Orientation",
-      date: "2024-07-25",
-      time: "1:00 PM",
-      isHighlight: false,
-    },
-  ]);
-
-  const [meals, setMeals] = useState<Meal[]>([
-    {
-      id: 1,
-      menu: "Oatmeal with fresh fruits",
-      servingsCount: "8 fl oz",
-      date: "2024-11-15",
-    },
-    {
-      id: 2,
-      menu: "Grilled chicken with vegetables",
-      servingsCount: "1pc",
-      date: "2024-11-15",
-    },
-  ]);
 
   // Function to toggle highlight status
   const toggleHighlight = (eventId: number) => {
@@ -147,13 +156,7 @@ const AdminDashboard = () => {
       )
     );
   };
-  const deleteEvent = (eventId: number) => {
-    setEvents(events.filter((event) => event.id !== eventId));
-  };
-  // Function to delete a meal
-  const deleteMeal = (mealId: number) => {
-    setMeals(meals.filter((meal) => meal.id !== mealId));
-  };
+
   const handleLogout = () => {
     logout();
     navigate("/");
@@ -162,10 +165,7 @@ const AdminDashboard = () => {
   return (
     <div style={dashboardStyles.container}>
       <header style={dashboardStyles.header}>
-        <div
-          style={dashboardStyles.headerContent     
-          }
-        >
+        <div style={dashboardStyles.headerContent}>
           <h1 style={dashboardStyles.headerTitle}>
             Vista Day Care Admin Panel
           </h1>
@@ -215,14 +215,17 @@ const AdminDashboard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {contacts.map((contact) => (
+                    {contacts.length ? contacts.map((contact) => (
                       <tr key={contact.id}>
                         <td style={dashboardStyles.td}>{contact.name}</td>
                         <td style={dashboardStyles.td}>{contact.phone}</td>
                         <td style={dashboardStyles.td}>{contact.email}</td>
                         <td style={dashboardStyles.td}>{contact.date}</td>
                       </tr>
-                    ))}
+                    ))
+                    :
+                    <tr style={{textAlign:"center", width:"100%"}}>No Contacts</tr>
+                  }
                   </tbody>
                 </table>
               </div>
@@ -231,59 +234,60 @@ const AdminDashboard = () => {
 
           {activeTab === "events" && (
             <>
-             
-                  <div style={dashboardStyles.cardHeader}>
-                    <h2 style={dashboardStyles.cardTitle}>Events Management</h2>
-                    <button
-                      style={dashboardStyles.button}
-                      onClick={() => setShowEventForm(true)}
-                      aria-label="Add new event"
-                    >
-                      <PlusIcon />
-                      Add Event
-                    </button>
-                  </div>
-                  <div style={{ overflowX: "auto" }}>
-                    <table style={dashboardStyles.table}>
-                      <thead>
-                        <tr>
-                          <th style={dashboardStyles.th}>Event Name</th>
-                          <th style={dashboardStyles.th}>Highlight of Day</th>
-                          <th style={dashboardStyles.th}>Date</th>
-                          <th style={dashboardStyles.th}>Time</th>
-                          <th style={dashboardStyles.th}>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {events.map((event) => (
-                          <tr key={event.id}>
-                            <td style={dashboardStyles.td}>{event.name}</td>
-                            <td style={dashboardStyles.td}>
-                              <input
-                                type="checkbox"
-                                checked={event.isHighlight}
-                                onChange={() => toggleHighlight(event.id)}
-                                style={{ cursor: "pointer" }}
-                                aria-label={`Mark ${event.name} as highlight of the day`}
-                              />
-                            </td>
-                            <td style={dashboardStyles.td}>{event.date}</td>
-                            <td style={dashboardStyles.td}>{event.time}</td>
-                            <td style={dashboardStyles.td}>
-                              <button
-                                style={dashboardStyles.deleteButton}
-                                onClick={() => deleteEvent(event.id)}
-                                aria-label={`Delete ${event.name}`}
-                              >
-                                <TrashIcon />
-                              </button>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-
+              <div style={dashboardStyles.cardHeader}>
+                <h2 style={dashboardStyles.cardTitle}>Events Management</h2>
+                <button
+                  style={dashboardStyles.button}
+                  onClick={() => setShowEventForm(true)}
+                  aria-label="Add new event"
+                >
+                  <PlusIcon />
+                  Add Event
+                </button>
+              </div>
+              <div style={{ overflowX: "auto" }}>
+                <table style={dashboardStyles.table}>
+                  <thead>
+                    <tr>
+                      <th style={dashboardStyles.th}>Event Name</th>
+                      <th style={dashboardStyles.th}>Highlight of Day</th>
+                      <th style={dashboardStyles.th}>Date</th>
+                      <th style={dashboardStyles.th}>Time</th>
+                      <th style={dashboardStyles.th}>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {events.length ? events.map((event) => (
+                      <tr key={event.id}>
+                        <td style={dashboardStyles.td}>{event.event_name}</td>
+                        <td style={dashboardStyles.td}>
+                          <input
+                            type="checkbox"
+                            checked={event.isHighlight}
+                            onChange={() => toggleHighlight(event.id)}
+                            style={{ cursor: "pointer" }}
+                            aria-label={`Mark ${event.event_name} as highlight of the day`}
+                          />
+                        </td>
+                        <td style={dashboardStyles.td}>{event.event_date}</td>
+                        <td style={dashboardStyles.td}>{event.end_time}</td>
+                        <td style={dashboardStyles.td}>
+                          <button
+                            style={dashboardStyles.deleteButton}
+                            onClick={() => deleteEvent(event.id)}
+                            aria-label={`Delete ${event.event_name}`}
+                          >
+                            <TrashIcon />
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                    :
+                    <tr>No Events</tr>
+                  }
+                  </tbody>
+                </table>
+              </div>
             </>
           )}
 
@@ -311,22 +315,27 @@ const AdminDashboard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {meals.map((meal) => (
-                      <tr key={meal.id}>
-                        <td style={dashboardStyles.td}>{meal.menu}</td>
-                        <td style={dashboardStyles.td}>{meal.servingsCount}</td>
-                        <td style={dashboardStyles.td}>{meal.date}</td>
+                    {meals.length? meals.map((meal) => (
+                      <tr key={`${meal.meal_date}-${meal.meal_name}`}>
+                        <td style={dashboardStyles.td}>{meal.meal_name}</td>
+                        <td style={dashboardStyles.td}>{meal.quantity}</td>
+                        <td style={dashboardStyles.td}>{meal.meal_date}</td>
                         <td style={dashboardStyles.td}>
                           <button
                             style={dashboardStyles.deleteButton}
-                            onClick={() => deleteMeal(meal.id)}
-                            aria-label={`Delete ${meal.menu}`}
+                            onClick={() =>
+                              deleteMeal(meal.meal_date, meal.meal_name)
+                            }
+                            aria-label={`Delete ${meal.meal_name}`}
                           >
                             <TrashIcon />
                           </button>
                         </td>
                       </tr>
-                    ))}
+                    ))
+                    :
+                    <tr>No meals</tr>
+                  }
                   </tbody>
                 </table>
               </div>
@@ -338,10 +347,12 @@ const AdminDashboard = () => {
         <AddEventForm
           isOpen={showEventForm}
           onClose={() => setShowEventForm(false)}
+          onSubmit={fetchEvents} // Call fetchEvents after adding a new event
         />
         <AddMealForm
           isOpen={showMealForm}
           onClose={() => setShowMealForm(false)}
+          onSubmit={fetchMeals}
         />
       </main>
     </div>

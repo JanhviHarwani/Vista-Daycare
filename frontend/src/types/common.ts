@@ -94,3 +94,31 @@ export const testimonialData: Testimonial[] = [
   }
 
 ];
+
+export interface Contact {
+  id: number;
+  name: string;
+  phone: string;
+  email: string;
+  date: string;
+}
+
+export interface Event {
+  id: number;
+  event_name: string;
+  event_date: string;
+  end_time: string;
+  isHighlight: boolean;
+}
+
+export interface Meal {
+  meal_date: string;
+  meal_name: string;
+  quantity: string;
+}
+export interface Contact {
+  date:string; 
+  name:string;
+  phone:string;
+  email:string;
+}

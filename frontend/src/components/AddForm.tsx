@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axiosInstance from "../lib/axiosInstance"; // Import the Axios instance
 import { Modal } from "./Modal";
 import { FormInput } from "./FormInput";
 import { formStyles } from "../styles/styles";
@@ -37,62 +38,74 @@ const FormCheckbox = ({
   );
 };
 
-export const AddMealForm = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+export const AddMealForm = ({ isOpen, onClose, onSubmit }: { 
+  isOpen: boolean; 
+  onClose: () => void;
+  onSubmit?: () => void;
+}) => {
   const [formData, setFormData] = useState({
-    menu: '',
-    servingsCount: '',
-    date: ''
+    meal_date: '',
+    meal_name: '',
+    quantity: '1pc'  // Default value
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Submitting meal:', formData);
-    onClose();
+    try {
+      // Matches your backend's expected structure
+      const response = await axiosInstance.post("/meals", {
+        meal_date: formData.meal_date,
+        meal_name: [formData.meal_name],
+        quantity: formData.quantity
+      });
+
+      if (response.status === 201) {
+        console.log('Meal added successfully:', response.data);
+        if (onSubmit) {
+          onSubmit(); // Call the optional onSubmit callback (for refreshing the list or similar)
+        }
+        onClose(); // Close the modal
+      } else {
+        console.error("Failed to add meal:", response);
+      }
+    } catch (error) {
+      console.error("Error adding meal:", error);
+    }
   };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Add New Meal">
       <form onSubmit={handleSubmit}>
         <FormInput
-          label="Menu Description"
+          label="Menu Name"
           type="text"
-          value={formData.menu}
-          onChange={(value) => setFormData({ ...formData, menu: value })}
-          placeholder="Enter menu details"
+          value={formData.meal_name}
+          onChange={(value) => setFormData({ ...formData, meal_name: value })}
+          placeholder="Enter meal name"
           required
-          aria-describedby="menuDescription"
+          aria-describedby="mealNameDescription"
         />
         <FormInput
-          label="Servings"
+          label="Quantity"
           type="text"
-          value={formData.servingsCount}
-          onChange={(value) => setFormData({ ...formData, servingsCount: value })}
-          placeholder="Enter number of servings"
+          value={formData.quantity}
+          onChange={(value) => setFormData({ ...formData, quantity: value })}
+          placeholder="Enter quantity (e.g., 1pc, 8 fl oz)"
           required
-          // min="1"
-          aria-describedby="servingsDescription"
+          aria-describedby="quantityDescription"
         />
         <FormInput
           label="Date"
           type="date"
-          value={formData.date}
-          onChange={(value) => setFormData({ ...formData, date: value })}
+          value={formData.meal_date}
+          onChange={(value) => setFormData({ ...formData, meal_date: value })}
           required
         />
         <div style={formStyles.buttons}>
-          <button 
-            type="button" 
-            onClick={onClose} 
-            style={formStyles.cancelBtn} 
-            aria-label="Cancel meal creation"
-          >
+          <button type="button" onClick={onClose} style={formStyles.cancelBtn}>
             Cancel
           </button>
-          <button 
-            type="submit" 
-            style={formStyles.submitBtn} 
-            aria-label="Submit meal details"
-          >
+          <button type="submit" style={formStyles.submitBtn}>
             Add Meal
           </button>
         </div>
@@ -100,8 +113,9 @@ export const AddMealForm = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
     </Modal>
   );
 };
+
   
-export const AddEventForm = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+export const AddEventForm = ({ isOpen, onClose, onSubmit }: { isOpen: boolean; onClose: () => void; onSubmit?: () => void }) => {
     const [formData, setFormData] = useState({
       name: '',
       date: '',
@@ -109,10 +123,31 @@ export const AddEventForm = ({ isOpen, onClose }: { isOpen: boolean; onClose: ()
       isHighlight: false
     });
   
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
-      console.log('Submitting event:', formData);
-      onClose();
+  
+      try {
+        // Make POST request to add a new event
+        const response = await axiosInstance.post("/event", {
+          event_name: formData.name,
+          event_date: formData.date,
+          start_time: formData.time,
+          end_time: formData.time,  // You may need to use an additional field for end time if needed
+          isHighlight: formData.isHighlight,
+        });
+  
+        if (response.status === 201) {
+          console.log('Event added successfully:', response.data);
+          if (onSubmit) {
+            onSubmit(); // Call the optional onSubmit callback (for refreshing the list or similar)
+          }
+          onClose(); // Close the modal
+        } else {
+          console.error("Failed to add event:", response);
+        }
+      } catch (error) {
+        console.error("Error adding event:", error);
+      }
     };
   
     return (
