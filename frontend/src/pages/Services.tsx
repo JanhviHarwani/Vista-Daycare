@@ -1,7 +1,8 @@
 import ApplicationStructure from "../components/ApplicationStructure";
+
+import './Services.css';
 import Slider from "./Slider";
 import Team from "./Team";
-import './Services.css';
 
 const teamMembers = [
   { image: "/image1.jpg" },
