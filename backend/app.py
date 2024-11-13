@@ -103,12 +103,12 @@ def insert_meal_endpoint(current_user, role):
 
     meal_date = data['meal_date']
     meals = data['meal_name']
-    meal_type = data.get('meal_type', 'Breakfast')  # Default to 'Breakfast' if not provided
+    quantity = data.get('quantity', '1pc')
 
     if not is_valid_date(meal_date):
         return jsonify({"error": "Please enter date in the format yyyy-mm-dd"}), 400
 
-    meals_with_type = [{"meal_name": meal, "meal_type": meal_type} for meal in meals]
+    meals_with_type = [{"meal_name": meal, "quantity": quantity} for meal in meals]
 
     result, status_code = insert_meal(meal_date, meals_with_type)
     return jsonify(result), status_code

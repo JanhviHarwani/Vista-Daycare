@@ -14,7 +14,7 @@ def get_meals_for_date(meal_date):
             ExpressionAttributeValues={":meal_date": meal_date}
         )
         if 'Items' in response and response['Items']:
-            meal_data = [{"meal_name": item['meal_name'], "meal_type": item.get('meal_type', 'Breakfast')} for item in response['Items']]
+            meal_data = [{"meal_name": item['meal_name'], "quantity": item.get('quantity', '1pc')} for item in response['Items']]
             return meal_data
         else:
             return []
@@ -37,7 +37,7 @@ def insert_meal(meal_date, meals):
             table.put_item(Item={
                 'meal_date': meal_date, 
                 'meal_name': meal['meal_name'], 
-                'meal_type': meal.get('meal_type', 'Breakfast')  # Default to 'Breakfast' if not provided
+                'quantity': meal.get('quantity', '1pc')  # Default to 'Breakfast' if not provided
             })
         return {"message": f"Meals inserted successfully"}, 201
     except ClientError as e:
@@ -59,22 +59,22 @@ def delete_meal(meal_date, meals):
         return {"error": "Failed to delete meal(s)"}, 500
 
 # Function to update a meal for a specific date
-def update_meal(meal_date, old_meal, new_meal, meal_type=None):
+def update_meal(meal_date, old_meal, new_meal, quantity=None):
     """Update meal for a specific date."""
     try:
         update_expression = "set meal_name = :new_meal"
         expression_attribute_values = {':new_meal': new_meal}
 
-        if meal_type:
-            update_expression += ", meal_type = :meal_type"
-            expression_attribute_values[':meal_type'] = meal_type
+        if quantity:
+            update_expression += ", quantity = :quantity"
+            expression_attribute_values[':quantity'] = quantity
 
         table.update_item(
             Key={'meal_date': meal_date, 'meal_name': old_meal},
             UpdateExpression=update_expression,
             ExpressionAttributeValues=expression_attribute_values
         )
-        return {"message": f"Meal '{old_meal}' updated to '{new_meal}' with type '{meal_type}'"}, 200
+        return {"message": f"Meal '{old_meal}' updated to '{new_meal}' with quantity '{quantity}'"}, 200
     except ClientError as e:
         print(f"Error updating meal: {e}")
         return {"error": "Failed to update meal"}, 500
@@ -86,7 +86,7 @@ def get_all_meals():
         response = table.scan()
         if 'Items' in response and response['Items']:
             meals = [
-                {"meal_date": item['meal_date'], "meal_name": item['meal_name'], "meal_type": item.get('meal_type', 'Breakfast')}
+                {"meal_date": item['meal_date'], "meal_name": item['meal_name'], "quantity": item.get('quantity', '1pc')}
                 for item in response['Items']
             ]
             meals.sort(key=lambda x: x['meal_date'])  # Sort by meal_date
