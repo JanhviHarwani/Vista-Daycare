@@ -31,10 +31,8 @@ def get_all_contacts():
     try:
         response = table.scan()
         contacts = response.get('Items', [])
-
-        if not contacts:
-            return {'message': 'No contacts found'}
-
+        if contacts:
+            contacts.sort(key=lambda x: x['date'], reverse=True)
         return {'contacts': contacts}
 
     except ClientError as e:

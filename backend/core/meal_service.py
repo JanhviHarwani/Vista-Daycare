@@ -84,7 +84,7 @@ def get_all_meals():
                     'quantity', '1pc')}
                 for item in response['Items']
             ]
-            meals.sort(key=lambda x: x['meal_date'])
+            meals.sort(key=lambda x: x['meal_date'], reverse=True)
             return meals
         else:
             return []

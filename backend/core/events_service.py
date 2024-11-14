@@ -91,7 +91,7 @@ def get_all_events():
                        "end_time": item['end_time'],
                        "isHighlight": item.get('isHighlight', False)}  # Default to False if not set
                       for item in response['Items']]
-            events.sort(key=lambda x: x['event_date'])
+            events.sort(key=lambda x: x['event_date'], reverse=True)
             return events
         else:
             return []
