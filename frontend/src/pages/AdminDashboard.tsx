@@ -6,7 +6,6 @@ import { useAuth } from "../hooks/useAuth";
 import axiosInstance from "../lib/axiosInstance";
 import {
   getErrorMessage,
-  handleAuthError,
   isAuthError,
   isNetworkError,
 } from "../lib/errorHandling";
@@ -43,7 +42,7 @@ const AdminDashboard = () => {
     } catch (error) {
       const errorMessage = getErrorMessage(error);
       toast.error(errorMessage);
-      handleAuthError(error, logout, () => navigate("/"));
+      // handleAuthError(error, logout, () => navigate("/"));
     } finally {
       setLoading(false);
     }
@@ -95,7 +94,7 @@ const AdminDashboard = () => {
     } catch (error) {
       const errorMessage = getErrorMessage(error);
       showError(errorMessage);
-      handleAuthError(error, logout, () => navigate("/"));
+      // handleAuthError(error, logout, () => navigate("/"));
     } finally {
       setLoading(false);
     }
@@ -143,7 +142,7 @@ const AdminDashboard = () => {
     } catch (error) {
       const errorMessage = getErrorMessage(error);
       showError(errorMessage);
-      handleAuthError(error, logout, () => navigate("/"));
+      // handleAuthError(error, logout, () => navigate("/"));
     } finally {
       setLoading(false);
     }
@@ -244,10 +243,25 @@ const AdminDashboard = () => {
               <div style={{ overflowX: "auto" }}>
                 {loading ? (
                   <div style={dashboardStyles.loadingSpinner}>
-                  <div style={{...dashboardStyles.loadingDot, ...dashboardStyles.loadingDot1}} />
-                  <div style={{...dashboardStyles.loadingDot, ...dashboardStyles.loadingDot2}} />
-                  <div style={{...dashboardStyles.loadingDot, ...dashboardStyles.loadingDot3}} />
-                </div>
+                    <div
+                      style={{
+                        ...dashboardStyles.loadingDot,
+                        ...dashboardStyles.loadingDot1,
+                      }}
+                    />
+                    <div
+                      style={{
+                        ...dashboardStyles.loadingDot,
+                        ...dashboardStyles.loadingDot2,
+                      }}
+                    />
+                    <div
+                      style={{
+                        ...dashboardStyles.loadingDot,
+                        ...dashboardStyles.loadingDot3,
+                      }}
+                    />
+                  </div>
                 ) : (
                   <table style={dashboardStyles.table}>
                     <thead>
@@ -310,61 +324,80 @@ const AdminDashboard = () => {
                 </button>
               </div>
               <div style={{ overflowX: "auto" }}>
-              {loading ? (
+                {loading ? (
                   <div style={dashboardStyles.loadingSpinner}>
-                  <div style={{...dashboardStyles.loadingDot, ...dashboardStyles.loadingDot1}} />
-                  <div style={{...dashboardStyles.loadingDot, ...dashboardStyles.loadingDot2}} />
-                  <div style={{...dashboardStyles.loadingDot, ...dashboardStyles.loadingDot3}} />
-                </div>
+                    <div
+                      style={{
+                        ...dashboardStyles.loadingDot,
+                        ...dashboardStyles.loadingDot1,
+                      }}
+                    />
+                    <div
+                      style={{
+                        ...dashboardStyles.loadingDot,
+                        ...dashboardStyles.loadingDot2,
+                      }}
+                    />
+                    <div
+                      style={{
+                        ...dashboardStyles.loadingDot,
+                        ...dashboardStyles.loadingDot3,
+                      }}
+                    />
+                  </div>
                 ) : (
-                <table style={dashboardStyles.table}>
-                  <thead>
-                    <tr>
-                      <th style={dashboardStyles.th}>Event Name</th>
-                      <th style={dashboardStyles.th}>Highlight of Day</th>
-                      <th style={dashboardStyles.th}>Date</th>
-                      <th style={dashboardStyles.th}>Time</th>
-                      <th style={dashboardStyles.th}>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {events?.length > 0 ? (
-                      events.map((event) => (
-                        <tr key={event.id}>
-                          <td style={dashboardStyles.td}>{event.event_name}</td>
-                          <td style={dashboardStyles.td}>
-                            <input
-                              type="checkbox"
-                              checked={event.isHighlight}
-                              onChange={() => toggleHighlight(event.id)}
-                              style={{ cursor: "pointer" }}
-                              aria-label={`Mark ${event.event_name} as highlight of the day`}
-                            />
-                          </td>
-                          <td style={dashboardStyles.td}>{event.event_date}</td>
-                          <td style={dashboardStyles.td}>{event.end_time}</td>
-                          <td style={dashboardStyles.td}>
-                            <button
-                              style={dashboardStyles.deleteButton}
-                              onClick={() => deleteEvent(event.id)}
-                              aria-label={`Delete ${event.event_name}`}
-                            >
-                              <TrashIcon />
-                            </button>
+                  <table style={dashboardStyles.table}>
+                    <thead>
+                      <tr>
+                        <th style={dashboardStyles.th}>Event Name</th>
+                        <th style={dashboardStyles.th}>Highlight of Day</th>
+                        <th style={dashboardStyles.th}>Date</th>
+                        <th style={dashboardStyles.th}>Time</th>
+                        <th style={dashboardStyles.th}>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {events?.length > 0 ? (
+                        events.map((event) => (
+                          <tr key={event.id}>
+                            <td style={dashboardStyles.td}>
+                              {event.event_name}
+                            </td>
+                            <td style={dashboardStyles.td}>
+                              <input
+                                type="checkbox"
+                                checked={event.isHighlight}
+                                onChange={() => toggleHighlight(event.id)}
+                                style={{ cursor: "pointer" }}
+                                aria-label={`Mark ${event.event_name} as highlight of the day`}
+                              />
+                            </td>
+                            <td style={dashboardStyles.td}>
+                              {event.event_date}
+                            </td>
+                            <td style={dashboardStyles.td}>{event.end_time}</td>
+                            <td style={dashboardStyles.td}>
+                              <button
+                                style={dashboardStyles.deleteButton}
+                                onClick={() => deleteEvent(event.id)}
+                                aria-label={`Delete ${event.event_name}`}
+                              >
+                                <TrashIcon />
+                              </button>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan={5}>
+                            <div style={dashboardStyles.emptyState}>
+                              No events scheduled
+                            </div>
                           </td>
                         </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan={5}>
-                          <div style={dashboardStyles.emptyState}>
-                            No events scheduled
-                          </div>
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
+                      )}
+                    </tbody>
+                  </table>
                 )}
               </div>
             </>
@@ -384,53 +417,68 @@ const AdminDashboard = () => {
                 </button>
               </div>
               <div style={{ overflowX: "auto" }}>
-              {loading ? (
+                {loading ? (
                   <div style={dashboardStyles.loadingSpinner}>
-                  <div style={{...dashboardStyles.loadingDot, ...dashboardStyles.loadingDot1}} />
-                  <div style={{...dashboardStyles.loadingDot, ...dashboardStyles.loadingDot2}} />
-                  <div style={{...dashboardStyles.loadingDot, ...dashboardStyles.loadingDot3}} />
-                </div>
+                    <div
+                      style={{
+                        ...dashboardStyles.loadingDot,
+                        ...dashboardStyles.loadingDot1,
+                      }}
+                    />
+                    <div
+                      style={{
+                        ...dashboardStyles.loadingDot,
+                        ...dashboardStyles.loadingDot2,
+                      }}
+                    />
+                    <div
+                      style={{
+                        ...dashboardStyles.loadingDot,
+                        ...dashboardStyles.loadingDot3,
+                      }}
+                    />
+                  </div>
                 ) : (
-                <table style={dashboardStyles.table}>
-                  <thead>
-                    <tr>
-                      <th style={dashboardStyles.th}>Menu</th>
-                      <th style={dashboardStyles.th}>Servings</th>
-                      <th style={dashboardStyles.th}>Date</th>
-                      <th style={dashboardStyles.th}>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {meals?.length > 0 ? (
-                      meals.map((meal) => (
-                        <tr key={`${meal.meal_date}-${meal.meal_name}`}>
-                          <td style={dashboardStyles.td}>{meal.meal_name}</td>
-                          <td style={dashboardStyles.td}>{meal.quantity}</td>
-                          <td style={dashboardStyles.td}>{meal.meal_date}</td>
-                          <td style={dashboardStyles.td}>
-                            <button
-                              style={dashboardStyles.deleteButton}
-                              onClick={() =>
-                                deleteMeal(meal.meal_date, meal.meal_name)
-                              }
-                              aria-label={`Delete ${meal.meal_name}`}
-                            >
-                              <TrashIcon />
-                            </button>
+                  <table style={dashboardStyles.table}>
+                    <thead>
+                      <tr>
+                        <th style={dashboardStyles.th}>Menu</th>
+                        <th style={dashboardStyles.th}>Servings</th>
+                        <th style={dashboardStyles.th}>Date</th>
+                        <th style={dashboardStyles.th}>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {meals?.length > 0 ? (
+                        meals.map((meal) => (
+                          <tr key={`${meal.meal_date}-${meal.meal_name}`}>
+                            <td style={dashboardStyles.td}>{meal.meal_name}</td>
+                            <td style={dashboardStyles.td}>{meal.quantity}</td>
+                            <td style={dashboardStyles.td}>{meal.meal_date}</td>
+                            <td style={dashboardStyles.td}>
+                              <button
+                                style={dashboardStyles.deleteButton}
+                                onClick={() =>
+                                  deleteMeal(meal.meal_date, meal.meal_name)
+                                }
+                                aria-label={`Delete ${meal.meal_name}`}
+                              >
+                                <TrashIcon />
+                              </button>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan={4}>
+                            <div style={dashboardStyles.emptyState}>
+                              No meals available
+                            </div>
                           </td>
                         </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan={4}>
-                          <div style={dashboardStyles.emptyState}>
-                            No meals available
-                          </div>
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
+                      )}
+                    </tbody>
+                  </table>
                 )}
               </div>
             </>
