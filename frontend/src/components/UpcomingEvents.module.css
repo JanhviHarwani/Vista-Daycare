@@ -70,6 +70,7 @@
 
 .date_circle {
   position: relative;
+  padding: 5px;
   width: 80px;
   height: 80px;
   border-radius: 50%;
@@ -204,4 +205,46 @@
     max-width: 400px;
     margin: 0 auto;
   }
+}
+
+.no_events_container {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.no_events_text {
+  font-size: 1.2rem;
+  color: #2D2D2D;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.no_events_text::before,
+.no_events_text::after {
+  content: '';
+  height: 2px;
+  width: 50px;
+  background: #a2845e;
+  opacity: 0.3;
+}
+
+.loading_container {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  color: #2D2D2D;
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
 }
