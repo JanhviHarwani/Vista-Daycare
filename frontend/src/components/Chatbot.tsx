@@ -41,25 +41,25 @@ const ChatBubbleIcon = ({ onClick, style, isShaking }: ChatBubbleIconProps) => (
 
 const botInfo = {
   name: "Rosa",
-  title: "Care Companion",
+  title: "Vista Care Companion",
   avatar: <ChatBubbleIcon />,
   greeting:
-    "¡Hola! I'm Rosa, your Vista Care companion. How may I assist you today?",
-  // languages: ["English", "Spanish"],
+    "Hola! I'm Rosa. I can assist you with the Activities, Events, Meals, Contact and Health Care Therapy.",
 };
 
 const quickResponses = [
   {
-    title: "Our Services",
-    description: "Learn about our adult day care services",
+    title: "Today's Events",
+    description: "See what's happening today at Vista Care",
   },
   {
-    title: "Schedule a Visit",
-    description: "Book a tour of our facility",
+    title: "AI Therapy",
+    description: "Discover our AI-assisted therapy programs",
   },
+
   {
-    title: "Daily Activities",
-    description: "View our activity calendar",
+    title: "Contact Us",
+    description: "Need help? Get in touch with our care team",
   },
 ];
 
@@ -76,8 +76,7 @@ const ChatBot = () => {
       sender: "bot",
       timestamp: new Date(),
     },
-  ]
-);
+  ]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -166,7 +165,7 @@ const ChatBot = () => {
 
   const handleQuickResponse = async (response: QuickResponse) => {
     // Handle quick response as a user message
-    const messageText = `${response.title}: ${response.description}`;
+    const messageText = response.title;
     setMessage(messageText);
     await handleSubmit({ preventDefault: () => {} } as React.FormEvent);
   };
@@ -223,19 +222,17 @@ const ChatBot = () => {
             </div>
 
             <div className={css.quickResponses}>
-              <div className={css.quickResponses}>
-                {!hasInteracted &&
-                  quickResponses.map((response, index) => (
-                    <button
-                      key={index}
-                      className={css.responseButton}
-                      onClick={() => handleQuickResponse(response)}
-                    >
-                      <strong>{response.title}</strong>
-                      <span>{response.description}</span>
-                    </button>
-                  ))}
-              </div>
+              {messages.length === 1 && // Only show when there's just the greeting message
+                quickResponses.map((response, index) => (
+                  <button
+                    key={index}
+                    className={css.responseButton}
+                    onClick={() => handleQuickResponse(response)}
+                  >
+                    <strong>{response.title}</strong>
+                    <span>{response.description}</span>
+                  </button>
+                ))}
             </div>
 
             <form onSubmit={handleSubmit} className={css.chatInput}>

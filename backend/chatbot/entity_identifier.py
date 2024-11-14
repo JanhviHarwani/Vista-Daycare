@@ -1,11 +1,19 @@
 import random
 import requests
-from chatbot.default import get_greeting, get_goodbye, get_contact_info, get_services_info, handle_unknown, get_staff_info
+from chatbot.default import (
+    get_greeting,
+    get_goodbye,
+    get_contact_info,
+    get_services_info,
+    handle_unknown,
+    get_staff_info,
+)
 from chatbot.event import get_event_info
 from chatbot.meal import get_meal_info
 from chatbot.consultant import get_health_therapy_info
 from chatbot.process_text import process_and_identify
 
+# Extended list of key words
 # Extended list of key words
 MEAL_KEYWORDS = [
     'meal', 'food', 'breakfast', 'lunch', 'dinner', 'snack', 'brunch', 'supper',
@@ -31,7 +39,7 @@ GOODBYE_KEYWORDS = [
 
 HEALTH_THERAPY_KEYWORDS = [
     'health', 'therapy', 'consultation', 'doctor', 'counseling', 'psychologist', 'mental',
-    'wellness', 'session', 'treatment', 'healthcare', 'therapy center', 'medical',
+    'wellness', 'session', 'treatment', 'healthcare', 'therapy center', 'medical', 
     'memory', 'exercises', 'arthritis', 'muscle', 'anxiety', 'sleep', 'pain', 'pressure',
     'fatigue', 'falls', 'skin', 'appetite', 'balance', 'cognition', 'loneliness', 'chronic',
     'food', 'irritability', 'osteoporosis', 'sadness', 'independence', 'diabetes', 'hearing',
@@ -39,7 +47,7 @@ HEALTH_THERAPY_KEYWORDS = [
     'depression', 'dehydration', 'infections', 'swelling', 'incontinence', 'digestion',
     'forgetfulness', 'heart', 'bruising', 'sugar', 'asthma', 'spots', 'signs', 'aches', 'stress',
     'cancer', 'teeth', 'brain', 'blood', 'back', 'ankles', 'utis', 'management', 'circulation',
-    'cold', 'cramps', 'constipation', 'alzheimer', 'posture', 'headaches', 'mobility', 'breathlessness',
+    'cold', 'cramps', 'constipation', 'lonely', 'alzheimer', 'posture', 'headaches', 'mobility', 'breathlessness',
     'bones', 'disease', 'health', 'system', 'drymouth', 'hair', 'loss', 'stroke', 'hydration', 'therapy',
     'socializing', 'medication', 'inhalers', 'hygiene', 'support', 'movement', 'relief', 'diet', 'lung',
     'cognitive', 'coping', 'mindfulness', 'routine', 'tests', 'plan', 'vaccinations', 'sunscreen',
@@ -47,7 +55,8 @@ HEALTH_THERAPY_KEYWORDS = [
     'companionship', 'tinnitus', 'supplements', 'wellness', 'rehabilitation', 'prevention', 'resilience',
     'surgery', 'loss', 'fitness', 'clarity', 'stretching', 'management', 'correction', 'assessment',
     'habit', 'illness', 'wellbeing', 'prevention', 'relaxation', 'clarity', 'function', 'omega',
-    'fats', 'cognition', 'mental', 'pain', 'medication', 'vision', 'routine', 'bp'
+    'fats', 'cognition', 'mental', 'pain', 'medication', 'vision', 'routine', 'bp', 'healthy', 
+    'sick'
 ]
 
 
@@ -74,18 +83,18 @@ def identify_intent(user_message):
         intent = "meal"
     elif process_and_identify(user_message, EVENT_KEYWORDS):
         intent = "event"
-    elif process_and_identify(user_message, GREETING_KEYWORDS):
-        intent = "greeting"
-    elif process_and_identify(user_message, GOODBYE_KEYWORDS):
-        intent = "goodbye"
-    elif process_and_identify(user_message, HEALTH_THERAPY_KEYWORDS):
-        intent = "health_therapy"
     elif process_and_identify(user_message, CONTACT_INFO_KEYWORDS):
         intent = "contact_info"
     elif process_and_identify(user_message, SERVICES_KEYWORDS):
         intent = "services"
     elif process_and_identify(user_message, STAFF_KEYWORDS):
         intent = "staff"
+    elif process_and_identify(user_message, HEALTH_THERAPY_KEYWORDS):
+        intent = "health_therapy"
+    elif process_and_identify(user_message, GREETING_KEYWORDS):
+        intent = "greeting"
+    elif process_and_identify(user_message, GOODBYE_KEYWORDS):
+        intent = "goodbye"
     else:
         intent = "unknown"
     return intent
@@ -102,6 +111,6 @@ def handle_new_message(user_message):
         "contact_info": get_contact_info,
         "services": get_services_info,
         "staff": get_staff_info,
-        "unknown": handle_unknown
+        "unknown": handle_unknown,
     }
     return service_function_map[intent](user_message)

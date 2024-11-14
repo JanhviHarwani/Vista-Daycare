@@ -96,6 +96,49 @@ export const testimonialData: Testimonial[] = [
 ];
 
 
+//Services Provided
+export type Services = {
+  title: string;
+  imageKey: string;
+  description: string
+};
+
+export type ServiceUrl = Services & {
+  imageUrl: string;
+};
+
+export const serviceData: Services[] = [
+  {
+    title:"Health Services",
+    imageKey: "services-page/artistiqueimagery-130.jpg",
+    description:"Support and counseling to address emotional and physical well-being and mental health challenges."
+  },
+  {
+    title:"Professional Nursing Services",
+    imageKey: "services-page/artistiqueimagery-133.jpg",
+    description:"Skilled nursing care to monitor and manage medical conditions and treatments."
+  },
+  {
+    title:"Activities",
+    imageKey: "services-page/artistiqueimagery-080.jpg",
+    description:"Engaging programs designed to stimulate cognitive and physical health."
+  },
+  {title:"Transportation",
+    imageKey: "services-page/artistiqueimagery-117.jpg",
+    description:" We provide safe and convenient transportation to and from the facility for participants from surrounding areas."
+  },
+  {
+    title:"Nutritional Counseling",
+    imageKey: "services-page/artistiqueimagery-119.jpg",
+    description:"Expert advice to promote healthy eating habits and address dietary concerns."
+  },
+  {  title:"Individual Assessment",
+    imageKey: "services-page/artistiqueimagery-101.jpg",
+    description:"Comprehensive evaluation of each participant’s health and personal needs to create a tailored care plan."
+  },
+
+];
+
 export interface Event {
   id: number;
   event_name: string;

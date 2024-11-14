@@ -1,23 +1,26 @@
 import boto3
 from botocore.exceptions import ClientError
 from config import Config
+from core.utils import get_current_date
 
 # Initialize DynamoDB table
 table = Config.init_event_table()
+
 
 # Function to insert an event into the EventsTable
 def insert_event(event_date, event_name, start_time, end_time, is_highlight=False):
     try:
         if not isinstance(start_time, str) or not isinstance(end_time, str):
             raise ValueError(
-                "start_time and end_time must be strings in 'HH:MM' format.")
+                "start_time and end_time must be strings in 'HH:MM' format."
+            )
         response = table.put_item(
             Item={
                 "event_date": event_date,
                 "event_name": event_name,
                 "start_time": start_time,
                 "end_time": end_time,
-                "isHighlight": is_highlight 
+                "isHighlight": is_highlight,
             }
         )
         print("Insert successful:", response)
@@ -30,14 +33,12 @@ def insert_event(event_date, event_name, start_time, end_time, is_highlight=Fals
         print(f"Error: {ve}")
         return {"error": str(ve), "status": "failed"}
 
+
 # Function to delete an event from the EventsTable
 def delete_event(event_date, event_name):
     try:
         response = table.delete_item(
-            Key={
-                'event_date': event_date,
-                'event_name': event_name
-            }
+            Key={"event_date": event_date, "event_name": event_name}
         )
         if response.get("ResponseMetadata", {}).get("HTTPStatusCode") == 200:
             return {"message": "Event deleted successfully", "status": "success"}
@@ -48,30 +49,26 @@ def delete_event(event_date, event_name):
         print(f"Error deleting event: {e}")
         return {"error": "Failed to delete event", "status": "failed"}
 
+
 # Function to update an event's times (start_time, end_time) and highlight status
 def update_event(event_date, event_name, start_time, end_time, is_highlight=None):
     try:
         if not isinstance(start_time, str) or not isinstance(end_time, str):
             raise ValueError(
-                "start_time and end_time must be strings in 'HH:MM' format.")
+                "start_time and end_time must be strings in 'HH:MM' format."
+            )
 
         # Prepare update expression and values
         update_expression = "SET start_time = :start_time, end_time = :end_time"
-        expression_attribute_values = {
-            ':start_time': start_time,
-            ':end_time': end_time
-        }
+        expression_attribute_values = {":start_time": start_time, ":end_time": end_time}
         if is_highlight is not None:
             update_expression += ", isHighlight = :is_highlight"
-            expression_attribute_values[':is_highlight'] = is_highlight
+            expression_attribute_values[":is_highlight"] = is_highlight
         response = table.update_item(
-            Key={
-                'event_date': event_date,
-                'event_name': event_name
-            },
+            Key={"event_date": event_date, "event_name": event_name},
             UpdateExpression=update_expression,
             ExpressionAttributeValues=expression_attribute_values,
-            ReturnValues="UPDATED_NEW"
+            ReturnValues="UPDATED_NEW",
         )
         print("Update successful:", response)
         return {"message": "Event updated successfully", "status": "success"}
@@ -84,14 +81,18 @@ def update_event(event_date, event_name, start_time, end_time, is_highlight=None
 def get_all_events():
     try:
         response = table.scan()
-        if 'Items' in response and response['Items']:
-            events = [{"event_date": item['event_date'],
-                       "event_name": item['event_name'],
-                       "start_time": item['start_time'],
-                       "end_time": item['end_time'],
-                       "isHighlight": item.get('isHighlight', False)}  # Default to False if not set
-                      for item in response['Items']]
-            events.sort(key=lambda x: x['event_date'])
+        if "Items" in response and response["Items"]:
+            events = [
+                {
+                    "event_date": item["event_date"],
+                    "event_name": item["event_name"],
+                    "start_time": item["start_time"],
+                    "end_time": item["end_time"],
+                    "isHighlight": item.get("isHighlight", False),
+                }
+                for item in response["Items"]
+            ]
+            events.sort(key=lambda x: x["event_date"], reverse=True)
             return events
         else:
             return []
@@ -104,17 +105,17 @@ def get_events_for_date(event_date):
     try:
         response = table.query(
             KeyConditionExpression="event_date = :event_date",
-            ExpressionAttributeValues={":event_date": event_date}
+            ExpressionAttributeValues={":event_date": event_date},
         )
-        if 'Items' in response and response['Items']:
+        if "Items" in response and response["Items"]:
             events = [
                 {
-                    "event_name": item['event_name'],
-                    "start_time": item['start_time'],
-                    "end_time": item['end_time'],
-                    "isHighlight": item.get('isHighlight', False)
+                    "event_name": item["event_name"],
+                    "start_time": item["start_time"],
+                    "end_time": item["end_time"],
+                    "isHighlight": item.get("isHighlight", False),
                 }
-                for item in response['Items']
+                for item in response["Items"]
             ]
             return events
         else:
@@ -122,4 +123,27 @@ def get_events_for_date(event_date):
 
     except ClientError as e:
         print(f"Error querying events for date {event_date}: {e}")
+        return []
+
+
+def get_upcoming_events(limit=6):
+    try:
+        current_date_str = get_current_date()
+        print(current_date_str)
+        # Query for upcoming events
+        response = table.scan(
+            FilterExpression="event_date >= :current_date",
+            ExpressionAttributeValues={":current_date": current_date_str},
+        )
+        if "Items" in response and response["Items"]:
+            sorted_events = sorted(
+                response["Items"],
+                key=lambda x: (x["event_date"], x["start_time"]),
+            )[:limit]
+            return sorted_events
+        else:
+            return []
+
+    except ClientError as e:
+        print(f"Error querying events: {e}")
         return []

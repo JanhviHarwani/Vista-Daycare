@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './LoginPage.module.css';
 
+const API_URL = import.meta.env.VITE_API_BASE_URL;
+
 interface LoginResponse {
   token: string;
   error?: string;
@@ -22,7 +24,7 @@ export const LoginPage = () => {
 
     try {
       const response = await axios.post<LoginResponse>(
-        'http://localhost:5001/login',
+        `${API_URL}/login`,
         { username, password },
         {
           headers: {
