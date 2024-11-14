@@ -14,13 +14,10 @@ from config import Config
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
-# Use JWT_SECRET_KEY from .env file
+CORS(app)
 app.config['SECRET_KEY'] = Config.JWT_SECRET_KEY
 
 # Login
-
-
 def token_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -80,25 +77,18 @@ def register(current_user, role):
     return jsonify(result), status_code
 
 # Meals Service
-
-
 @app.route('/meal/<meal_date>', methods=['GET'])
 def meals_for_date(meal_date):
     """Fetch meals for a specific date."""
     meals = get_meals_for_date(meal_date)
-    if meals:
-        return jsonify(meals), 200
-    else:
-        return jsonify({"error": "No meals found for the specified date"}), 404
+    return jsonify(meals), 200
 
 
 @app.route('/meals/all', methods=['GET'])
 def get_all_meals_endpoint():
     """Fetch all meals sorted by meal date."""
     meals = get_all_meals()
-    if meals:
-        return jsonify(meals), 200
-    return jsonify({"error": "No meals found"}), 404
+    return jsonify(meals), 200
 
 
 @app.route('/meals', methods=['POST'])
@@ -142,24 +132,16 @@ def delete_meal_endpoint(current_user, role):
     return jsonify(result), status_code
 
 # Events service
-
-
 @app.route('/events/all', methods=['GET'])
 def get_all_events_endpoint():
     events = get_all_events()
-    if events:
-        return jsonify(events), 200  # Return events sorted by date
-    else:
-        return jsonify({"error": "No events found in the database"}), 404
+    return jsonify(events), 200
 
 
 @app.route('/event/<event_date>', methods=['GET'])
 def get_events(event_date):
     events = get_events_for_date(event_date)
-    if events:
-        return jsonify(events), 200
-    else:
-        return jsonify({"error": "No events found for the specified date"}), 404
+    return jsonify(events), 200
 
 
 @app.route('/event', methods=['POST'])
@@ -290,8 +272,6 @@ def delete_contact(current_user, role):
     return jsonify(result), 200
 
 # Chat bot
-
-
 @app.route('/chat', methods=['POST'])
 def chat():
     user_message = request.json.get('message', '')
