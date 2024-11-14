@@ -1,11 +1,12 @@
 # Vista-Daycare
 Capstone Project
 
-commands to run:
- cd frontend
- npm install
- npm run dev
+Project Details
+Webpage for Vista Daycare
 
- Have already added header and footer to all the pages.
-
-
+Features:
+Interactive Frontend using React
+Backend uisn Flask for events, meals and contact details
+Hosted on AWS Lambda, S3, Dynamodb, Route53
+Chatbot for getting details about the daycare for meals, events, contact info
+Rag application to creaate a customised AI chatbot for health and therapy.
