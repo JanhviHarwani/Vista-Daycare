@@ -44,21 +44,22 @@ const botInfo = {
   title: "Care Companion",
   avatar: <ChatBubbleIcon />,
   greeting:
-    "Hola! I'm Rosa, your Vista Care companion. We offer information on the services, meal options, upcoming events, and an AI-powered health care bot. How may I assist you today?",
+    "Hola! I'm Rosa, your Vista Care companion. How may I assist you today?",
 };
 
 const quickResponses = [
   {
-    title: "Our Services",
-    description: "Learn about our adult day care services",
+    title: "Today's Events",
+    description: "See what's happening today at Vista Care",
   },
   {
-    title: "Schedule a Visit",
-    description: "Book a tour of our facility",
+    title: "AI Therapy",
+    description: "Discover our AI-assisted therapy programs",
   },
+
   {
-    title: "Daily Activities",
-    description: "View our activity calendar",
+    title: "Contact Us",
+    description: "Need help? Get in touch with our care team",
   },
 ];
 
@@ -164,7 +165,7 @@ const ChatBot = () => {
 
   const handleQuickResponse = async (response: QuickResponse) => {
     // Handle quick response as a user message
-    const messageText = `${response.title}: ${response.description}`;
+    const messageText = response.title;
     setMessage(messageText);
     await handleSubmit({ preventDefault: () => {} } as React.FormEvent);
   };
