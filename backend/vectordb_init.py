@@ -1,4 +1,4 @@
-from rag.update import init_update
+from rag.populate_db import init_update
 
 if __name__ == '__main__':
     init_update()

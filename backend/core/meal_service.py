@@ -14,7 +14,8 @@ def get_meals_for_date(meal_date):
             ExpressionAttributeValues={":meal_date": meal_date}
         )
         if 'Items' in response and response['Items']:
-            meal_data = [{"meal_name": item['meal_name'], "quantity": item.get('quantity', '1pc')} for item in response['Items']]
+            meal_data = [{"meal_name": item['meal_name'], "quantity": item.get(
+                'quantity', '1pc')} for item in response['Items']]
             return meal_data
         else:
             return []
@@ -22,16 +23,13 @@ def get_meals_for_date(meal_date):
         print(f"Error querying DynamoDB: {e}")
         return []
 
-# Function to insert one or more meals into the database
+
 def insert_meal(meal_date, meal_name, quantity):
     """Insert one or more meals into the database."""
-
-
     try:
-
         table.put_item(Item={
-            'meal_date': meal_date, 
-            'meal_name': meal_name, 
+            'meal_date': meal_date,
+            'meal_name': meal_name,
             'quantity': quantity
         })
         return {"message": f"Meals inserted successfully"}, 201
@@ -47,13 +45,14 @@ def delete_meal(meal_date, meals):
 
     try:
         for meal_name in meals:
-            table.delete_item(Key={'meal_date': meal_date, 'meal_name': meal_name})
+            table.delete_item(
+                Key={'meal_date': meal_date, 'meal_name': meal_name})
         return {"message": f"{len(meals)} meal(s) deleted successfully"}, 200
     except ClientError as e:
         print(f"Error deleting meal(s) from DynamoDB: {e}")
         return {"error": "Failed to delete meal(s)"}, 500
 
-# Function to update a meal for a specific date
+
 def update_meal(meal_date, old_meal, new_meal, quantity=None):
     """Update meal for a specific date."""
     try:
@@ -74,17 +73,18 @@ def update_meal(meal_date, old_meal, new_meal, quantity=None):
         print(f"Error updating meal: {e}")
         return {"error": "Failed to update meal"}, 500
 
-# Function to get all meals sorted by meal date
+
 def get_all_meals():
     """Get all meals sorted by meal date."""
     try:
         response = table.scan()
         if 'Items' in response and response['Items']:
             meals = [
-                {"meal_date": item['meal_date'], "meal_name": item['meal_name'], "quantity": item.get('quantity', '1pc')}
+                {"meal_date": item['meal_date'], "meal_name": item['meal_name'], "quantity": item.get(
+                    'quantity', '1pc')}
                 for item in response['Items']
             ]
-            meals.sort(key=lambda x: x['meal_date'])  # Sort by meal_date
+            meals.sort(key=lambda x: x['meal_date'])
             return meals
         else:
             return []

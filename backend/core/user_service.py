@@ -7,22 +7,26 @@ import datetime
 
 user_table = Config.init_user_table()
 
+
 def check_superuser_exists():
     """Check if a superuser exists, create one if not."""
     try:
-        response = user_table.get_item(Key={'username': Config.SUPERUSER_USERNAME})
-
+        response = user_table.get_item(
+            Key={'username': Config.SUPERUSER_USERNAME})
 
         if 'Item' not in response:
             # Superuser doesn't exist, create one
-            create_user(Config.SUPERUSER_USERNAME, Config.SUPERUSER_PASSWORD, role='superuser')
+            create_user(Config.SUPERUSER_USERNAME,
+                        Config.SUPERUSER_PASSWORD, role='superuser')
     except ClientError as e:
         print(f"Error checking for superuser: {e}")
         return False
 
+
 def create_superuser():
     """Create a superuser if one doesn't already exist."""
     check_superuser_exists()
+
 
 def create_user(username, password, role='admin'):
     """Create a new user with the given username, password, and role."""
@@ -40,6 +44,7 @@ def create_user(username, password, role='admin'):
         print(f"Error creating user: {e}")
         return {"error": "Failed to create user"}, 500
 
+
 def authenticate_user(username, password):
     """Authenticate user by username and password."""
     try:
@@ -53,10 +58,12 @@ def authenticate_user(username, password):
         print(f"Error authenticating user: {e}")
         return None
 
+
 def create_token(username, user):
     token = jwt.encode({
         'username': username,
         'role': user['role'],
-        'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)  # Token expires in 1 hour
+        # Token expires in 1 hour
+        'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
     }, Config.JWT_SECRET_KEY, algorithm="HS256")
     return token

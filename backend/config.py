@@ -7,6 +7,7 @@ from botocore.exceptions import ClientError
 # Load environment variables from .env file
 load_dotenv()
 
+
 class Config:
     # Fetch the values from environment variables
     SUPERUSER_USERNAME = os.getenv('SUPERUSER_USERNAME')
