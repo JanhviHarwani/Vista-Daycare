@@ -2,7 +2,7 @@ import ApplicationStructure from "../components/ApplicationStructure";
 import { useState } from "react";
 import './ContactUs.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhone, faEnvelope, faMapMarkerAlt, faUser} from '@fortawesome/free-solid-svg-icons';
+import { faPhone, faEnvelope, faMapMarkerAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 
 function ContactUs() {
     const [form, setForm] = useState({
@@ -10,6 +10,7 @@ function ContactUs() {
         phone: "",
         email: ""
     });
+    const [submitted, setSubmitted] = useState(false); // State to track form submission
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -18,13 +19,16 @@ function ContactUs() {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        alert(`Contact Details Submitted`);
-        // Additional form submission logic
+        setSubmitted(true); // Set form submission state to true
     };
 
     return (
         <ApplicationStructure>
+             <h1 className="contact-us-header">Contact Us</h1>
+
             <div className="whole_contact">
+            
+               
                 <div className="contact_column">
                     <h2>Operating Hours</h2>
                     <ul>
@@ -58,16 +62,17 @@ function ContactUs() {
                         </li>
                     </ul>
                 </div>
+
                 <div className="contact_column">
                     <div className="map">
-                    <iframe
-                        title="Google Map"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509597!2d-118.1718322153181!3d33.98034548067903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2a5a37f16df03%3A0x6192b5dcdbf4f2ff!2s6061%20Atlantic%20Blvd%2C%20Maywood%2C%20CA%2090270%2C%20USA!5e0!3m2!1sen!2sus!4v1691234567890!5m2!1sen!2sus"
-                        width="100%"
-                        height="200px"
-                        style={{ border: 0 }}
-                        loading="lazy"
-                    ></iframe>
+                        <iframe
+                            title="Google Map"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509597!2d-118.1718322153181!3d33.98034548067903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2a5a37f16df03%3A0x6192b5dcdbf4f2ff!2s6061%20Atlantic%20Blvd%2C%20Maywood%2C%20CA%2090270%2C%20USA!5e0!3m2!1sen!2sus!4v1691234567890!5m2!1sen!2sus"
+                            width="100%"
+                            height="200px"
+                            style={{ border: 0 }}
+                            loading="lazy"
+                        ></iframe>
                     </div>
                     <p style={{ marginTop: "10px", display: "flex", alignItems: "center" }}>
                         <FontAwesomeIcon icon={faPhone} style={{ marginRight: "20px" }} />
@@ -83,8 +88,16 @@ function ContactUs() {
                     </p>
                 </div>
 
-                <div className="contact_column" style={{backgroundColor: "#F2EEE8"}}>
+                <div className="contact_column" style={{ backgroundColor: "#F2EEE8" }}>
                     <h2>Come and Visit Us</h2>
+
+                    {/* Success alert box */}
+                    {submitted && (
+                        <div className="success-alert">
+                            <strong>Success!</strong> Your contact details have been submitted.
+                        </div>
+                    )}
+
                     <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column" }}>
                         <label style={{ marginBottom: "10px", textAlign: "left", width: "100%" }}>
                             Your Name:
@@ -97,7 +110,7 @@ function ContactUs() {
                                     onChange={handleChange}
                                     placeholder="Enter your name"
                                     required
-                                    style={{ padding: "8px 10px 8px 40px", width: "83%", borderRadius: "6px", border: "1px solid #ccc", backgroundColor:"#E9E6E1" }}
+                                    style={{ padding: "8px 10px 8px 40px", width: "83%", borderRadius: "6px", border: "1px solid #ccc", backgroundColor: "#E9E6E1" }}
                                 />
                             </div>
                         </label>
@@ -112,7 +125,7 @@ function ContactUs() {
                                     onChange={handleChange}
                                     placeholder="Enter your phone number"
                                     required
-                                    style={{ padding: "8px 10px 8px 40px", width: "83%", borderRadius: "6px", border: "1px solid #ccc", backgroundColor:"#E9E6E1" }}
+                                    style={{ padding: "8px 10px 8px 40px", width: "83%", borderRadius: "6px", border: "1px solid #ccc", backgroundColor: "#E9E6E1" }}
                                 />
                             </div>
                         </label>
@@ -127,7 +140,7 @@ function ContactUs() {
                                     onChange={handleChange}
                                     placeholder="Enter your email address"
                                     required
-                                    style={{ padding: "8px 10px 8px 40px", width: "83%", borderRadius: "6px", border: "1px solid #ccc" , backgroundColor:"#E9E6E1"}}
+                                    style={{ padding: "8px 10px 8px 40px", width: "83%", borderRadius: "6px", border: "1px solid #ccc", backgroundColor: "#E9E6E1" }}
                                 />
                             </div>
                         </label>
@@ -148,7 +161,6 @@ function ContactUs() {
                         </button>
                     </form>
                 </div>
-
             </div>
         </ApplicationStructure>
     );

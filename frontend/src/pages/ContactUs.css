@@ -1,50 +1,249 @@
+/* Success alert after form submission */
+.success-alert {
+    background-color: #28a745; /* Green background */
+    color: #fff; /* White text */
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* General styling for the whole contact section */
 .whole_contact {
     display: flex;
     justify-content: space-between;
-    padding-top: 100px;
-    margin: 100px;
+    margin-top: 30px;
 }
 
 .contact_column {
     flex: 1;
-    margin: 10px;
-    min-width: 300px;
-    max-width: 400px;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-
-.map{
-    padding-top: 30px;
-}
-
-.contact_column ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.operating-hours-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 0;
-}
-
-.day {
-    flex: 1;
-    text-align: left;
-}
-
-.time {
-    flex: 1;
-    text-align: right;
+    margin: 10px;
 }
 
 .contact_column h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Style for the map */
+.map iframe {
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling the operating hours section */
+.operating-hours-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.day {
+    font-weight: bold;
+}
+
+.time {
+    color: #555;
+}
+
+/* Styling for form inputs */
+input[type="text"], input[type="tel"], input[type="email"] {
+    padding: 8px 10px 8px 40px;
+    width: 83%;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #E9E6E1;
+    margin-bottom: 10px;
+}
+
+input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus {
+    border-color: #9A1C1A;
+    outline: none;
+}
+
+/* Style for the form labels */
+label {
+    margin-bottom: 10px;
     text-align: left;
+    width: 100%;
+}
+
+/* Icons inside input fields */
+input[type="text"] + div i, input[type="tel"] + div i, input[type="email"] + div i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+/* Button styling */
+button[type="submit"] {
+    padding: 8px 15px;
+    background-color: #9A1C1A;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    align-self: flex-end;
+    margin-top: 30px;
+}
+
+button[type="submit"]:hover {
+    background-color: #c0392b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .whole_contact {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-heading {
+        font-size: 1.6rem;
+    }
+
+    .eligibility-description, .payment-sources {
+        font-size: 1rem;
+    }
+}
+
+/* Payment section styles */
+.payment-sources-container {
+    margin-top: 20px;
+}
+
+.payment-sources-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.payment-source-item {
+    margin-bottom: 15px;
+    border-left: 4px solid #e74c3c;
+    padding-left: 15px;
     margin-left: 0;
-    font-size: 30px;
+}
+
+.payment-source-heading {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #e74c3c;
+    margin-bottom: 5px;
+}
+
+.payment-source-description {
+    margin-left: 10px;
+    font-size: 1em;
+    color: #555;
+}
+
+/* Eligibility description styling */
+.eligibility-description {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-left: 4px solid #e74c3c;
+    border-radius: 5px;
+}
+
+.eligibility-description strong {
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+/* Image gallery styles */
+.image-gallery {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.image-container {
+    width: 23%;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.responsive-img {
+    width: 100%;
+    max-width: 280px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.responsive-img:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .image-gallery {
+        justify-content: center;
+    }
+
+    .responsive-img {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-heading {
+        font-size: 1.6rem;
+    }
+
+    .eligibility-description,
+    .payment-sources {
+        font-size: 1rem;
+    }
+}
+
+.contact-us-header {
+    font-size: 2.5rem;
+    font-weight: 600; /* Slightly bold for emphasis, but not too heavy */
+    color: #333; /* Soft black color for a welcoming feel */
+    text-align: center;
+    margin-top: 40px;  /* Space from the top */
+    margin-bottom: 20px; /* Less space below to keep things compact */
+    letter-spacing: 1px; /* A slight letter spacing for elegance */
+    position: relative;
+}
+
+/* Cute small underline effect */
+.contact-us-header::after {
+    content: "";
+    position: absolute;
+    bottom: -5px; /* Position the underline just below the text */
+    left: 50%;
+    transform: translateX(-50%); /* Center the underline */
+    width: 80px; /* Width of the underline */
+    height: 3px; /* Height of the underline */
+    background-color: burlywood; /* Matching the primary button color */
+    border-radius: 5px; /* Rounded corners for a cute effect */
+}
+
+/* Make the header responsive */
+@media (max-width: 768px) {
+    .contact-us-header {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-us-header {
+        font-size: 1.6rem;
+    }
 }
