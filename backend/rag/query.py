@@ -17,7 +17,7 @@ def generate_embedding(text):
 def generate_gpt_response(query, similar_results):
     context = "\n".join([result["metadata"]["answer"] for result in similar_results])
     messages = [
-        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "system", "content": "You are a AI health care and therapy chatbot for vista adult daycare. You need to be able to manage questions around common diseases. The daycare offers services like transport, socialising, food, gym and a nurse for basic health checkups. If you cannot answer questions plese ask to contact the health care specialist at vista for further . Please try to prioritise info in the assistant part"},
         {"role": "user", "content": query},
         {"role": "assistant", "content": context},
     ]

@@ -41,10 +41,10 @@ const ChatBubbleIcon = ({ onClick, style, isShaking }: ChatBubbleIconProps) => (
 
 const botInfo = {
   name: "Rosa",
-  title: "Care Companion",
+  title: "Vista Care Companion",
   avatar: <ChatBubbleIcon />,
   greeting:
-    "Hola! I'm Rosa, your Vista Care companion. How may I assist you today?",
+    "Hola! I'm Rosa. I can assist you with the Activities, Events, Meals, Contact and Health Care Therapy.",
 };
 
 const quickResponses = [

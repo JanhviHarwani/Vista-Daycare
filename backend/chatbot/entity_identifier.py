@@ -39,7 +39,7 @@ GOODBYE_KEYWORDS = [
 
 HEALTH_THERAPY_KEYWORDS = [
     'health', 'therapy', 'consultation', 'doctor', 'counseling', 'psychologist', 'mental',
-    'wellness', 'session', 'treatment', 'healthcare', 'therapy center', 'medical',
+    'wellness', 'session', 'treatment', 'healthcare', 'therapy center', 'medical', 
     'memory', 'exercises', 'arthritis', 'muscle', 'anxiety', 'sleep', 'pain', 'pressure',
     'fatigue', 'falls', 'skin', 'appetite', 'balance', 'cognition', 'loneliness', 'chronic',
     'food', 'irritability', 'osteoporosis', 'sadness', 'independence', 'diabetes', 'hearing',
@@ -47,7 +47,7 @@ HEALTH_THERAPY_KEYWORDS = [
     'depression', 'dehydration', 'infections', 'swelling', 'incontinence', 'digestion',
     'forgetfulness', 'heart', 'bruising', 'sugar', 'asthma', 'spots', 'signs', 'aches', 'stress',
     'cancer', 'teeth', 'brain', 'blood', 'back', 'ankles', 'utis', 'management', 'circulation',
-    'cold', 'cramps', 'constipation', 'alzheimer', 'posture', 'headaches', 'mobility', 'breathlessness',
+    'cold', 'cramps', 'constipation', 'lonely', 'alzheimer', 'posture', 'headaches', 'mobility', 'breathlessness',
     'bones', 'disease', 'health', 'system', 'drymouth', 'hair', 'loss', 'stroke', 'hydration', 'therapy',
     'socializing', 'medication', 'inhalers', 'hygiene', 'support', 'movement', 'relief', 'diet', 'lung',
     'cognitive', 'coping', 'mindfulness', 'routine', 'tests', 'plan', 'vaccinations', 'sunscreen',
@@ -55,7 +55,8 @@ HEALTH_THERAPY_KEYWORDS = [
     'companionship', 'tinnitus', 'supplements', 'wellness', 'rehabilitation', 'prevention', 'resilience',
     'surgery', 'loss', 'fitness', 'clarity', 'stretching', 'management', 'correction', 'assessment',
     'habit', 'illness', 'wellbeing', 'prevention', 'relaxation', 'clarity', 'function', 'omega',
-    'fats', 'cognition', 'mental', 'pain', 'medication', 'vision', 'routine', 'bp'
+    'fats', 'cognition', 'mental', 'pain', 'medication', 'vision', 'routine', 'bp', 'healthy', 
+    'sick'
 ]
 
 
