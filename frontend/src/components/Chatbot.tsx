@@ -75,8 +75,7 @@ const ChatBot = () => {
       sender: "bot",
       timestamp: new Date(),
     },
-  ]
-);
+  ]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -222,19 +221,17 @@ const ChatBot = () => {
             </div>
 
             <div className={css.quickResponses}>
-              <div className={css.quickResponses}>
-                {!hasInteracted &&
-                  quickResponses.map((response, index) => (
-                    <button
-                      key={index}
-                      className={css.responseButton}
-                      onClick={() => handleQuickResponse(response)}
-                    >
-                      <strong>{response.title}</strong>
-                      <span>{response.description}</span>
-                    </button>
-                  ))}
-              </div>
+              {messages.length === 1 && // Only show when there's just the greeting message
+                quickResponses.map((response, index) => (
+                  <button
+                    key={index}
+                    className={css.responseButton}
+                    onClick={() => handleQuickResponse(response)}
+                  >
+                    <strong>{response.title}</strong>
+                    <span>{response.description}</span>
+                  </button>
+                ))}
             </div>
 
             <form onSubmit={handleSubmit} className={css.chatInput}>

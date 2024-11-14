@@ -1,4 +1,12 @@
 export const dashboardStyles = {
+  customCheckbox: {
+    cursor: "not-allowed",
+    width:"20px",
+    height: "50px",
+    borderColor: "white",
+    backgroundColor: "white",
+    colorScheme: "white"
+  },
   emptyState: {
     textAlign: 'center' as const,
     padding: '2rem',

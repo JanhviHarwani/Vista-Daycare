@@ -49,25 +49,20 @@ const AdminDashboard = () => {
   };
 
   // Delete event
-  const deleteEvent = async (eventId: number) => {
+  const deleteEvent = async (eventDate: string, eventName: string) => {
     try {
-      const eventToDelete = events.find((e) => e.id === eventId);
-      if (!eventToDelete) {
-        showError("Event not found");
-        return;
-      }
       const response = await axiosInstance({
         method: "DELETE",
         url: "/event",
         data: {
-          // This is the correct way to send data with DELETE
-          event_date: eventToDelete.event_date,
-          event_name: eventToDelete.event_name,
+          event_date: eventDate,
+          event_name: eventName,
         },
         headers: {
           "Content-Type": "application/json",
         },
       });
+  
       if (response.status === 200) {
         fetchEvents();
         showSuccess("Event deleted successfully");
@@ -75,8 +70,6 @@ const AdminDashboard = () => {
     } catch (error) {
       if (isAuthError(error)) {
         showError(authErrorMessages.sessionExpired);
-        // logout();
-        // navigate("/login");
       } else if (isNetworkError(error)) {
         showError(authErrorMessages.networkError);
       } else {
@@ -184,15 +177,15 @@ const AdminDashboard = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
   // Function to toggle highlight status
-  const toggleHighlight = (eventId: number) => {
-    setEvents(
-      events.map((event) =>
-        event.id === eventId
-          ? { ...event, isHighlight: !event.isHighlight }
-          : event
-      )
-    );
-  };
+  // const toggleHighlight = (eventId: number) => {
+  //   setEvents(
+  //     events.map((event) =>
+  //       event.id === eventId
+  //         ? { ...event, isHighlight: !event.isHighlight }
+  //         : event
+  //     )
+  //   );
+  // };
 
   const handleLogout = () => {
     logout();
@@ -359,17 +352,20 @@ const AdminDashboard = () => {
                     <tbody>
                       {events?.length > 0 ? (
                         events.map((event) => (
-                          <tr key={event.id}>
+                          <tr key={`${event.event_date}-${event.event_name}`}>
                             <td style={dashboardStyles.td}>
                               {event.event_name}
                             </td>
                             <td style={dashboardStyles.td}>
                               <input
+                              key={`${event.event_date}-${event.event_name}`}
                                 type="checkbox"
                                 checked={event.isHighlight}
-                                onChange={() => toggleHighlight(event.id)}
-                                style={{ cursor: "pointer" }}
+                                // onChange={() => toggleHighlight(event.id)}
+                           
+                                style={dashboardStyles.customCheckbox}
                                 aria-label={`Mark ${event.event_name} as highlight of the day`}
+                                disabled
                               />
                             </td>
                             <td style={dashboardStyles.td}>
@@ -379,7 +375,7 @@ const AdminDashboard = () => {
                             <td style={dashboardStyles.td}>
                               <button
                                 style={dashboardStyles.deleteButton}
-                                onClick={() => deleteEvent(event.id)}
+                                onClick={() => deleteEvent(event.event_date, event.event_name)}
                                 aria-label={`Delete ${event.event_name}`}
                               >
                                 <TrashIcon />
