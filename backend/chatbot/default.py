@@ -40,7 +40,7 @@ def get_services_info(message):
     """
     Provides information about the services offered at Vista Adult Daycare.
     """
-    text = """At Vista Adult Daycare, we provide a variety of services including safe transportation, nutritious meals, social activities, and fitness programs. Our friendly staff ensures personalized care, while our nursing team offers health support throughout the day. Join us for a caring, engaging, and enjoyable experience!"""
+    text = """At Vista Adult Daycare, we provide a variety of services including safe transportation, nutritious meals, social activities, various events and fitness programs. Our friendly staff ensures personalized care, while our nursing team offers health support throughout the day. Join us for a caring, engaging, and enjoyable experience!"""
     return text
 
 

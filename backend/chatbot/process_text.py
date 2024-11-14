@@ -2,7 +2,7 @@ import spacy
 import nltk
 from nltk.stem import PorterStemmer
 
-nltk.download('punkt')
+nltk.download("punkt")
 nlp = spacy.load("en_core_web_sm")
 stemmer = PorterStemmer()
 
@@ -23,8 +23,7 @@ def process_keywords(keyword_list):
 def process_message(message):
     """Process the user message by applying both stemming and lemmatization."""
     doc = nlp(message.lower())
-    processed_words = process_words(
-        [token.text for token in doc if not token.is_stop])
+    processed_words = process_words([token.text for token in doc if not token.is_stop])
     return processed_words
 
 

@@ -18,7 +18,7 @@ function ContactUs() {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        alert(`Form Submitted!\nName: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}`);
+        alert(`Contact Details Submitted`);
         // Additional form submission logic
     };
 

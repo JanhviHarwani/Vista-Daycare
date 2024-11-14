@@ -47,9 +47,7 @@ function Header() {
             className={css.select}
             aria-label="Additional navigation options"
           >
-            <option value="" disabled>
-              More
-            </option>
+            <option value="" disabled hidden>More</option>
             <option value="/activities">Events Calendar</option>
             <option value="/eligibility">Eligibility & Insurance</option>
             <option value="/admin">Admin Login</option>

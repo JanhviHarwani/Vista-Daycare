@@ -44,8 +44,7 @@ const botInfo = {
   title: "Care Companion",
   avatar: <ChatBubbleIcon />,
   greeting:
-    "¡Hola! I'm Rosa, your Vista Care companion. How may I assist you today?",
-  // languages: ["English", "Spanish"],
+    "Hola! I'm Rosa, your Vista Care companion. We offer information on the services, meal options, upcoming events, and an AI-powered health care bot. How may I assist you today?",
 };
 
 const quickResponses = [

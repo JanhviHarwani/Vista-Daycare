@@ -2,10 +2,8 @@
   padding: 20px 0;
   width: 100%;
   background-color: #F2EEE8;
-  margin-top: 2rem;
-
-
 }
+
 .main_footer_wrapper {
   display: flex;
   flex-direction: column;
