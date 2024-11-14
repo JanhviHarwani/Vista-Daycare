@@ -95,13 +95,6 @@ export const testimonialData: Testimonial[] = [
 
 ];
 
-export interface Contact {
-  id: number;
-  name: string;
-  phone: string;
-  email: string;
-  date: string;
-}
 
 export interface Event {
   id: number;
@@ -117,8 +110,13 @@ export interface Meal {
   quantity: string;
 }
 export interface Contact {
+  id:number;
   date:string; 
   name:string;
   phone:string;
   email:string;
+}
+// Interface for the API response
+export interface ContactsApiResponse {
+  contacts: Contact[];
 }

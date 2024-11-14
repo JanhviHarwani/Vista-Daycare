@@ -9,7 +9,6 @@ import AboutUs from './pages/AboutUs'
 import ContactUs from './pages/ContactUs'
 import NotFound from './pages/NotFound'
 import './index.css'
-// import Admin from './pages/Admin'
 import AdminDashboard from './pages/AdminDashboard'
 import { LoginPage } from './pages/LoginPage'
 import { PrivateRoute } from './components/PrivateRoute'
@@ -46,6 +45,7 @@ function App() {
         {/* Catch all route for 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>
+      {/* for error notifications */}
       <ToastContainer
           position="top-right"
           autoClose={3000}

@@ -55,12 +55,11 @@ export const AddMealForm = ({ isOpen, onClose, onSubmit }: {
       // Matches your backend's expected structure
       const response = await axiosInstance.post("/meals", {
         meal_date: formData.meal_date,
-        meal_name: [formData.meal_name],
+        meal_name: formData.meal_name,
         quantity: formData.quantity
       });
 
       if (response.status === 201) {
-        console.log('Meal added successfully:', response.data);
         if (onSubmit) {
           onSubmit(); // Call the optional onSubmit callback (for refreshing the list or similar)
         }
@@ -137,7 +136,6 @@ export const AddEventForm = ({ isOpen, onClose, onSubmit }: { isOpen: boolean; o
         });
   
         if (response.status === 201) {
-          console.log('Event added successfully:', response.data);
           if (onSubmit) {
             onSubmit(); // Call the optional onSubmit callback (for refreshing the list or similar)
           }

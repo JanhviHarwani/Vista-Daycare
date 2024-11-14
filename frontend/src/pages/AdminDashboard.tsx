@@ -12,7 +12,7 @@ import {
 } from "../lib/errorHandling";
 import { toast } from "react-toastify"; // You'll need to install this package
 import { showError, showSuccess, authErrorMessages } from "../lib/toast";
-import { Contact, Event, Meal } from "../types/common";
+import { Contact, ContactsApiResponse, Event, Meal } from "../types/common";
 import { LogoutIcon, PlusIcon, TrashIcon } from "../components/SVGs";
 // import { format } from "date-fns";
 
@@ -23,6 +23,7 @@ const AdminDashboard = () => {
   const [meals, setMeals] = useState<Meal[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
   const [contacts, setContacts] = useState<Contact[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
   const { logout } = useAuth();
@@ -36,12 +37,15 @@ const AdminDashboard = () => {
   // Fetch events from backend using Axios
   const fetchEvents = async () => {
     try {
+      setLoading(true);
       const response = await axiosInstance.get<Event[]>("/events/all");
       setEvents(response.data);
     } catch (error) {
       const errorMessage = getErrorMessage(error);
       toast.error(errorMessage);
       handleAuthError(error, logout, () => navigate("/"));
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -81,18 +85,49 @@ const AdminDashboard = () => {
       }
     }
   };
-// contact section
-// Add fetchContacts function
-const fetchContacts = async () => {
-  try {
-    const response = await axiosInstance.get<Contact[]>("/contact");
-    setContacts(response.data);
-  } catch (error) {
-    const errorMessage = getErrorMessage(error);
-    showError(errorMessage);
-    handleAuthError(error, logout, () => navigate("/"));
-  }
-};
+  // contact section
+  // Add fetchContacts function
+  const fetchContacts = async () => {
+    try {
+      setLoading(true);
+      const response = await axiosInstance.get<ContactsApiResponse>("/contact");
+      setContacts(response.data.contacts);
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      showError(errorMessage);
+      handleAuthError(error, logout, () => navigate("/"));
+    } finally {
+      setLoading(false);
+    }
+  };
+  const deleteContact = async (contactDate: string, contactName: string) => {
+    try {
+      const response = await axiosInstance({
+        method: "DELETE",
+        url: "/contact",
+        data: {
+          date: contactDate,
+          name: contactName,
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.status === 200) {
+        fetchContacts();
+        showSuccess("Contact deleted successfully");
+      }
+    } catch (error) {
+      if (isAuthError(error)) {
+        showError(authErrorMessages.sessionExpired);
+      } else if (isNetworkError(error)) {
+        showError(authErrorMessages.networkError);
+      } else {
+        showError(getErrorMessage(error));
+      }
+    }
+  };
   // Meal section
   useEffect(() => {
     if (activeTab === "contacts") {
@@ -102,12 +137,15 @@ const fetchContacts = async () => {
   // Add fetchMeals function
   const fetchMeals = async () => {
     try {
+      setLoading(true);
       const response = await axiosInstance.get<Meal[]>("/meals/all");
       setMeals(response.data);
     } catch (error) {
       const errorMessage = getErrorMessage(error);
       showError(errorMessage);
       handleAuthError(error, logout, () => navigate("/"));
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -161,7 +199,6 @@ const fetchContacts = async () => {
     logout();
     navigate("/");
   };
-
   return (
     <div style={dashboardStyles.container}>
       <header style={dashboardStyles.header}>
@@ -205,29 +242,56 @@ const fetchContacts = async () => {
                 </h2>
               </div>
               <div style={{ overflowX: "auto" }}>
-                <table style={dashboardStyles.table}>
-                  <thead>
-                    <tr>
-                      <th style={dashboardStyles.th}>Name</th>
-                      <th style={dashboardStyles.th}>Phone</th>
-                      <th style={dashboardStyles.th}>Email</th>
-                      <th style={dashboardStyles.th}>Submission Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {contacts.length ? contacts.map((contact) => (
-                      <tr key={contact.id}>
-                        <td style={dashboardStyles.td}>{contact.name}</td>
-                        <td style={dashboardStyles.td}>{contact.phone}</td>
-                        <td style={dashboardStyles.td}>{contact.email}</td>
-                        <td style={dashboardStyles.td}>{contact.date}</td>
+                {loading ? (
+                  <div style={dashboardStyles.loadingSpinner}>
+                  <div style={{...dashboardStyles.loadingDot, ...dashboardStyles.loadingDot1}} />
+                  <div style={{...dashboardStyles.loadingDot, ...dashboardStyles.loadingDot2}} />
+                  <div style={{...dashboardStyles.loadingDot, ...dashboardStyles.loadingDot3}} />
+                </div>
+                ) : (
+                  <table style={dashboardStyles.table}>
+                    <thead>
+                      <tr>
+                        <th style={dashboardStyles.th}>Name</th>
+                        <th style={dashboardStyles.th}>Phone</th>
+                        <th style={dashboardStyles.th}>Email</th>
+                        <th style={dashboardStyles.th}>Submission Date</th>
+                        <th style={dashboardStyles.th}>Actions</th>
                       </tr>
-                    ))
-                    :
-                    <tr style={{textAlign:"center", width:"100%"}}>No Contacts</tr>
-                  }
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {contacts?.length > 0 ? (
+                        contacts.map((contact) => (
+                          <tr key={contact.id}>
+                            <td style={dashboardStyles.td}>{contact.name}</td>
+                            <td style={dashboardStyles.td}>{contact.phone}</td>
+                            <td style={dashboardStyles.td}>{contact.email}</td>
+                            <td style={dashboardStyles.td}>{contact.date}</td>
+                            <td style={dashboardStyles.td}>
+                              <button
+                                style={dashboardStyles.deleteButton}
+                                onClick={() =>
+                                  deleteContact(contact.date, contact.name)
+                                }
+                                aria-label={`Delete ${contact.name}`}
+                              >
+                                <TrashIcon />
+                              </button>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan={5}>
+                            <div style={dashboardStyles.emptyState}>
+                              No contacts available
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                )}
               </div>
             </>
           )}
@@ -246,6 +310,13 @@ const fetchContacts = async () => {
                 </button>
               </div>
               <div style={{ overflowX: "auto" }}>
+              {loading ? (
+                  <div style={dashboardStyles.loadingSpinner}>
+                  <div style={{...dashboardStyles.loadingDot, ...dashboardStyles.loadingDot1}} />
+                  <div style={{...dashboardStyles.loadingDot, ...dashboardStyles.loadingDot2}} />
+                  <div style={{...dashboardStyles.loadingDot, ...dashboardStyles.loadingDot3}} />
+                </div>
+                ) : (
                 <table style={dashboardStyles.table}>
                   <thead>
                     <tr>
@@ -257,36 +328,44 @@ const fetchContacts = async () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {events.length ? events.map((event) => (
-                      <tr key={event.id}>
-                        <td style={dashboardStyles.td}>{event.event_name}</td>
-                        <td style={dashboardStyles.td}>
-                          <input
-                            type="checkbox"
-                            checked={event.isHighlight}
-                            onChange={() => toggleHighlight(event.id)}
-                            style={{ cursor: "pointer" }}
-                            aria-label={`Mark ${event.event_name} as highlight of the day`}
-                          />
-                        </td>
-                        <td style={dashboardStyles.td}>{event.event_date}</td>
-                        <td style={dashboardStyles.td}>{event.end_time}</td>
-                        <td style={dashboardStyles.td}>
-                          <button
-                            style={dashboardStyles.deleteButton}
-                            onClick={() => deleteEvent(event.id)}
-                            aria-label={`Delete ${event.event_name}`}
-                          >
-                            <TrashIcon />
-                          </button>
+                    {events?.length > 0 ? (
+                      events.map((event) => (
+                        <tr key={event.id}>
+                          <td style={dashboardStyles.td}>{event.event_name}</td>
+                          <td style={dashboardStyles.td}>
+                            <input
+                              type="checkbox"
+                              checked={event.isHighlight}
+                              onChange={() => toggleHighlight(event.id)}
+                              style={{ cursor: "pointer" }}
+                              aria-label={`Mark ${event.event_name} as highlight of the day`}
+                            />
+                          </td>
+                          <td style={dashboardStyles.td}>{event.event_date}</td>
+                          <td style={dashboardStyles.td}>{event.end_time}</td>
+                          <td style={dashboardStyles.td}>
+                            <button
+                              style={dashboardStyles.deleteButton}
+                              onClick={() => deleteEvent(event.id)}
+                              aria-label={`Delete ${event.event_name}`}
+                            >
+                              <TrashIcon />
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan={5}>
+                          <div style={dashboardStyles.emptyState}>
+                            No events scheduled
+                          </div>
                         </td>
                       </tr>
-                    ))
-                    :
-                    <tr>No Events</tr>
-                  }
+                    )}
                   </tbody>
                 </table>
+                )}
               </div>
             </>
           )}
@@ -305,6 +384,13 @@ const fetchContacts = async () => {
                 </button>
               </div>
               <div style={{ overflowX: "auto" }}>
+              {loading ? (
+                  <div style={dashboardStyles.loadingSpinner}>
+                  <div style={{...dashboardStyles.loadingDot, ...dashboardStyles.loadingDot1}} />
+                  <div style={{...dashboardStyles.loadingDot, ...dashboardStyles.loadingDot2}} />
+                  <div style={{...dashboardStyles.loadingDot, ...dashboardStyles.loadingDot3}} />
+                </div>
+                ) : (
                 <table style={dashboardStyles.table}>
                   <thead>
                     <tr>
@@ -315,29 +401,37 @@ const fetchContacts = async () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {meals.length? meals.map((meal) => (
-                      <tr key={`${meal.meal_date}-${meal.meal_name}`}>
-                        <td style={dashboardStyles.td}>{meal.meal_name}</td>
-                        <td style={dashboardStyles.td}>{meal.quantity}</td>
-                        <td style={dashboardStyles.td}>{meal.meal_date}</td>
-                        <td style={dashboardStyles.td}>
-                          <button
-                            style={dashboardStyles.deleteButton}
-                            onClick={() =>
-                              deleteMeal(meal.meal_date, meal.meal_name)
-                            }
-                            aria-label={`Delete ${meal.meal_name}`}
-                          >
-                            <TrashIcon />
-                          </button>
+                    {meals?.length > 0 ? (
+                      meals.map((meal) => (
+                        <tr key={`${meal.meal_date}-${meal.meal_name}`}>
+                          <td style={dashboardStyles.td}>{meal.meal_name}</td>
+                          <td style={dashboardStyles.td}>{meal.quantity}</td>
+                          <td style={dashboardStyles.td}>{meal.meal_date}</td>
+                          <td style={dashboardStyles.td}>
+                            <button
+                              style={dashboardStyles.deleteButton}
+                              onClick={() =>
+                                deleteMeal(meal.meal_date, meal.meal_name)
+                              }
+                              aria-label={`Delete ${meal.meal_name}`}
+                            >
+                              <TrashIcon />
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan={4}>
+                          <div style={dashboardStyles.emptyState}>
+                            No meals available
+                          </div>
                         </td>
                       </tr>
-                    ))
-                    :
-                    <tr>No meals</tr>
-                  }
+                    )}
                   </tbody>
                 </table>
+                )}
               </div>
             </>
           )}

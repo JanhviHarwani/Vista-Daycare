@@ -1,4 +1,43 @@
 export const dashboardStyles = {
+  emptyState: {
+    textAlign: 'center' as const,
+    padding: '2rem',
+    color: '#6b7280',
+    backgroundColor: '#f9fafb',
+    borderRadius: '0.5rem',
+    border: '1px dashed #d1d5db',
+    margin: '1rem 0',
+  },
+  
+  loadingSpinner: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '2rem',
+    color: '#4b5563',
+  },
+  
+  loadingDot: {
+    width: '0.75rem',
+    height: '0.75rem',
+    margin: '0 0.25rem',
+    backgroundColor: '#2563eb',
+    borderRadius: '50%',
+    transition: 'all 0.2s ease',
+    animation: 'pulse 1s infinite',
+    opacity: '0.6'
+  },
+  
+  loadingDot1: {
+    animationDelay: '0s'
+  },
+  loadingDot2: {
+    animationDelay: '0.2s'
+  },
+  loadingDot3: {
+    animationDelay: '0.4s'
+  },
+
   headerContent: {
     display: 'flex',
     justifyContent: "space-evenly",
