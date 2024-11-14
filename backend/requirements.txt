@@ -5,11 +5,9 @@ botocore==1.29.9
 PyJWT==2.7.0
 python-dotenv==0.21.0
 werkzeug==2.2.3
-flask-bcrypt
-spacy
-dateparser
-nltk
-pinecone-client
-transformers
-torch
-numpy
+flask-bcrypt==1.0.1
+spacy==3.8.2
+dateparser==1.2.0
+nltk==3.9.1
+pinecone-client==5.0.1
+openai==1.54.4
