@@ -4,17 +4,18 @@ import jwt
 import datetime
 from flask import Flask, jsonify, request
 from functools import wraps
-from core.meal_service import get_meals_for_date, insert_meal, delete_meal, update_meal
-from core.events_service import get_events_for_date, insert_event, delete_event, update_event
+from core.meal_service import get_meals_for_date, get_all_meals, insert_meal, delete_meal, update_meal
+from core.events_service import get_events_for_date, get_all_events, insert_event, delete_event, update_event
 from core.user_service import authenticate_user, create_user, create_superuser, create_token
 from core.contact_service import add_new_contact, get_all_contacts, delete_existing_contact
 from core.utils import is_valid_date, is_valid_time, get_current_date
 from chatbot.entity_identifier import handle_new_message
 from config import Config
+from flask_cors import CORS
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = Config.JWT_SECRET_KEY  # Use JWT_SECRET_KEY from .env file
-
+CORS(app)
+app.config['SECRET_KEY'] = Config.JWT_SECRET_KEY
 
 # Login
 def token_required(f):
@@ -22,11 +23,13 @@ def token_required(f):
     def decorated_function(*args, **kwargs):
         token = None
         if 'Authorization' in request.headers:
-            token = request.headers['Authorization'].split(" ")[1]  # Extract token
+            token = request.headers['Authorization'].split(" ")[
+                1]  # Extract token
         if not token:
             return jsonify({"error": "Token is missing!"}), 403
         try:
-            data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
+            data = jwt.decode(
+                token, app.config['SECRET_KEY'], algorithms=["HS256"])
             current_user = data['username']
             role = data['role']
         except jwt.ExpiredSignatureError:
@@ -36,13 +39,14 @@ def token_required(f):
         return f(current_user, role, *args, **kwargs)
     return decorated_function
 
+
 @app.route('/login', methods=['POST'])
 def login():
     """Admin login to get a JWT token."""
     data = request.get_json()
     if not data or 'username' not in data or 'password' not in data:
         return jsonify({"error": "Missing username or password"}), 400
-    
+
     username = data['username']
     password = data['password']
 
@@ -51,8 +55,9 @@ def login():
         return jsonify({"error": "Invalid credentials"}), 401
 
     token = create_token(username, user)
-    
+
     return jsonify({'token': token}), 200
+
 
 @app.route('/register', methods=['POST'])
 @token_required
@@ -60,11 +65,11 @@ def register(current_user, role):
     """Register a new admin user (only superuser can create new users)."""
     if role != 'superuser':
         return jsonify({"error": "Unauthorized to create new users"}), 403
-    
+
     data = request.get_json()
     if not data or 'username' not in data or 'password' not in data:
         return jsonify({"error": "Missing username or password"}), 400
-    
+
     username = data['username']
     password = data['password']
 
@@ -72,16 +77,19 @@ def register(current_user, role):
     return jsonify(result), status_code
 
 # Meals Service
-@app.route('/meals/<meal_date>', methods=['GET'])
+@app.route('/meal/<meal_date>', methods=['GET'])
 def meals_for_date(meal_date):
     """Fetch meals for a specific date."""
-    if not is_valid_date(meal_date):
-        return jsonify({"error": "please enter date of format yyyy-mm-dd"}), 400
     meals = get_meals_for_date(meal_date)
+    return jsonify(meals), 200
 
-    if meals:
-        return jsonify(meals), 200
-    return jsonify({"error": "No meals found"}), 404
+
+@app.route('/meals/all', methods=['GET'])
+def get_all_meals_endpoint():
+    """Fetch all meals sorted by meal date."""
+    meals = get_all_meals()
+    return jsonify(meals), 200
+
 
 @app.route('/meals', methods=['POST'])
 @token_required
@@ -89,19 +97,21 @@ def insert_meal_endpoint(current_user, role):
     """Insert one or more meals into the database."""
     if role not in ['superuser', 'admin']:
         return jsonify({"error": "Unauthorized"}), 403
-    
+
     data = request.get_json()
     if not data or 'meal_date' not in data or 'meal_name' not in data:
         return jsonify({"error": "Missing meal date or name"}), 400
 
     meal_date = data['meal_date']
     meals = data['meal_name']
+    quantity = data.get('quantity', '1pc')
 
     if not is_valid_date(meal_date):
-        return jsonify({"error": "please enter date of format yyyy-mm-dd"}), 400
+        return jsonify({"error": "Please enter date in the format yyyy-mm-dd"}), 400
 
-    result, status_code = insert_meal(meal_date, meals)
+    result, status_code = insert_meal(meal_date, meals, quantity)
     return jsonify(result), status_code
+
 
 @app.route('/meals', methods=['DELETE'])
 @token_required
@@ -117,18 +127,21 @@ def delete_meal_endpoint(current_user, role):
     meal_date = data['meal_date']
     meals = data['meal_name']
     if not is_valid_date(meal_date):
-        return jsonify({"error": "please enter date of format yyyy-mm-dd"}), 400
+        return jsonify({"error": "Please enter date in the format yyyy-mm-dd"}), 400
     result, status_code = delete_meal(meal_date, meals)
     return jsonify(result), status_code
 
 # Events service
-@app.route('/events/<event_date>', methods=['GET'])
+@app.route('/events/all', methods=['GET'])
+def get_all_events_endpoint():
+    events = get_all_events()
+    return jsonify(events), 200
+
+
+@app.route('/event/<event_date>', methods=['GET'])
 def get_events(event_date):
     events = get_events_for_date(event_date)
-    if events:
-        return jsonify(events), 200
-    else:
-        return jsonify({"error": "No events found for the specified date"}), 404
+    return jsonify(events), 200
 
 
 @app.route('/event', methods=['POST'])
@@ -136,6 +149,7 @@ def get_events(event_date):
 def create_event(current_user, role):
     if role not in ['superuser', 'admin']:
         return jsonify({"error": "Unauthorized"}), 403
+
     data = request.get_json()
 
     if not data or 'event_date' not in data or 'event_name' not in data or 'start_time' not in data or 'end_time' not in data:
@@ -145,15 +159,18 @@ def create_event(current_user, role):
     event_name = data['event_name']
     start_time = data['start_time']
     end_time = data['end_time']
+    # Default to False if not provided
+    is_highlight = data.get('isHighlight', False)
 
     if not is_valid_date(event_date):
-        return jsonify({"error": "please enter date of format yyyy-mm-dd"}), 400
+        return jsonify({"error": "Please enter date in format yyyy-mm-dd"}), 400
     if not is_valid_time(start_time):
-        return jsonify({"error": "please enter time of HH:MM"}), 400
+        return jsonify({"error": "Please enter start_time in HH:MM format"}), 400
     if not is_valid_time(end_time):
-        return jsonify({"error": "please enter time of HH:MM"}), 400
+        return jsonify({"error": "Please enter end_time in HH:MM format"}), 400
 
-    result = insert_event(event_date, event_name, start_time, end_time)
+    result = insert_event(event_date, event_name,
+                          start_time, end_time, is_highlight)
     if result['status'] == 'success':
         return jsonify(result), 201
     else:
@@ -165,6 +182,7 @@ def create_event(current_user, role):
 def delete_event_endpoint(current_user, role):
     if role not in ['superuser', 'admin']:
         return jsonify({"error": "Unauthorized"}), 403
+
     data = request.get_json()
 
     if not data or 'event_date' not in data or 'event_name' not in data:
@@ -174,13 +192,14 @@ def delete_event_endpoint(current_user, role):
     event_name = data['event_name']
 
     if not is_valid_date(event_date):
-        return jsonify({"error": "please enter date of format yyyy-mm-dd"}), 400
+        return jsonify({"error": "Please enter date in format yyyy-mm-dd"}), 400
 
     result = delete_event(event_date, event_name)
     if result['status'] == 'success':
         return jsonify(result), 200
     else:
         return jsonify(result), 500
+
 
 @app.route('/event', methods=['PUT'])
 @token_required
@@ -195,6 +214,7 @@ def update_event_endpoint(current_user, role):
     event_name = data['event_name']
     start_time = data['start_time']
     end_time = data['end_time']
+    is_highlight = data.get('isHighlight', False)
 
     if not is_valid_date(event_date):
         return jsonify({"error": "please enter date of format yyyy-mm-dd"}), 400
@@ -202,11 +222,13 @@ def update_event_endpoint(current_user, role):
         return jsonify({"error": "please enter time of HH:MM"}), 400
     if not is_valid_time(end_time):
         return jsonify({"error": "please enter time of HH:MM"}), 400
-    result = update_event(event_date, event_name, start_time, end_time)
+    result = update_event(event_date, event_name,
+                          start_time, end_time, is_highlight)
     if result['status'] == 'success':
         return jsonify(result), 200
     else:
         return jsonify(result), 500
+
 
 # Contacts
 @app.route('/contact', methods=['POST'])
@@ -222,6 +244,7 @@ def add_contact():
         return jsonify(result), 500
     return jsonify(result), 201
 
+
 @app.route('/contact', methods=['GET'])
 @token_required
 def get_contacts(current_user, role):
@@ -232,6 +255,7 @@ def get_contacts(current_user, role):
         return jsonify(result), 500
     return jsonify(result), 200
 
+
 @app.route('/contact', methods=['DELETE'])
 @token_required
 def delete_contact(current_user, role):
@@ -241,7 +265,7 @@ def delete_contact(current_user, role):
     if 'date' not in data or 'name' not in data:
         return jsonify({'error': 'Missing required fields: date and/or name'}), 400
     if not is_valid_date(data['date']):
-        return jsonify({"error": "please enter date of format yyyy-mm-dd"}), 400      
+        return jsonify({"error": "please enter date of format yyyy-mm-dd"}), 400
     result = delete_existing_contact(data['date'], data['name'])
     if 'error' in result:
         return jsonify(result), 500
@@ -257,6 +281,7 @@ def chat():
     response_message = handle_new_message(user_message)
     return jsonify({"response": response_message}), 201
 
+
 if __name__ == '__main__':
     create_superuser()
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5001)

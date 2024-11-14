@@ -2,16 +2,18 @@ import re
 from datetime import datetime
 import dateparser
 
+
 def is_valid_date(date_str):
     pattern = r"^\d{4}-\d{2}-\d{2}$"
     if not re.match(pattern, date_str):
         return False
-    
+
     try:
         datetime.strptime(date_str, "%Y-%m-%d")
         return True
     except ValueError:
         return False
+
 
 def is_valid_time(time_str):
     pattern = r"^\d{2}:\d{2}$"
@@ -22,6 +24,7 @@ def is_valid_time(time_str):
         return True
     except ValueError:
         return False
+
 
 def extract_date(user_input):
     """
@@ -38,7 +41,8 @@ def extract_date(user_input):
             return parsed_date.strftime('%Y-%m-%d')
 
     date_keywords = ['yesterday', 'today', 'tomorrow', 'next', 'last']
-    matched_keywords = [word for word in date_keywords if word in user_input.lower()]
+    matched_keywords = [
+        word for word in date_keywords if word in user_input.lower()]
 
     if matched_keywords:
         date_phrase = matched_keywords[0]

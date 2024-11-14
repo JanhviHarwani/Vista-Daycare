@@ -8,20 +8,20 @@ from chatbot.process_text import process_and_identify
 
 # Extended list of key words
 MEAL_KEYWORDS = [
-    'meal', 'food', 'breakfast', 'lunch', 'dinner', 'snack', 'brunch', 'supper', 
+    'meal', 'food', 'breakfast', 'lunch', 'dinner', 'snack', 'brunch', 'supper',
     'tea', 'midnight snack', 'supper', 'dish', 'cuisine', 'menu'
 ]
 
 EVENT_KEYWORDS = [
-    'event', 'party', 'meeting', 'conference', 'seminar', 'workshop', 'webinar', 
-    'gathering', 'celebration', 'birthday', 'wedding', 'conference call', 'networking', 
-    'class', 'course', 'exhibition', 'festival', 'show', 'performance', 'concert', 
-    'panel', 'presentation', 'ceremony', 
+    'event', 'party', 'meeting', 'conference', 'seminar', 'workshop', 'webinar',
+    'gathering', 'celebration', 'birthday', 'wedding', 'conference call', 'networking',
+    'class', 'course', 'exhibition', 'festival', 'show', 'performance', 'concert',
+    'panel', 'presentation', 'ceremony',
     'together', 'reunion', 'launch', 'event details'
 ]
 
 GREETING_KEYWORDS = [
-    'hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening', 
+    'hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening',
     'morning', 'afternoon', 'evening', 'yo', 'greetings', 'sup', 'howdy', "about"
 ]
 
@@ -30,12 +30,29 @@ GOODBYE_KEYWORDS = [
 ]
 
 HEALTH_THERAPY_KEYWORDS = [
-    'health', 'therapy', 'consultation', 'doctor', 'counseling', 'psychologist', 'mental', 
+    'health', 'therapy', 'consultation', 'doctor', 'counseling', 'psychologist', 'mental',
     'wellness', 'session', 'treatment', 'healthcare', 'therapy center', 'medical',
+    'memory', 'exercises', 'arthritis', 'muscle', 'anxiety', 'sleep', 'pain', 'pressure',
+    'fatigue', 'falls', 'skin', 'appetite', 'balance', 'cognition', 'loneliness', 'chronic',
+    'food', 'irritability', 'osteoporosis', 'sadness', 'independence', 'diabetes', 'hearing',
+    'vision', 'blurry', 'dementia', 'sharpness', 'dizziness', 'cholesterol', 'grief', 'weight',
+    'depression', 'dehydration', 'infections', 'swelling', 'incontinence', 'digestion',
+    'forgetfulness', 'heart', 'bruising', 'sugar', 'asthma', 'spots', 'signs', 'aches', 'stress',
+    'cancer', 'teeth', 'brain', 'blood', 'back', 'ankles', 'utis', 'management', 'circulation',
+    'cold', 'cramps', 'constipation', 'alzheimer', 'posture', 'headaches', 'mobility', 'breathlessness',
+    'bones', 'disease', 'health', 'system', 'drymouth', 'hair', 'loss', 'stroke', 'hydration', 'therapy',
+    'socializing', 'medication', 'inhalers', 'hygiene', 'support', 'movement', 'relief', 'diet', 'lung',
+    'cognitive', 'coping', 'mindfulness', 'routine', 'tests', 'plan', 'vaccinations', 'sunscreen',
+    'compression', 'acupuncture', 'geriatrics', 'nutrition', 'taichi', 'bladder', 'caregiver',
+    'companionship', 'tinnitus', 'supplements', 'wellness', 'rehabilitation', 'prevention', 'resilience',
+    'surgery', 'loss', 'fitness', 'clarity', 'stretching', 'management', 'correction', 'assessment',
+    'habit', 'illness', 'wellbeing', 'prevention', 'relaxation', 'clarity', 'function', 'omega',
+    'fats', 'cognition', 'mental', 'pain', 'medication', 'vision', 'routine', 'bp'
 ]
 
+
 CONTACT_INFO_KEYWORDS = [
-    'contact', 'phone', 'email', 'address', 'location', 'hours', 'reach', 
+    'contact', 'phone', 'email', 'address', 'location', 'hours', 'reach',
     'telephone', 'office', "info", "help"
 ]
 
@@ -44,11 +61,12 @@ SERVICES_KEYWORDS = [
 ]
 
 STAFF_KEYWORDS = [
-    'staff', 'team', 'caregivers', 'nurses', 'nursing', 'employees', 
-    'professionals', 'doctors', 'medical staff', 
+    'staff', 'team', 'caregivers', 'nurses', 'nursing', 'employees',
+    'professionals', 'doctors', 'medical staff',
     'support staff', 'providers',  'associates',
-    'trained', 'staff expertise', 'dedicated', 
+    'trained', 'staff expertise', 'dedicated',
 ]
+
 
 def identify_intent(user_message):
     """Handle the user message, identify intent, extract the date, and return the response."""
@@ -82,7 +100,7 @@ def handle_new_message(user_message):
         "event": get_event_info,
         "health_therapy": get_health_therapy_info,
         "contact_info": get_contact_info,
-        "services": get_services_info, 
+        "services": get_services_info,
         "staff": get_staff_info,
         "unknown": handle_unknown
     }

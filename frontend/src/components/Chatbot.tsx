@@ -1,6 +1,8 @@
 // components/ChatBot.tsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import css from "./ChatBot.module.css";
+import { Message, QuickResponse } from "../types/chat.type";
+import { ChatService } from "../lib/chat.service";
 
 interface ChatBubbleIconProps {
   onClick?: () => void;
@@ -43,7 +45,7 @@ const botInfo = {
   avatar: <ChatBubbleIcon />,
   greeting:
     "¡Hola! I'm Rosa, your Vista Care companion. How may I assist you today?",
-  languages: ["English", "Spanish"],
+  // languages: ["English", "Spanish"],
 };
 
 const quickResponses = [
@@ -66,6 +68,25 @@ const ChatBot = () => {
   const [message, setMessage] = useState("");
   const [isShaking, setIsShaking] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: "0",
+      text: botInfo.greeting,
+      sender: "bot",
+      timestamp: new Date(),
+    },
+  ]
+);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const triggerShake = () => {
     setIsShaking(true);
@@ -85,7 +106,7 @@ const ChatBot = () => {
   // Periodic shake when closed
   useEffect(() => {
     let interval: NodeJS.Timeout;
-    
+
     if (!isOpen && hasInteracted) {
       interval = setInterval(() => {
         triggerShake();
@@ -102,26 +123,52 @@ const ChatBot = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (message.trim()) {
-      // Simulate message sending
-    //   const userMessage = message.trim();
-    //   setMessage("");
-      
-      // Simulate bot response
-      setTimeout(() => {
+      const userMessage = message.trim();
+      setMessage("");
+
+      // Add user message to chat
+      const newUserMessage: Message = {
+        id: Date.now().toString(),
+        text: userMessage,
+        sender: "user",
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, newUserMessage]);
+
+      setIsLoading(true);
+      try {
+        // Get bot response
+        const botResponse = await ChatService.sendMessage(userMessage);
+
+        // Add bot response to chat
+        const newBotMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          text: botResponse,
+          sender: "bot",
+          timestamp: new Date(),
+        };
+        setMessages((prev) => [...prev, newBotMessage]);
+
         if (!isOpen) {
           triggerShake();
         }
-      }, 1000);
+      } catch (error) {
+        console.error("Failed to get bot response:", error);
+        // Optionally add an error message to the chat
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
-  const handleQuickResponse = (response: typeof quickResponses[0]) => {
-    // Handle quick response selection
-    console.log(`Selected: ${response.title}`);
-    // Add your logic here
+  const handleQuickResponse = async (response: QuickResponse) => {
+    // Handle quick response as a user message
+    const messageText = `${response.title}: ${response.description}`;
+    setMessage(messageText);
+    await handleSubmit({ preventDefault: () => {} } as React.FormEvent);
   };
 
   return (
@@ -134,13 +181,6 @@ const ChatBot = () => {
               <div className={css.headerInfo}>
                 <h3>{botInfo.name}</h3>
                 <p>{botInfo.title}</p>
-                <div className={css.languageBadges}>
-                  {botInfo.languages.map((lang) => (
-                    <span key={lang} className={css.badge}>
-                      {lang}
-                    </span>
-                  ))}
-                </div>
               </div>
               <button
                 onClick={toggleChat}
@@ -153,21 +193,49 @@ const ChatBot = () => {
           </div>
 
           <div className={css.chatBody}>
-            <div className={css.welcomeMessage}>
-              <p>{botInfo.greeting}</p>
+            <div className={css.messageContainer}>
+              {messages.map((msg) => (
+                <div
+                  key={msg.id}
+                  className={`${css.message} ${
+                    msg.sender === "user" ? css.userMessage : css.botMessage
+                  }`}
+                >
+                  {msg.text}
+                  <div className={css.messageTime}>
+                    {msg.timestamp.toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </div>
+                </div>
+              ))}
+              {isLoading && (
+                <div className={css.botMessage}>
+                  <div className={css.typingIndicator}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              )}
+              <div ref={messagesEndRef} />
             </div>
 
             <div className={css.quickResponses}>
-              {quickResponses.map((response, index) => (
-                <button 
-                  key={index} 
-                  className={css.responseButton}
-                  onClick={() => handleQuickResponse(response)}
-                >
-                  <strong>{response.title}</strong>
-                  <span>{response.description}</span>
-                </button>
-              ))}
+              <div className={css.quickResponses}>
+                {!hasInteracted &&
+                  quickResponses.map((response, index) => (
+                    <button
+                      key={index}
+                      className={css.responseButton}
+                      onClick={() => handleQuickResponse(response)}
+                    >
+                      <strong>{response.title}</strong>
+                      <span>{response.description}</span>
+                    </button>
+                  ))}
+              </div>
             </div>
 
             <form onSubmit={handleSubmit} className={css.chatInput}>
@@ -177,9 +245,14 @@ const ChatBot = () => {
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Type your message here..."
                 className={css.messageInput}
+                disabled={isLoading}
               />
-              <button type="submit" className={css.sendButton}>
-                Send
+              <button
+                type="submit"
+                className={css.sendButton}
+                disabled={isLoading}
+              >
+                {isLoading ? "..." : "Send"}
               </button>
             </form>
           </div>

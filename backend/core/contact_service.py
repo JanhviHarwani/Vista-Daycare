@@ -5,6 +5,7 @@ from config import Config
 
 table = Config.init_contacts_table()
 
+
 def add_new_contact(date, name, phone, email):
     """
     Add a new contact to DynamoDB. The `date` is the partition key.
@@ -22,6 +23,7 @@ def add_new_contact(date, name, phone, email):
     except ClientError as e:
         return {'error': str(e)}
 
+
 def get_all_contacts():
     """
     Get all contacts from DynamoDB.
@@ -29,14 +31,15 @@ def get_all_contacts():
     try:
         response = table.scan()
         contacts = response.get('Items', [])
-        
+
         if not contacts:
             return {'message': 'No contacts found'}
-        
+
         return {'contacts': contacts}
-    
+
     except ClientError as e:
         return {'error': str(e)}
+
 
 def delete_existing_contact(date, name):
     """
@@ -60,4 +63,3 @@ def delete_existing_contact(date, name):
         return {'message': f'Contact {name} on {date} deleted successfully'}
     except Exception as e:
         return {'error': f'An error occurred: {str(e)}'}
-

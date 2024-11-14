@@ -94,3 +94,29 @@ export const testimonialData: Testimonial[] = [
   }
 
 ];
+
+
+export interface Event {
+  id: number;
+  event_name: string;
+  event_date: string;
+  end_time: string;
+  isHighlight: boolean;
+}
+
+export interface Meal {
+  meal_date: string;
+  meal_name: string;
+  quantity: string;
+}
+export interface Contact {
+  id:number;
+  date:string; 
+  name:string;
+  phone:string;
+  email:string;
+}
+// Interface for the API response
+export interface ContactsApiResponse {
+  contacts: Contact[];
+}

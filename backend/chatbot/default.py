@@ -2,8 +2,9 @@ def get_greeting(message):
     """
     Responds with a greeting and provides information about the services available at Vista Adult Daycare Center.
     """
-    text = """Hello and welcome to Vista Adult Daycare Center! I’m here to assist you with any questions you may have. We offer services like information about the center, meal options, upcoming events, and even an AI-powered health care bot. Let me know if you need any information on the services we offer!""" 
+    text = """Hello and welcome to Vista Adult Daycare Center! I’m here to assist you with any questions you may have. We offer services like information about the center, meal options, upcoming events, and even an AI-powered health care bot. Let me know if you need any information on the services we offer!"""
     return text
+
 
 def get_goodbye(message):
     """
@@ -11,6 +12,7 @@ def get_goodbye(message):
     """
     text = """Thank you for visiting Vista Adult Daycare Center! It was a pleasure chatting with you. If you need anything in the future, don’t hesitate to reach out. Take care and have a wonderful day ahead!"""
     return text
+
 
 def get_contact_info(message):
     """
@@ -25,12 +27,14 @@ def get_contact_info(message):
             We’re here to help, and we look forward to hearing from you! """
     return text
 
+
 def handle_unknown(message):
     """
     Handles unknown messages by asking for clarification or further information.
     """
-    text =  """Thank you for reaching out to Vista Adult Daycare Center. I’m sorry, but I wasn’t able to understand your request. Could you please clarify your question or let me know how I can assist you? Whether you need information about our services, meal options, events, or health care support, I’m here to help in any way I can."""
+    text = """Thank you for reaching out to Vista Adult Daycare Center. I’m sorry, but I wasn’t able to understand your request. Could you please clarify your question or let me know how I can assist you? Whether you need information about our services, meal options, events, or health care support, I’m here to help in any way I can."""
     return text
+
 
 def get_services_info(message):
     """
@@ -38,6 +42,7 @@ def get_services_info(message):
     """
     text = """At Vista Adult Daycare, we provide a variety of services including safe transportation, nutritious meals, social activities, and fitness programs. Our friendly staff ensures personalized care, while our nursing team offers health support throughout the day. Join us for a caring, engaging, and enjoyable experience!"""
     return text
+
 
 def get_staff_info(message):
     """
