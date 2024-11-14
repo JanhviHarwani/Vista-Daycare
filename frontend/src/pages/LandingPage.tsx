@@ -1,5 +1,4 @@
 import ApplicationStructure from '../components/ApplicationStructure'
-import ChatBot from '../components/Chatbot'
 import MapView from '../components/MapView'
 import MissionStatement from '../components/MissionStatement'
 import Testimonials from '../components/Testimonials'
@@ -14,7 +13,6 @@ function LandingPage() {
       <UpcomingEvents />
       <Testimonials />
       <MapView />
-      <ChatBot /> 
     </ApplicationStructure>
   )
 }
