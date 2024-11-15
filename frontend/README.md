@@ -1,6 +1,4 @@
-
-
-commands to run:
- cd frontend
- npm install
- npm run dev
+# Commands to run React App:
+- cd frontend
+- npm install
+- npm run dev

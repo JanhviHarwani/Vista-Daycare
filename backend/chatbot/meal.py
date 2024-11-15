@@ -4,6 +4,9 @@ from datetime import datetime
 
 
 def get_meal_info(message):
+    """
+    Identifies the meal in the message and gets the meal for the particular date
+    """
     date = extract_date(message)
     meals = get_meals_for_date(date)
     today = datetime.today().strftime("%Y-%m-%d")

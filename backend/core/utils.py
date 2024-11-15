@@ -4,6 +4,9 @@ import dateparser
 
 
 def is_valid_date(date_str):
+    """
+    Checks if a given string is a valid date
+    """
     pattern = r"^\d{4}-\d{2}-\d{2}$"
     if not re.match(pattern, date_str):
         return False
@@ -16,6 +19,9 @@ def is_valid_date(date_str):
 
 
 def is_valid_time(time_str):
+    """
+    Checks if a given string is a valid time
+    """
     pattern = r"^\d{2}:\d{2}$"
     if not re.match(pattern, time_str):
         return False
@@ -54,4 +60,7 @@ def extract_date(user_input):
 
 
 def get_current_date():
+    """
+    Returns current date
+    """
     return datetime.today().strftime("%Y-%m-%d")
