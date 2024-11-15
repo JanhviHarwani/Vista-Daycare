@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { getSignedMediaUrl } from '../lib/aws-config';
-import { serviceData, type ServiceUrl } from '../types/common';
-import ApplicationStructure from '../components/ApplicationStructure';
-import Slider from '../components/Slider';
-import Team from '../components/Team';
-import './Services.css';
+import React, { useEffect, useState } from "react";
+import { getSignedMediaUrl } from "../lib/aws-config";
+import { serviceData, type ServiceUrl } from "../types/common";
+import ApplicationStructure from "../components/ApplicationStructure";
+import Slider from "../components/Slider";
+import Team from "../components/Team";
+import "./Services.css";
 
 const Services: React.FC = () => {
   const [services, setServices] = useState<ServiceUrl[]>([]);
@@ -24,8 +24,8 @@ const Services: React.FC = () => {
         setServices(servicesWithUrls);
         setError(null);
       } catch (error) {
-        console.error('Error loading service images:', error);
-        setError('Error loading images');
+        console.error("Error loading service images:", error);
+        setError("Error loading images");
       } finally {
         setIsLoading(false);
       }
@@ -35,7 +35,7 @@ const Services: React.FC = () => {
   }, []);
 
   if (isLoading) {
-    return <div>Loading services...</div>;
+    return <div>Loading services.......</div>;
   }
 
   if (error) {
@@ -54,7 +54,7 @@ const Services: React.FC = () => {
               <Team
                 members={[
                   {
-                    image: service.imageUrl || '/images/fallback-image.jpg',
+                    image: service.imageUrl || "/images/fallback-image.jpg",
                   },
                 ]}
               />
