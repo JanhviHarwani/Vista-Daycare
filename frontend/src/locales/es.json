@@ -1,0 +1,23 @@
+{
+    "aboutUs": {
+      "title": "Sobre nosotros",
+      "description": "Vista Adult Day Health Care es un proveedor autorizado y calificado de Servicios para Adultos Basados en la Comunidad (CBAS), que sirve a la comunidad del sur de California desde 2007. Estamos comprometidos a ayudar a aquellos que buscan una vida enriquecida y saludable.",
+      "missionStatement": "Declaración de Misión",
+      "missionDescription": "La misión de Vista es proporcionar un entorno inclusivo y de apoyo donde los adultos puedan recibir atención integral, apoyo y participar en actividades atractivas.",
+      "meetStaff": "Conozca a Nuestro Personal",
+      "adminDepartment": "Departamento de Administración",
+      "programActivities": "Departamento de Programas y Actividades",
+      "healthTherapy": "Departamento de Salud y Terapia",
+      "founder": "Fundador",
+      "projectDirector": "Director del Proyecto",
+      "officeAssistant": "Asistente de Oficina / Recepcionista",
+      "activitiesCoordinator": "Coordinador de Actividades",
+      "programAide": "Asistente del Programa",
+      "socialWorker": "Trabajador Social",
+      "ptOtAide": "Asistente de PT/OT",
+      "cna": "CNA",
+      "kitchenStaff": "Asistente del Programa / Cocina",
+      "rd": "RD"
+    }
+  }
+  
