@@ -110,7 +110,7 @@ export type ServiceUrl = Services & {
 export const serviceData: Services[] = [
   {
     title:"Health Services",
-    imageKey: "services-page/artistiqueimagery-130.jpg",
+    imageKey: "services-page/artistiqueimagery-097.jpg",
     description:"Support and counseling to address emotional and physical well-being and mental health challenges."
   },
   {

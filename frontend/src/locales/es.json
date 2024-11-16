@@ -1,7 +1,9 @@
 {
     "aboutUs": {
       "title": "Sobre nosotros",
-      "description": "Vista Adult Day Health Care es un proveedor autorizado y calificado de Servicios para Adultos Basados en la Comunidad (CBAS), que sirve a la comunidad del sur de California desde 2007. Estamos comprometidos a ayudar a aquellos que buscan una vida enriquecida y saludable.",
+      "description1": "Vista Adult Day Health Care es un proveedor autorizado y calificado de Servicios para Adultos Basados en la Comunidad (CBAS), sirviendo a la comunidad del sur de California desde 2007. Estamos comprometidos a ayudar a aquellos que buscan una vida enriquecida y saludable.",
+      "description2": "Nuestros servicios integrales incluyen evaluación individual, servicios profesionales de enfermería, terapias físicas, ocupacionales y del habla, servicios de salud mental, actividades terapéuticas, servicios sociales, cuidado personal, comidas variadas, asesoramiento nutricional y transporte desde y hacia áreas circundantes.",
+      "description3": "Nuestro objetivo es proporcionar una comunidad para que los adultos mayores socialicen y mejoren su salud, seguridad y bienestar. Ofrecemos tanto servicios terapéuticos como recreativos a nuestros miembros de Vista ADHC. Nuestro dedicado personal trata a los miembros con profesionalismo, dignidad y compasión, ayudándolos a restaurar y mantener una salud óptima, autosuficiencia e independencia. Damos la bienvenida a participantes de todas las razas, nacionalidades y credos religiosos. Nuestro equipo de profesionales de la salud altamente calificados y capacitados comparte nuestros objetivos y filosofía, esforzándose por crear un entorno acogedor, inclusivo y de apoyo para todos.",
       "missionStatement": "Declaración de Misión",
       "missionDescription": "La misión de Vista es proporcionar un entorno inclusivo y de apoyo donde los adultos puedan recibir atención integral, apoyo y participar en actividades atractivas.",
       "meetStaff": "Conozca a Nuestro Personal",
