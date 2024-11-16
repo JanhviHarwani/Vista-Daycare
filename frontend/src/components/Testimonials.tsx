@@ -4,12 +4,16 @@ import { getSignedMediaUrl } from '../lib/aws-config';
 import css from './testimonials.module.css';
 import { testimonialData, type Testimonial } from '../types/common';
 
-
 const Testimonials: React.FC = () => {
   const [ testimonials, setTestimonials] = useState<(Testimonial & { imageUrl?: string })[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [language, setLanguage] = useState<'en' | 'es'>('en');
 
+  useEffect(() => {
+    const browserLanguage = navigator.language.slice(0, 2);
+    setLanguage(browserLanguage === 'es' ? 'es' : 'en');
+  }, []);
   useEffect(() => {
     const loadImages = async () => {
       try {
@@ -44,7 +48,7 @@ const Testimonials: React.FC = () => {
   return (
     <section className={css.testimonials_section} aria-labelledby="testimonials-heading">
       <div className={css.content_wrapper}>
-      <h1 id="testimonials-heading" className={css.title}>
+        <h1 id="testimonials-heading" className={css.title}>
           Testimonials
           <div className={css.title_underline}></div>
         </h1>
@@ -54,8 +58,8 @@ const Testimonials: React.FC = () => {
             <div key={index} className={css.testimonial_card}>
               <div className={css.avatar}>
                 {testimonial.imageUrl && (
-                  <img 
-                    src={testimonial.imageUrl} 
+                  <img
+                    src={testimonial.imageUrl}
                     alt={`${testimonial.name}'s portrait`}
                     className={css.avatar_image}
                     width="75%"
@@ -65,21 +69,21 @@ const Testimonials: React.FC = () => {
                   />
                 )}
               </div>
-              
+
               <div className={css.card_content}>
                 <div className={css.rating} aria-label={`Rating: ${testimonial.rating} out of 5`}>
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <span key={i} className={css.star}>⭐</span>
                   ))}
                 </div>
-                
+
                 <div className={css.testimonial_text}>
-                  {testimonial.text}
+                  {language === 'es' ? testimonial.text_es : testimonial.text}
                 </div>
 
                 <div className={css.profile_info}>
                   <h3>{testimonial.name}</h3>
-                  <span>{testimonial.role}</span>
+                  <span>{language === 'es' ? testimonial.role_es : testimonial.role}</span>
                 </div>
               </div>
             </div>

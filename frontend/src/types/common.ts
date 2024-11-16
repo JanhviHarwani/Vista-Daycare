@@ -65,6 +65,9 @@ export type Testimonial = {
   rating: number;
   role: string;
   imageKey: string;
+  text_es: string;
+  role_es: string
+
 };
 
 export type TestimonialWithUrl = Testimonial & {
@@ -76,23 +79,28 @@ export const testimonialData: Testimonial[] = [
     text: "I love everything here. I also have a best friend here at the center. The fondest memory of this place for me is when I won at Raffle game.",
     rating: 5,
     role: "Long-term Member",
-    imageKey: "landing-page/Paco.jpg"
+    imageKey: "landing-page/Paco.jpg",
+    text_es: "Me encanta todo aquí. También tengo un mejor amigo aquí en el centro. El recuerdo más querido de este lugar para mí es cuando gané en el juego de Rifa.",
+    role_es: "Miembro a largo plazo"
   },
   {
     name: "Yolanda Perez",
     text: "I've been coming here for 10 years now and have made so many friends. I keep coming back here because I feel regenerated and I feel good and like I did something. It just does good for me when I go back home!",
     rating: 5,
     role: "Long-term Member",
-    imageKey: "landing-page/yolanda.jpg"
+    imageKey: "landing-page/yolanda.jpg",
+    text_es: "He estado viniendo aquí durante 10 años y he hecho tantos amigos. Sigo regresando aquí porque me siento regenerada, me siento bien y siento que hice algo. ¡Me hace bien cuando regreso a casa!",
+    role_es: "Miembro a largo plazo"
   },
   {
     name: "Raul Moreno",
     text: "This center has impacted me in a great way due to my accident in the past. They focused on taking care of me, making sure I was mentally, physically, and emotionally good. I have been here for 19 years and their care for me is unwavering.",
     rating: 5,
     role: "Long-term Member",
-    imageKey: "landing-page/raul.jpg"
+    imageKey: "landing-page/raul.jpg",
+    text_es: "Este centro me ha impactado de gran manera debido a mi accidente en el pasado. Se enfocaron en cuidarme, asegurándose de que estuviera bien mental, física y emocionalmente. He estado aquí durante 19 años y su cuidado por mí es inquebrantable.",
+    role_es: "Miembro a largo plazo"
   }
-
 ];
 
 
