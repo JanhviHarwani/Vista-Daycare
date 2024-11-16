@@ -56,5 +56,32 @@
         "role": "Miembro de Largo Plazo"
       }
     ]
+  },
+  "eligibility": {
+    "title": "Elegibilidad para Participantes en Vista Adult Day Care",
+    "description": {
+      "eligibilityCriteria": "Criterios de Elegibilidad para ADHC: Programas basados en la comunidad que ofrecen un programa organizado de salud, servicios terapéuticos y sociales. Los programas atienden a adultos mayores frágiles y adultos más jóvenes con condiciones médicas, cognitivas o de salud mental crónicas que están en riesgo de ser ubicados en instituciones. Atiende a adultos de 18 años o más."
+    },
+    "paymentSources": {
+      "title": "Fuentes de Pago",
+      "sources": [
+        {
+          "name": "Medi-Cal",
+          "description": "Para los participantes que cumplen con los criterios de elegibilidad de Medi-Cal CBAS."
+        },
+        {
+          "name": "Pago Privado",
+          "description": "Opciones de pago por cuenta propia disponibles para participantes que no son elegibles para otras fuentes de financiamiento."
+        },
+        {
+          "name": "Centro Regional",
+          "description": "Para los participantes con discapacidades del desarrollo, financiados a través de centros regionales."
+        },
+        {
+          "name": "Agencias de Áreas para Personas Mayores",
+          "description": "Servicios financiados a través de agencias locales para personas mayores para participantes calificados."
+        }
+      ]
+    }
   }
 }

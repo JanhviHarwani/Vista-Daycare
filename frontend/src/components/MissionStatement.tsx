@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import  { useEffect } from 'react';
 import css from './MissionStatement.module.css';
 
 interface Card {
@@ -9,7 +10,18 @@ interface Card {
 }
 
 const MissionStatement: React.FC = () => {
-  const { t } = useTranslation();
+  const { i18n} = useTranslation(); 
+  const { t} = useTranslation(); 
+
+  useEffect(() => {
+    const userLanguage = navigator.language || 'en'; 
+    const supportedLanguages = ['en', 'es']; 
+    const defaultLanguage = 'en'; 
+    const languageToUse = supportedLanguages.includes(userLanguage.slice(0, 2)) ? userLanguage.slice(0, 2) : defaultLanguage;
+    if (i18n && typeof i18n.changeLanguage === 'function') {
+      i18n.changeLanguage(languageToUse);
+    }
+  }, [i18n]);
   const cards = t('missionPage.cards', { returnObjects: true }) as Card[];
 
   return (

@@ -58,6 +58,33 @@
         "text": "This center has impacted me in a great way due to my accident in the past. They focused on taking care of me, making sure I was mentally, physically, and emotionally good. I have been here for 19 years and their care for me is unwavering.",
         "role": "Long-term Member"
       }
+    },
+    "eligibility": {
+      "title": "Participant Eligibility in Vista Adult Day Care",
+      "description": {
+        "eligibilityCriteria": "Eligibility Criteria for ADHC: Community-based programs providing an organized day program of health, therapeutic, and social services. Programs serve frail older adults and younger adults with chronic disabling medical, cognitive, or mental health conditions who are at risk of institutional placement. Serves adults age 18 and over."
+      },
+      "paymentSources": {
+        "title": "Payment Sources",
+        "sources": [
+          {
+            "name": "Medi-Cal",
+            "description": "For participants who meet the Medi-Cal CBAS eligibility criteria."
+          },
+          {
+            "name": "Private Payment",
+            "description": "Self-pay options available for participants not eligible for other funding sources."
+          },
+          {
+            "name": "Regional Center",
+            "description": "For participants with Developmental Disabilities, funded through regional centers."
+          },
+          {
+            "name": "Area Agencies on Aging",
+            "description": "Services funded through local aging agencies for qualified participants."
+          }
+        ]
+      }
     }
     }
     

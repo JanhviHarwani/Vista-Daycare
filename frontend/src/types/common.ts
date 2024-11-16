@@ -58,6 +58,31 @@ export const mediaItems: MediaItem[] = [
     caption: "Our Team",
   }
 ];
+
+//Eligibility Data
+export const imageGalleryItems: MediaItem[] = [
+  {
+    type: 'image',
+    key: 'insurance-page/Anthem.jpg',
+    caption: 'Anthem',
+  },
+  {
+    type: 'image',
+    key: 'insurance-page/California.png',
+    caption: 'California',
+  },
+  {
+    type: 'image',
+    key: 'insurance-page/Medi-cal.png',
+    caption: 'Medi-cal',
+  },
+  {
+    type: 'image',
+    key: 'insurance-page/Medicare.png',
+    caption: 'Medicare',
+  },
+];
+
 // New Testimonial types
 export type Testimonial = {
   name: string;
