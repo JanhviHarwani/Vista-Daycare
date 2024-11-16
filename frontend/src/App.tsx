@@ -16,6 +16,8 @@ import { AuthProvider } from './providers/AuthProviders'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';  
 import './components/toast.css';  
+import { I18nextProvider } from 'react-i18next';
+import './i18n';
 function App() {
 
   return (

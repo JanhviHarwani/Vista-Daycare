@@ -14,10 +14,10 @@ from core.meal_service import (
 from core.events_service import (
     get_events_for_date,
     get_all_events,
+    get_upcoming_events,
     insert_event,
     delete_event,
     update_event,
-    get_upcoming_events,
 )
 from core.user_service import (
     authenticate_user,
@@ -30,7 +30,15 @@ from core.contact_service import (
     get_all_contacts,
     delete_existing_contact,
 )
-from core.utils import is_valid_date, is_valid_time, get_current_date
+from core.metrics_service import (
+    log_visit,
+    get_visits_for_day,
+)
+from core.utils import (
+    is_valid_date,
+    is_valid_time,
+    get_current_date,
+)
 from chatbot.entity_identifier import handle_new_message
 from config import Config
 from flask_cors import CORS
@@ -40,13 +48,12 @@ CORS(app)
 app.config["SECRET_KEY"] = Config.JWT_SECRET_KEY
 
 
-# Login
 def token_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         token = None
         if "Authorization" in request.headers:
-            token = request.headers["Authorization"].split(" ")[1]  # Extract token
+            token = request.headers["Authorization"].split(" ")[1]
         if not token:
             return jsonify({"error": "Token is missing!"}), 403
         try:
@@ -99,7 +106,6 @@ def register(current_user, role):
     return jsonify(result), status_code
 
 
-# Meals Service
 @app.route("/meal/<meal_date>", methods=["GET"])
 def meals_for_date(meal_date):
     """Fetch meals for a specific date."""
@@ -155,21 +161,23 @@ def delete_meal_endpoint(current_user, role):
     return jsonify(result), status_code
 
 
-# Events service
 @app.route("/events/all", methods=["GET"])
 def get_all_events_endpoint():
+    """Gets all events from the database."""
     events = get_all_events()
     return jsonify(events), 200
 
 
 @app.route("/event/<event_date>", methods=["GET"])
 def get_events(event_date):
+    """Gets events for the particular date from the database."""
     events = get_events_for_date(event_date)
     return jsonify(events), 200
 
 
 @app.route("/events/upcoming", methods=["GET"])
 def upcoming_events():
+    """Gets events from database that occur after today database."""
     events = get_upcoming_events()
     return jsonify(events), 200
 
@@ -177,6 +185,7 @@ def upcoming_events():
 @app.route("/event", methods=["POST"])
 @token_required
 def create_event(current_user, role):
+    """Insert one or more events into the database."""
     if role not in ["superuser", "admin"]:
         return jsonify({"error": "Unauthorized"}), 403
     data = request.get_json()
@@ -212,6 +221,7 @@ def create_event(current_user, role):
 @app.route("/event", methods=["DELETE"])
 @token_required
 def delete_event_endpoint(current_user, role):
+    """Deletes events from the database."""
     if role not in ["superuser", "admin"]:
         return jsonify({"error": "Unauthorized"}), 403
 
@@ -236,6 +246,7 @@ def delete_event_endpoint(current_user, role):
 @app.route("/event", methods=["PUT"])
 @token_required
 def update_event_endpoint(current_user, role):
+    """Updates events database."""
     if role not in ["superuser", "admin"]:
         return jsonify({"error": "Unauthorized"}), 403
     data = request.get_json()
@@ -267,9 +278,9 @@ def update_event_endpoint(current_user, role):
         return jsonify(result), 500
 
 
-# Contacts
 @app.route("/contact", methods=["POST"])
 def add_contact():
+    """Adds contact into the database."""
     data = request.get_json()
     current_date = get_current_date()
     if "name" not in data or "phone" not in data or "email" not in data:
@@ -283,6 +294,7 @@ def add_contact():
 @app.route("/contact", methods=["GET"])
 @token_required
 def get_contacts(current_user, role):
+    """Gets all contacts from the database"""
     if role not in ["superuser", "admin"]:
         return jsonify({"error": "Unauthorized"}), 403
     result = get_all_contacts()
@@ -294,6 +306,7 @@ def get_contacts(current_user, role):
 @app.route("/contact", methods=["DELETE"])
 @token_required
 def delete_contact(current_user, role):
+    """Deletes contacts from the database"""
     if role not in ["superuser", "admin"]:
         return jsonify({"error": "Unauthorized"}), 403
     data = request.get_json()
@@ -307,9 +320,38 @@ def delete_contact(current_user, role):
     return jsonify(result), 200
 
 
-# Chat bot
+@app.route('/log_visit', methods=['POST'])
+def log_visit_route():
+    """API route to log a visit to a page."""
+    data = request.get_json()
+    page_name = data.get("page_name")
+    if not page_name:
+        return jsonify({"error": "Page name is required"}), 400
+
+    try:
+        visit_id, message = log_visit(page_name)
+        return jsonify({"visit_id": visit_id, "message": message}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/get_visits', methods=['GET'])
+@token_required
+def get_visits_route(current_user, role):
+    """API route to get all visits for a given date."""
+    target_date = request.args.get("date")
+    if not date and not is_valid_date(target_date):
+        return jsonify({"error": "Date is required (format: YYYY-MM-DD)"}), 400
+    try:
+        visits = get_visits_for_day(target_date)
+        return jsonify({"date": target_date, "visits": visits}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 @app.route("/chat", methods=["POST"])
 def chat():
+    """Handles user chatbot"""
     user_message = request.json.get("message", "")
     if not user_message:
         return jsonify({"response": "Please provide a valid message."}), 400

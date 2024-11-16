@@ -3,12 +3,14 @@ from botocore.exceptions import ClientError
 from config import Config
 from core.utils import get_current_date
 
-# Initialize DynamoDB table
+
 table = Config.init_event_table()
 
 
-# Function to insert an event into the EventsTable
 def insert_event(event_date, event_name, start_time, end_time, is_highlight=False):
+    """
+    Function to insert an event into the EventsTable
+    """
     try:
         if not isinstance(start_time, str) or not isinstance(end_time, str):
             raise ValueError(
@@ -23,7 +25,6 @@ def insert_event(event_date, event_name, start_time, end_time, is_highlight=Fals
                 "isHighlight": is_highlight,
             }
         )
-        print("Insert successful:", response)
         return {"message": "Event inserted successfully", "status": "success"}
 
     except ClientError as e:
@@ -34,8 +35,10 @@ def insert_event(event_date, event_name, start_time, end_time, is_highlight=Fals
         return {"error": str(ve), "status": "failed"}
 
 
-# Function to delete an event from the EventsTable
 def delete_event(event_date, event_name):
+    """
+    Deletes events in the db 
+    """
     try:
         response = table.delete_item(
             Key={"event_date": event_date, "event_name": event_name}
@@ -50,15 +53,15 @@ def delete_event(event_date, event_name):
         return {"error": "Failed to delete event", "status": "failed"}
 
 
-# Function to update an event's times (start_time, end_time) and highlight status
 def update_event(event_date, event_name, start_time, end_time, is_highlight=None):
+    """
+    Updates events in the db based on event date
+    """
     try:
         if not isinstance(start_time, str) or not isinstance(end_time, str):
             raise ValueError(
                 "start_time and end_time must be strings in 'HH:MM' format."
             )
-
-        # Prepare update expression and values
         update_expression = "SET start_time = :start_time, end_time = :end_time"
         expression_attribute_values = {":start_time": start_time, ":end_time": end_time}
         if is_highlight is not None:
@@ -70,7 +73,6 @@ def update_event(event_date, event_name, start_time, end_time, is_highlight=None
             ExpressionAttributeValues=expression_attribute_values,
             ReturnValues="UPDATED_NEW",
         )
-        print("Update successful:", response)
         return {"message": "Event updated successfully", "status": "success"}
 
     except ClientError as e:
@@ -79,6 +81,9 @@ def update_event(event_date, event_name, start_time, end_time, is_highlight=None
 
 
 def get_all_events():
+    """
+    Gets all events in the db in descending order
+    """
     try:
         response = table.scan()
         if "Items" in response and response["Items"]:
@@ -101,7 +106,9 @@ def get_all_events():
 
 
 def get_events_for_date(event_date):
-    """Fetch events for a specific date."""
+    """
+    Fetch events for a specific date.
+    """
     try:
         response = table.query(
             KeyConditionExpression="event_date = :event_date",
@@ -129,8 +136,6 @@ def get_events_for_date(event_date):
 def get_upcoming_events(limit=6):
     try:
         current_date_str = get_current_date()
-        print(current_date_str)
-        # Query for upcoming events
         response = table.scan(
             FilterExpression="event_date >= :current_date",
             ExpressionAttributeValues={":current_date": current_date_str},

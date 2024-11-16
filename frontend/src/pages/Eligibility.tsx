@@ -1,56 +1,88 @@
-import ApplicationStructure from "../components/ApplicationStructure";
-import './Eligibility.css'; // Importing an external CSS file for styles
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { imageGalleryItems } from '../types/common';
+import { getSignedMediaUrl } from '../lib/aws-config';
+import ApplicationStructure from '../components/ApplicationStructure';
+import './Eligibility.css';
 
-function Eligibility() {
+const Eligibility: React.FC = () => {
+  const { t } = useTranslation();
+  const [gallery, setGallery] = useState<{ src: string; alt: string }[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const { i18n} = useTranslation(); 
+
+  useEffect(() => {
+    const userLanguage = navigator.language || 'en'; 
+    const supportedLanguages = ['en', 'es']; 
+    const defaultLanguage = 'en'; 
+    const languageToUse = supportedLanguages.includes(userLanguage.slice(0, 2)) ? userLanguage.slice(0, 2) : defaultLanguage;
+    if (i18n && typeof i18n.changeLanguage === 'function') {
+      i18n.changeLanguage(languageToUse);
+    }
+  }, [i18n]);
+
+  useEffect(() => {
+    const loadGalleryImages = async () => {
+      try {
+        setIsLoading(true);
+        const signedUrls = await Promise.all(
+          imageGalleryItems.map(async (item) => ({
+            src: await getSignedMediaUrl(item.key),
+            alt: item.caption,
+          }))
+        );
+        setGallery(signedUrls);
+      } catch (err) {
+        console.error('Error loading gallery images:', err);
+        setError('Failed to load images');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadGalleryImages();
+  }, []);
+
+  if (isLoading) {
+    return <div>Loading gallery...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
     <ApplicationStructure>
       <div className="eligibility-container">
-        <h2 className="section-heading">Participant Eligibility in Vista Adult Day Care</h2>
-
+        <h2 className="section-heading">{t('eligibility.title')}</h2>
+        <div className="title_underline"></div>
         <h4 className="eligibility-description">
-          <strong>Eligibility Criteria for ADHC:</strong> Community-based programs providing an organized day program of health, therapeutic, and social services. Programs serve frail older adults and younger adults with chronic disabling medical, cognitive, or mental health conditions who are at risk of institutional placement. Serves adults age 18 and over.
+          {t('eligibility.description.eligibilityCriteria')}
         </h4>
 
-
-        <h3 className="section-heading">Payment Sources</h3>
+        <h3 className="section-heading">{t('eligibility.paymentSources.title')}</h3>
         <div className="payment-sources-container">
-          <ul className="payment-sources-list">
-            <li className="payment-source-item">
-              <h4 className="payment-source-heading">Medi-Cal</h4>
-              <p className="payment-source-description">For participants who meet the Medi-Cal CBAS eligibility criteria.</p>
-            </li>
-            <li className="payment-source-item">
-              <h4 className="payment-source-heading">Private Payment</h4>
-              <p className="payment-source-description">Self-pay options available for participants not eligible for other funding sources.</p>
-            </li>
-            <li className="payment-source-item">
-              <h4 className="payment-source-heading">Regional Center</h4>
-              <p className="payment-source-description">For participants with Developmental Disabilities, funded through regional centers.</p>
-            </li>
-            <li className="payment-source-item">
-              <h4 className="payment-source-heading">Area Agencies on Aging</h4>
-              <p className="payment-source-description">Services funded through local aging agencies for qualified participants.</p>
-            </li>
-          </ul>
+          {Object.values(
+            t('eligibility.paymentSources.sources', { returnObjects: true })
+          ).map((source: any, index) => (
+            <div key={index} className="payment-source-item">
+              <h4 className="payment-source-heading">{source.name}</h4>
+              <p className="payment-source-description">{source.description}</p>
+            </div>
+          ))}
         </div>
 
         <div className="image-gallery">
-          <div className="image-container">
-            <img src="./img1.png" alt="Image 1" className="responsive-img" />
-          </div>
-          <div className="image-container">
-            <img src="./img2.jpg" alt="Image 2" className="responsive-img" />
-          </div>
-          <div className="image-container">
-            <img src="./img3.png" alt="Image 3" className="responsive-img" />
-          </div>
-          <div className="image-container">
-            <img src="./img4.png" alt="Image 4" className="responsive-img" />
-          </div>
+          {gallery.map((image, index) => (
+            <div key={index} className="image-container">
+              <img src={image.src} alt={image.alt} className="responsive-img" />
+            </div>
+          ))}
         </div>
       </div>
     </ApplicationStructure>
   );
-}
+};
 
 export default Eligibility;

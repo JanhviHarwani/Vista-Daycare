@@ -1,120 +1,116 @@
 .eligibility-container {
-    margin: 0 auto;
-    padding: 40px;
-    max-width: 1200px;
+  padding: 80px 20px;
+  background-color: #F2EEE8;
+  overflow: hidden;
+  position: relative;
+}
+
+.section-heading {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #2D2D2D;
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.section-heading + .title_underline {
+  width: 100px;
+  height: 3px;
+  background: #a2845e;
+  margin: 20px auto 40px;
+}
+
+.payment-sources-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto 4rem;
+}
+
+.payment-source-item {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.payment-source-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.payment-source-heading {
+  font-size: 1.5rem;
+  color: #2D2D2D;
+  margin-bottom: 1rem;
+}
+
+.payment-source-description {
+  color: #4a4a4a;
+  line-height: 1.6;
+}
+
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.image-container {
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 8px; /* Added rounded corners */
+  height: 300px; /* Set fixed height for consistent image container sizing */
+}
+
+.image-container:hover {
+  transform: scale(1.05); /* Smooth scale effect */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.responsive-img {
+  width: 100%;
+  height: 100%; /* Ensure the image fills the container */
+  object-fit: cover; /* Cover the container without leaving space */
+  display: block;
+  border-radius: 8px; /* Added rounded corners to images */
+}
+
+.eligibility-container, .eligibility-description, .section-heading, .payment-source-heading, .payment-source-description {
+  color: #2D2D2D; /* or any color you prefer */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
   .section-heading {
-    text-align: center;
     font-size: 2rem;
-    margin-bottom: 20px;
-    font-weight: bold;
-  }
-  
-  .eligibility-description {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    margin-bottom: 40px;
-  }
-  
-  .payment-sources {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 40px;
-  }
-  
-  .image-gallery {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 30px;
-  }
-  
-  .image-container {
-    width: 23%;
-    overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .responsive-img {
-    width: 100%;
-    max-width: 280px;
-    border-radius: 8px;
-    object-fit: cover;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .responsive-img:hover {
-    transform: scale(1.05);
-  }
-  
-  @media (max-width: 768px) {
-    .image-gallery {
-      justify-content: center;
-    }
-  
-    .responsive-img {
-      max-width: 100%;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .section-heading {
-      font-size: 1.6rem;
-    }
-  
-    .eligibility-description,
-    .payment-sources {
-      font-size: 1rem;
-    }
-  }
-  
-  .payment-sources-container {
-    margin-top: 20px;
-  }
-  
-  .payment-sources-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .payment-source-item {
-    margin-bottom: 15px;
-    border-left: 4px solid #e74c3c;
-    padding-left: 15px;
-    margin-left: 0;
-  }
-  
-  .payment-source-heading {
-    font-weight: bold;
-    font-size: 1.1em;
-    color: #e74c3c;
-    margin-bottom: 5px;
-  }
-  
-  .payment-source-description {
-    margin-left: 10px;
-    font-size: 1em;
-    color: #555;
   }
 
-.eligibility-description {
-    font-size: 1.1em;
-    line-height: 1.6;
-    color: #333;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: #f9f9f9; 
-    border-left: 4px solid #e74c3c;
-    border-radius: 5px; 
+  .image-gallery {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust for smaller screens */
+    gap: 15px; /* Adjust gap for mobile */
   }
-  
-  .eligibility-description strong {
-    font-weight: bold;
-    color: #e74c3c; 
+
+  .payment-sources-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Make payment sources responsive */
   }
-  
+}

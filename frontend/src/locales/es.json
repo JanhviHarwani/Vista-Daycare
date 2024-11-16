@@ -1,0 +1,87 @@
+{
+  "aboutUs": {
+    "title": "Sobre nosotros",
+    "description1": "Vista Adult Day Health Care es un proveedor autorizado y calificado de Servicios para Adultos Basados en la Comunidad (CBAS), sirviendo a la comunidad del sur de California desde 2007. Estamos comprometidos a ayudar a aquellos que buscan una vida enriquecida y saludable.",
+    "description2": "Nuestros servicios integrales incluyen evaluación individual, servicios profesionales de enfermería, terapias físicas, ocupacionales y del habla, servicios de salud mental, actividades terapéuticas, servicios sociales, cuidado personal, comidas variadas, asesoramiento nutricional y transporte desde y hacia áreas circundantes.",
+    "description3": "Nuestro objetivo es proporcionar una comunidad para que los adultos mayores socialicen y mejoren su salud, seguridad y bienestar. Ofrecemos tanto servicios terapéuticos como recreativos a nuestros miembros de Vista ADHC. Nuestro dedicado personal trata a los miembros con profesionalismo, dignidad y compasión, ayudándolos a restaurar y mantener una salud óptima, autosuficiencia e independencia. Damos la bienvenida a participantes de todas las razas, nacionalidades y credos religiosos. Nuestro equipo de profesionales de la salud altamente calificados y capacitados comparte nuestros objetivos y filosofía, esforzándose por crear un entorno acogedor, inclusivo y de apoyo para todos.",
+    "missionStatement": "Declaración de Misión",
+    "missionDescription": "La misión de Vista es proporcionar un entorno inclusivo y de apoyo donde los adultos puedan recibir atención integral, apoyo y participar en actividades atractivas.",
+    "meetStaff": "Conozca a Nuestro Personal",
+    "adminDepartment": "Departamento de Administración",
+    "programActivities": "Departamento de Programas y Actividades",
+    "healthTherapy": "Departamento de Salud y Terapia",
+    "founder": "Fundador",
+    "projectDirector": "Director del Proyecto",
+    "officeAssistant": "Asistente de Oficina / Recepcionista",
+    "activitiesCoordinator": "Coordinador de Actividades",
+    "programAide": "Asistente del Programa",
+    "socialWorker": "Trabajador Social",
+    "ptOtAide": "Asistente de PT/OT",
+    "cna": "CNA",
+    "kitchenStaff": "Asistente del Programa / Cocina",
+    "rd": "RD"
+  },
+  "missionPage": {
+    "title": "Declaración de Misión",
+    "description": "La misión de Vista es proporcionar un entorno inclusivo y acogedor donde los adultos puedan recibir atención integral, apoyo y participar en actividades atractivas. Nuestro objetivo es mejorar su bienestar físico, emocional y cognitivo, promover la interacción social y empoderar a las personas para mantener su independencia y llevar una vida plena.",
+    "cards": [
+      {
+        "title": "Empoderando a los Mayores",
+        "content": "Como proveedor licenciado de Servicios para Adultos Basados en la Comunidad (CBAS) desde 2007, ofrecemos atención integral que incluye servicios profesionales de enfermería, diversas terapias, apoyo de salud mental y actividades personalizadas. Nuestro personal dedicado trata a cada miembro con dignidad y compasión, ayudándolos a mantener una salud e independencia óptimas.",
+        "iconPath": "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-8 8zm4.17-5.24l-1.1-1.1c.71-1.33.53-3.01-.59-4.13-1.33-1.33-3.47-1.33-4.8 0s-1.33 3.47 0 4.8 3.47 1.33 4.8 0l1.1 1.1c.76.76 2 .76 2.76 0 .76-.76.76-2 0-2.76z"
+      },
+      {
+        "title": "Participación Comunitaria",
+        "content": "Creamos una comunidad vibrante donde los mayores pueden socializar y prosperar. Nuestros servicios incluyen actividades terapéuticas, servicios sociales, comidas diversas, asesoramiento nutricional y transporte conveniente. Damos la bienvenida a participantes de todos los orígenes, fomentando un entorno inclusivo donde todos pueden participar en actividades atractivas y construir conexiones significativas.",
+        "iconPath": "M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V18h14v-1.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05.02.01.03.03.04.04 1.14.83 1.93 1.94 1.93 3.41V18h6v-1.5c0-2.33-4.67-3.5-7-3.5z"
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "Testimonios",
+   "list": [
+      {
+        "name": "Francisco(Paco) R.",
+        "text": "Me encanta todo aquí. También tengo un mejor amigo en el centro. El recuerdo más querido de este lugar para mí es cuando gané en el juego de Rifa.",
+        "role": "Miembro de Largo Plazo"
+      },
+      {
+        "name": "Yolanda Pérez",
+        "text": "He estado viniendo aquí durante 10 años y he hecho muchos amigos. Sigo viniendo porque me siento regenerada y me siento bien, como si hubiera hecho algo. ¡Simplemente me hace bien cuando regreso a casa!",
+        "role": "Miembro de Largo Plazo"
+      },
+      {
+        "name": "Raúl Moreno",
+        "text": "Este centro me ha impactado de manera significativa debido a mi accidente en el pasado. Se enfocaron en cuidarme, asegurándose de que estuviera bien mental, física y emocionalmente. He estado aquí durante 19 años y su atención hacia mí es inquebrantable.",
+        "role": "Miembro de Largo Plazo"
+      }
+    ]
+  },
+  "eligibility": {
+    "title": "Elegibilidad para Participantes en Vista Adult Day Care",
+    "description": {
+      "eligibilityCriteria": "Criterios de Elegibilidad para ADHC: Programas basados en la comunidad que ofrecen un programa organizado de salud, servicios terapéuticos y sociales. Los programas atienden a adultos mayores frágiles y adultos más jóvenes con condiciones médicas, cognitivas o de salud mental crónicas que están en riesgo de ser ubicados en instituciones. Atiende a adultos de 18 años o más."
+    },
+    "paymentSources": {
+      "title": "Fuentes de Pago",
+      "sources": [
+        {
+          "name": "Medi-Cal",
+          "description": "Para los participantes que cumplen con los criterios de elegibilidad de Medi-Cal CBAS."
+        },
+        {
+          "name": "Pago Privado",
+          "description": "Opciones de pago por cuenta propia disponibles para participantes que no son elegibles para otras fuentes de financiamiento."
+        },
+        {
+          "name": "Centro Regional",
+          "description": "Para los participantes con discapacidades del desarrollo, financiados a través de centros regionales."
+        },
+        {
+          "name": "Agencias de Áreas para Personas Mayores",
+          "description": "Servicios financiados a través de agencias locales para personas mayores para participantes calificados."
+        }
+      ]
+    }
+  }
+}

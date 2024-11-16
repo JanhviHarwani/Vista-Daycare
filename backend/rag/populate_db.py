@@ -11,6 +11,10 @@ index = None
 
 
 def create_index_if_not_exists(dimension=1536):
+    """
+    Create a index in pinecone if it does not exist.
+    Initializes a index.
+    """
     global index
     index_name = Config.pinecone_index_name
     response = pinecone_client.list_indexes()
@@ -29,19 +33,25 @@ def create_index_if_not_exists(dimension=1536):
     index = pinecone_client.Index(index_name)
 
 
-# Using the updated OpenAI API call for generating embeddings
 def generate_embedding(text):
+    """
+    Using the updated OpenAI API call for generating embeddings
+    """
     response = openai.embeddings.create(input=[text], model="text-embedding-ada-002")
     return response.data[0].embedding
 
 
-# Function to generate a hash for checking duplicate entries
 def generate_hash(text):
+    """
+    Function to generate a hash for checking duplicate entries
+    """
     return hashlib.md5(text.encode("utf-8")).hexdigest()
 
 
-# Function to check if a question-answer pair is already in the index based on metadata (hash)
 def is_duplicate(qa_pair, threshold=0.95):
+    """
+    Function to check if a question-answer pair is already in the index based on metadata (hash)
+    """
     question_embedding = generate_embedding(qa_pair["question"])
     answer_embedding = generate_embedding(qa_pair["answer"])
     qa_pair_hash = generate_hash(qa_pair["question"] + qa_pair["answer"])
@@ -53,8 +63,10 @@ def is_duplicate(qa_pair, threshold=0.95):
     return False
 
 
-# Function to insert Q&A pairs into Pinecone with duplicate checks
 def upsert_data(qa_pairs):
+    """
+    Function to insert Q&A pairs into Pinecone with duplicate checks
+    """
     vectors = []
     for qa in qa_pairs:
         if not is_duplicate(qa):
@@ -92,6 +104,9 @@ def upsert_data(qa_pairs):
 
 
 def read_qa_pairs_from_json(filename):
+    """
+    Read questions from file path
+    """
     current_dir = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(current_dir, filename)
     with open(file_path, "r") as file:
@@ -99,11 +114,14 @@ def read_qa_pairs_from_json(filename):
 
 
 def init_update():
+    """
+    Updates the Vector database with questions and answers
+    """
     # Step 1: Create the index if it does not exist
     create_index_if_not_exists()
 
     # Step 2: Read Q&A pairs from the JSON file
-    qa_pairs = read_qa_pairs_from_json("questions.json")
+    qa_pairs = read_qa_pairs_from_json(Config.questionsFile)
 
     # Step 3: Upsert data into Pinecone
     upsert_data(qa_pairs)

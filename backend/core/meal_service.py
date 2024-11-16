@@ -2,13 +2,14 @@ import boto3
 from botocore.exceptions import ClientError
 from config import Config
 
-# Initialize DynamoDB table
+
 table = Config.init_meal_table()
 
 
-# Function to get meals for a specific date
 def get_meals_for_date(meal_date):
-    """Fetch meals for a specific date."""
+    """
+    Fetch meals for a specific date.
+    """
     try:
         response = table.query(
             KeyConditionExpression="meal_date = :meal_date",
@@ -31,7 +32,9 @@ def get_meals_for_date(meal_date):
 
 
 def insert_meal(meal_date, meal_name, quantity):
-    """Insert one or more meals into the database."""
+    """
+    Insert one or more meals into the database.
+    """
     try:
         table.put_item(
             Item={"meal_date": meal_date, "meal_name": meal_name, "quantity": quantity}
@@ -42,9 +45,10 @@ def insert_meal(meal_date, meal_name, quantity):
         return {"error": "Failed to insert meal(s)"}, 500
 
 
-# Function to delete one or more meals from the database
 def delete_meal(meal_date, meals):
-    """Delete one or more meals from the database."""
+    """
+    Delete one or more meals from the database.
+    """
     if isinstance(meals, str):
         meals = [meals]
 
@@ -58,7 +62,9 @@ def delete_meal(meal_date, meals):
 
 
 def update_meal(meal_date, old_meal, new_meal, quantity=None):
-    """Update meal for a specific date."""
+    """
+    Update meal for a specific date.
+    """
     try:
         update_expression = "set meal_name = :new_meal"
         expression_attribute_values = {":new_meal": new_meal}
@@ -81,7 +87,9 @@ def update_meal(meal_date, old_meal, new_meal, quantity=None):
 
 
 def get_all_meals():
-    """Get all meals sorted by meal date."""
+    """
+    Get all meals sorted by meal date.
+    """
     try:
         response = table.scan()
         if "Items" in response and response["Items"]:

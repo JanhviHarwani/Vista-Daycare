@@ -4,6 +4,9 @@ from datetime import datetime
 
 
 def get_event_info(message):
+    """
+    Identifies the date in the message and gets the events for the particular date
+    """
     date = extract_date(message)
     events = get_events_for_date(date)
     today = datetime.today().strftime("%Y-%m-%d")

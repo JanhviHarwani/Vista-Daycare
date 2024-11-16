@@ -1,5 +1,6 @@
 import ApplicationStructure from "../components/ApplicationStructure";
 import "./AboutUs.css";
+import { useTranslation } from "react-i18next";
 
 import staffs from "../assets/image/staffs.jpg";
 import founder from "../assets/image/staff_founder.jpg";
@@ -17,45 +18,41 @@ import pt2 from "../assets/image/staff_pt2.jpg";
 import cna from "../assets/image/staff_cna.jpg";
 import kitchen from "../assets/image/staff_kitchen.jpg";
 import rd from "../assets/image/staff_rd.jpg";
+import  { useEffect } from 'react';
+//const { t } = useTranslation();
 
 function AboutUs() {
+  const { i18n} = useTranslation(); 
+  const { t} = useTranslation(); 
+
+  useEffect(() => {
+    const userLanguage = navigator.language || 'en'; 
+    const supportedLanguages = ['en', 'es']; 
+    const defaultLanguage = 'en'; 
+    const languageToUse = supportedLanguages.includes(userLanguage.slice(0, 2)) ? userLanguage.slice(0, 2) : defaultLanguage;
+    if (i18n && typeof i18n.changeLanguage === 'function') {
+      i18n.changeLanguage(languageToUse);
+    }
+  }, [i18n]);
   return (
     <ApplicationStructure>
       <div className="whole">
         <div className="parent-container">
           <h1 style={{ textAlign: "left" }}>
-            <span style={{ fontSize: "1.4em" }}>About </span> us
+            <span style={{ fontSize: "1.4em" }}>{t('aboutUs.title')}</span>
           </h1>
           <p style={{ textAlign: "center", lineHeight: "1.6" }}>
-            <strong>Vista Adult Day Health Care</strong> is a licensed and
-            qualified provider of Community-Based Adult Services (CBAS), serving
-            the Southern California community since 2007. We are committed to
-            helping those who seek an enriched and healthy life.
+          {t('aboutUs.description1')}
             <br />
             <br />
-            Our comprehensive services include individual assessment,
-            professional nursing services, physical, occupational, and speech
-            therapies, mental health services, therapeutic activities, social
-            services, personal care, diverse meals, nutritional counseling, and
-            transportation to and from surrounding areas.
+            {t('aboutUs.description2')}
             <br />
             <br />
-            <strong>Our goal</strong> is to provide a community for seniors to{" "}
-            <strong>socialize</strong> and improve their health, safety, and
-            well-being. We offer both <em>therapeutic</em> and{" "}
-            <em>recreational</em> services to our Vista ADHC members. Our
-            dedicated staff treats members with{" "}
-            <strong>professionalism, dignity, and compassion</strong>, helping
-            them restore and maintain optimal health, self-reliance, and
-            independence. We welcome participants of all races, nationalities,
-            and religious backgrounds. Our team of highly qualified and trained
-            healthcare professionals shares our goals and philosophy, striving
-            to create a nurturing, inclusive, and supportive environment for
-            all.
+            {t('aboutUs.description3')}
           </p>
 
           <h2 style={{ fontSize: "2em", textAlign: "center" }}>
-            Mission Statement
+          {t('aboutUs.missionStatement')}
           </h2>
           <hr />
           <p
@@ -69,31 +66,16 @@ function AboutUs() {
               lineHeight: "1.6",
             }}
           >
-            <strong>Vista's mission</strong> is to provide a{" "}
-            <strong>nurturing and inclusive environment</strong> where adults
-            can receive comprehensive care, support, and participate in engaging
-            activities.
-            <br />
-            <br />
-            We aim to enhance their{" "}
-            <em>physical, emotional, and cognitive well-being</em>, promote
-            social interaction, and empower individuals to maintain independence
-            and lead fulfilling lives.
-            <br />
-            <br />
-            Our dedicated team is committed to delivering{" "}
-            <strong>personalized care</strong>, fostering a{" "}
-            <strong>sense of community</strong>, and improving the overall
-            quality of life for our participants and their families.
+            {t('aboutUs.missionDescription')}
           </p>
           <h2 style={{ fontSize: "2em", textAlign: "center" }}>
-            Meet Our Staff
+          {t('aboutUs.meetStaff')}
           </h2>
           <hr />
           <img className="staffs" src={staffs} />
 
           <h3 className="section-heading" style={{ textAlign: "left" }}>
-            Administration Department
+          {t('aboutUs.adminDepartment')}
           </h3>
           <div className="staff_container">
             <div className="wrapper">
@@ -101,7 +83,7 @@ function AboutUs() {
                 <img className="staff_indiv" src={founder} />
                 <div className="content_first">
                   <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                    Founder
+                  {t('aboutUs.founder')}
                   </h1>
                 </div>
               </div>
@@ -110,7 +92,7 @@ function AboutUs() {
                 <img className="staff_indiv" src={director} />
                 <div className="content">
                   <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                    Project Director
+                  {t('aboutUs.projectDirector')}
                   </h1>
                 </div>
               </div>
@@ -119,8 +101,7 @@ function AboutUs() {
                 <img className="staff_indiv" src={recep} />
                 <div className="content">
                   <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                    Office Assist. /<br />
-                    Recep.
+                  {t('aboutUs.officeAssistant')}
                   </h1>
                 </div>
               </div>
@@ -128,7 +109,7 @@ function AboutUs() {
           </div>
 
           <h3 className="section-heading" style={{ textAlign: "left" }}>
-            Programs & Activities Department
+          {t('aboutUs.activitiesDept')}
           </h3>
           <div className="staff_container">
             <div className="wrapper">
@@ -136,7 +117,7 @@ function AboutUs() {
                 <img className="staff_indiv" src={actCoord} />
                 <div className="content_first">
                   <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                    Activities Coordinator
+                  {t('aboutUs.activitiesCoordinator')}
                   </h1>
                 </div>
               </div>
@@ -145,7 +126,7 @@ function AboutUs() {
                 <img className="staff_indiv" src={PAide1} />
                 <div className="content">
                   <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                    Program Aide
+                  {t('aboutUs.programAide')}
                   </h1>
                 </div>
               </div>
@@ -154,7 +135,7 @@ function AboutUs() {
                 <img className="staff_indiv" src={PAide2} />
                 <div className="content">
                   <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                    Program Aide
+                  {t('aboutUs.programAide')}
                   </h1>
                 </div>
               </div>
@@ -163,7 +144,7 @@ function AboutUs() {
                 <img className="staff_indiv" src={PAide3} />
                 <div className="content">
                   <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                    Program Aide
+                  {t('aboutUs.programAide')}
                   </h1>
                 </div>
               </div>
@@ -174,7 +155,7 @@ function AboutUs() {
                 <img className="staff_indiv" src={social} />
                 <div className="content_first">
                   <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                    Social Worker
+                  {t('aboutUs.socialWorker')}
                   </h1>
                 </div>
               </div>
@@ -183,8 +164,8 @@ function AboutUs() {
                 <img className="staff_indiv" src={driver1} />
                 <div className="content">
                   <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                    Program Aide /<br />
-                    Driver
+                  {t('aboutUs.programAide')}/<br />
+                  {t('aboutUs.driver')}
                   </h1>
                 </div>
               </div>
@@ -193,8 +174,8 @@ function AboutUs() {
                 <img className="staff_indiv" src={driver2} />
                 <div className="content">
                   <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                    Program Aide /<br />
-                    Driver
+                  {t('aboutUs.programAide')}/<br />
+                  {t('aboutUs.driver')}
                   </h1>
                 </div>
               </div>
@@ -202,7 +183,7 @@ function AboutUs() {
           </div>
 
           <h3 className="section-heading" style={{ textAlign: "left" }}>
-            Health & Therapy Department
+          {t('aboutUs.healthTherapy')}
           </h3>
           <div className="staff_container">
             <div className="wrapper">
@@ -210,7 +191,7 @@ function AboutUs() {
                 <img className="staff_indiv" src={pt1} />
                 <div className="content_first">
                   <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                    PT/OT Aide{" "}
+                  {t('aboutUs.ptOtAide')}
                   </h1>
                 </div>
               </div>
@@ -219,7 +200,7 @@ function AboutUs() {
                 <img className="staff_indiv" src={pt2} />
                 <div className="content">
                   <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                    PT/OT Aide{" "}
+                  {t('aboutUs.ptOtAide')}
                   </h1>
                 </div>
               </div>
@@ -227,7 +208,7 @@ function AboutUs() {
               <div className="image">
                 <img className="staff_indiv" src={cna} />
                 <div className="content">
-                  <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>CNA </h1>
+                  <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>{t('aboutUs.cna')} </h1>
                 </div>
               </div>
 
@@ -235,8 +216,7 @@ function AboutUs() {
                 <img className="staff_indiv" src={kitchen} />
                 <div className="content">
                   <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                    Program Aide /<br />
-                    Kitchen
+                  {t('aboutUs.kitchenStaff')}
                   </h1>
                 </div>
               </div>
@@ -246,7 +226,7 @@ function AboutUs() {
               <div className="image">
                 <img className="staff_indiv" src={rd} />
                 <div className="content_first">
-                  <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>RD</h1>
+                  <h1 style={{ textAlign: "left", fontSize: "1.8em" }}> {t('aboutUs.rd')}</h1>
                 </div>
               </div>
             </div>
