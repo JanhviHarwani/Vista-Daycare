@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./Carousel.css";
 
 interface CarouselProps {
@@ -33,9 +33,9 @@ const Carousel: React.FC<CarouselProps> = ({
 
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % upperImages.length);
-  };
+  }, [upperImages.length]);
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) =>
@@ -46,7 +46,7 @@ const Carousel: React.FC<CarouselProps> = ({
   useEffect(() => {
     const interval = setInterval(nextSlide, 3000);
     return () => clearInterval(interval);
-  }, [currentIndex]);
+  }, [nextSlide]);
 
   const getDisplayedItems = () => {
     const totalItems = upperImages.length;
