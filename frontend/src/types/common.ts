@@ -269,6 +269,126 @@ export const GalleryData_Act: Gallery[] = [
   },
 ];
 
+//Aboutus Provided
+export type Staffs = {
+  title: string;
+  imageKey: string;
+  description: string;
+  id: number;
+};
+
+export type StaffsUrl = Staffs & {
+  imageUrl: string;
+};
+
+export const StaffsData_admin: Staffs[] = [
+  {
+    title: "Founder",
+    imageKey: "aboutus-page/staff_founder.jpg",
+    description: "founder background",
+    id: 1,
+  },
+  {
+    title: "Project Director",
+    imageKey: "aboutus-page/staff_director.jpg",
+    description: "director background",
+    id: 2,
+  },
+  {
+    title: "Office Assist. / Recep.",
+    imageKey: "aboutus-page/staff_recep.jpg",
+    description: "Office Assist. / Recep. background",
+    id: 3,
+  },
+];
+
+export const StaffsData_act: Staffs[] = [
+  {
+    title: "Activities Coordinator",
+    imageKey: "aboutus-page/staff_actCoord.jpg",
+    description: "Activities Coordinator background",
+    id: 1,
+  },
+  {
+    title: "Program Aide",
+    imageKey: "aboutus-page/staff_PAide1.jpg",
+    description: "Program Aide background",
+    id: 2,
+  },
+  {
+    title: "Program Aide",
+    imageKey: "aboutus-page/staff_Paide2.jpg",
+    description: "Program Aide background",
+    id: 3,
+  },
+  {
+    title: "Program Aide",
+    imageKey: "aboutus-page/staff_PAide3.jpg",
+    description: "Program Aide background",
+    id: 4,
+  },
+  {
+    title: "Social Worker",
+    imageKey: "aboutus-page/staff_social.jpg",
+    description: "Social Worker background",
+    id: 2,
+  },
+  {
+    title: "Program Aide / Driver",
+    imageKey: "aboutus-page/staff_driver1.jpg",
+    description: "Program Aide / Driver background",
+    id: 2,
+  },
+  {
+    title: "Program Aide / Driver",
+    imageKey: "aboutus-page/staff_driver2.jpg",
+    description: "Program Aide / Driver background",
+    id: 3,
+  },
+];
+
+export const StaffsData_health: Staffs[] = [
+  {
+    title: "PT/OT Aide",
+    imageKey: "aboutus-page/staff_pt1.jpg",
+    description: "PT/OT Aide background",
+    id: 1,
+  },
+  {
+    title: "PT/OT Aide",
+    imageKey: "aboutus-page/staff_pt2.jpg",
+    description: "PT/OT Aide background",
+    id: 2,
+  },
+  {
+    title: "CNA",
+    imageKey: "aboutus-page/staff_cna.jpg",
+    description: "CNA background",
+    id: 3,
+  },
+  {
+    title: "Program Aide / Kitchen",
+    imageKey: "aboutus-page/staff_kitchen.jpg",
+    description: "Program Aide / Kitchen background",
+    id: 4,
+  },
+  {
+    title: "RD",
+    imageKey: "aboutus-page/staff_rd.jpg",
+    description: "RD background",
+    id: 2,
+  },
+];
+
+export const StaffsData_whole: Staffs[] = [
+  {
+    title: "All Staffs",
+    imageKey: "aboutus-page/staffs.jpg",
+    description: "All Staffs",
+    id: 1,
+  },
+];
+
 export interface Event {
   id: number;
   event_name: string;
