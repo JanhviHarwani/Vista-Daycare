@@ -26,13 +26,13 @@ function Gallery() {
     const loadServiceImages = async () => {
       try {
         setIsLoading(true);
-        const servicesWithUrls = await Promise.all(
-          GalleryData_Env.map(async (service) => ({
-            ...service,
-            imageUrl: await getSignedMediaUrl(service.imageKey),
+        const envWithUrls = await Promise.all(
+          GalleryData_Env.map(async (environment) => ({
+            ...environment,
+            imageUrl: await getSignedMediaUrl(environment.imageKey),
           }))
         );
-        setGallery(servicesWithUrls);
+        setGallery(envWithUrls);
         setError(null);
       } catch (error) {
         console.error("Error loading service images:", error);
@@ -55,6 +55,8 @@ function Gallery() {
       } catch (error) {
         console.error("Error loading activity images:", error);
         setError("Error loading activity images");
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -63,7 +65,7 @@ function Gallery() {
   }, []);
 
   if (isLoading) {
-    return <div>Loading services.......</div>;
+    return <div>Loading Gallery.......</div>;
   }
 
   if (error) {
