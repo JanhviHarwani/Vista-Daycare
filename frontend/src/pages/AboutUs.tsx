@@ -19,6 +19,7 @@ import cna from "../assets/image/staff_cna.jpg";
 import kitchen from "../assets/image/staff_kitchen.jpg";
 import rd from "../assets/image/staff_rd.jpg";
 import  { useEffect } from 'react';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 //const { t } = useTranslation();
 
 function AboutUs() {
@@ -35,7 +36,20 @@ function AboutUs() {
     }
   }, [i18n]);
   return (
+  <HelmetProvider>  
     <ApplicationStructure>
+    <Helmet>
+        <title>About Us - Learn More About Our Team and Mission</title>
+        <meta
+          name="description"
+          content="Discover our mission, meet our dedicated team members, and learn about the values that drive us."
+        />
+        <meta
+          name="keywords"
+          content="About Us, Our Team, Mission, Adult Day Care, Staff Profiles, Health Services, Community Support"
+        />
+        <meta name="robots" content="index, follow" />
+      </Helmet>
       <div className="whole">
         <div className="parent-container">
           <h1 style={{ textAlign: "left" }}>
@@ -235,6 +249,7 @@ function AboutUs() {
       </div>
       
     </ApplicationStructure>
+  </HelmetProvider>
   );
 }
 
