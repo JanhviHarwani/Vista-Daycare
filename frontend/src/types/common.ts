@@ -83,6 +83,35 @@ export const imageGalleryItems: MediaItem[] = [
   },
 ];
 
+//Services Slider Data
+export const slider: MediaItem[] = [
+  {
+    type: 'image',
+    key: 'services-page/slider1.jpg',
+    caption: 'Slider',
+  },
+  {
+    type: 'image',
+    key: 'services-page/slider2.jpg',
+    caption: 'Slider',
+  },
+  {
+    type: 'image',
+    key: 'services-page/slider3.jpg',
+    caption: 'Slider',
+  },
+  {
+    type: 'image',
+    key: 'services-page/slider4.jpg',
+    caption: 'Slider',
+  },
+  {
+    type: 'image',
+    key: 'services-page/slider5.jpg',
+    caption: 'Slider',
+  },
+];
+
 // New Testimonial types
 export type Testimonial = {
   name: string;
