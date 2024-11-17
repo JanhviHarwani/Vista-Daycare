@@ -24,6 +24,21 @@
       "kitchenStaff": "Program Aide / Kitchen",
       "rd": "RD"
     },
+    "header":{
+      "home": "Home",
+      "gallery": "Gallery",
+      "services": "Services",
+      "aboutUs": "About Us",
+      "eventsCalendar": "Events Calendar",
+      "more":"More",
+      "eligibility": "Eligibility & Insurance",
+      "adminLogin": "Admin Login",
+      "contactUs": "Contact Us",
+      "logoText": "ADULT DAY HEALTH CARE"
+    },
+    "footer":{      
+    "copyright": "© 2024 Vista Adult Day Health Care. All rights reserved.",
+    "serving": "Proudly serving the community since 2007."},
     "missionPage": {
       "title": "Mission Statement",
       "description": "Vista's mission is to provide a nurturing and inclusive environment where adults can receive comprehensive care, support and participate in engaging activities. We aim to enhance their physical, emotional and cognitive well-being, promote social interaction, and empower individuals to maintain independence and lead fulfilling lives.",

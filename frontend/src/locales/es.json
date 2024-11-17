@@ -21,6 +21,22 @@
     "kitchenStaff": "Asistente del Programa / Cocina",
     "rd": "RD"
   },
+  "header": {
+    "home": "Inicio",
+    "gallery": "Galería",
+    "services": "Servicios",
+    "aboutUs": "Sobre Nosotros",
+    "eventsCalendar": "Calendario de Eventos",
+    "more": "Más",
+    "eligibility": "Elegibilidad y Seguro",
+    "adminLogin": "Inicio de sesión de Administrador",
+    "contactUs": "Contáctenos",
+    "logoText": "CUIDADO DIURNO PARA ADULTOS"
+  },
+  "footer": {      
+  "copyright": "© 2024 Vista Cuidado de Salud para Adultos Durante el Día. Todos los derechos reservados.",
+  "serving": "Con orgullo sirviendo a la comunidad desde 2007."
+},
   "missionPage": {
     "title": "Declaración de Misión",
     "description": "La misión de Vista es proporcionar un entorno inclusivo y acogedor donde los adultos puedan recibir atención integral, apoyo y participar en actividades atractivas. Nuestro objetivo es mejorar su bienestar físico, emocional y cognitivo, promover la interacción social y empoderar a las personas para mantener su independencia y llevar una vida plena.",
@@ -39,7 +55,7 @@
   },
   "testimonials": {
     "title": "Testimonios",
-   "list": [
+    "list": [
       {
         "name": "Francisco(Paco) R.",
         "text": "Me encanta todo aquí. También tengo un mejor amigo en el centro. El recuerdo más querido de este lugar para mí es cuando gané en el juego de Rifa.",

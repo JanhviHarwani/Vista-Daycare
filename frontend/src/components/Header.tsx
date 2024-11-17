@@ -2,8 +2,22 @@ import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import css from "./Header.module.css";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+import  { useEffect } from 'react';
 
 function Header() {
+  const { i18n} = useTranslation(); 
+  const { t} = useTranslation(); 
+
+  useEffect(() => {
+    const userLanguage = navigator.language || 'en'; 
+    const supportedLanguages = ['en', 'es']; 
+    const defaultLanguage = 'en'; 
+    const languageToUse = supportedLanguages.includes(userLanguage.slice(0, 2)) ? userLanguage.slice(0, 2) : defaultLanguage;
+    if (i18n && typeof i18n.changeLanguage === 'function') {
+      i18n.changeLanguage(languageToUse);
+    }
+  }, [i18n]);
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -25,21 +39,21 @@ function Header() {
           <>
             <img src={logo} alt="Logo of Adult Day Health Care" />
           </>
-          <h3 className={css.logo_text}>ADULT DAY HEALTH CARE</h3>
+          <h3 className={css.logo_text}>  {t('header.logoText')}</h3>
         </div>
 
         <nav className={`${css.nav_wrapper} ${isMobileMenuOpen ? css.open : ''}`} aria-label="Main navigation">
           <Link className={css.nav_links} to="/">
-            Home
+          {t('header.home')}
           </Link>
           <Link className={css.nav_links} to="/gallery">
-            Gallery
+          {t('header.gallery')}
           </Link>
           <Link className={css.nav_links} to="/services">
-            Services
+          {t('header.services')}
           </Link>
           <Link className={css.nav_links} to="/aboutus">
-            About Us
+          {t('header.aboutUs')}
           </Link>
           <select
             onChange={handleChange}
@@ -47,13 +61,13 @@ function Header() {
             className={css.select}
             aria-label="Additional navigation options"
           >
-            <option value="" disabled hidden>More</option>
-            <option value="/activities">Events Calendar</option>
-            <option value="/eligibility">Eligibility & Insurance</option>
-            <option value="/admin">Admin Login</option>
+            <option value="" disabled hidden>  {t('header.more')}</option>
+            <option value="/activities">  {t('header.eventsCalendar')}</option>
+            <option value="/eligibility">  {t('header.eligibility')}</option>
+            <option value="/admin">  {t('header.adminLogin')}</option>
           </select>
           <div className={css.button_wrapper_custom}>
-            <button onClick={handleContactClick}aria-label="Go to the contact us page">Contact Us</button>
+            <button onClick={handleContactClick}aria-label="Go to the contact us page">  {t('header.contactUs')}</button>
           </div>
         </nav>
 
