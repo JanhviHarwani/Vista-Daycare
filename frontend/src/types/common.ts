@@ -162,7 +162,9 @@ export const testimonialData: Testimonial[] = [
 export type Services = {
   title: string;
   imageKey: string;
-  description: string
+  description: string;
+  extraImages?: string[];
+  details?:string;
 };
 
 export type ServiceUrl = Services & {
@@ -173,30 +175,42 @@ export const serviceData: Services[] = [
   {
     title:"Health Services",
     imageKey: "services-page/artistiqueimagery-097.jpg",
-    description:"Support and counseling to address emotional and physical well-being and mental health challenges."
+    description:"Support and counseling to address emotional and physical well-being and mental health challenges.",
+    extraImages: ['services-page/hs1.jpg', 'services-page/hs2.jpg','services-page/hs3.jpg', 'services-page/hs4.jpg','services-page/hs5.jpg','services-page/hs6.jpg'], 
+    details: 'More details about Health Services.',
   },
   {
     title:"Professional Nursing Services",
     imageKey: "services-page/artistiqueimagery-133.jpg",
-    description:"Skilled nursing care to monitor and manage medical conditions and treatments."
+    description:"Skilled nursing care to monitor and manage medical conditions and treatments.",
+    extraImages: ['services-page/pn1.jpg', 'services-page/pn2.jpg','services-page/pn3.jpg'], 
+    details: 'More details about Professional Nursing.',
   },
   {
     title:"Activities",
     imageKey: "services-page/artistiqueimagery-080.jpg",
-    description:"Engaging programs designed to stimulate cognitive and physical health."
+    description:"Engaging programs designed to stimulate cognitive and physical health.",
+    extraImages: ['services-page/a1.jpg', 'services-page/a2.jpg','services-page/a3.jpg', 'services-page/a4.jpg','services-page/a5.jpg','services-page/a6.jpg'], 
+    details: 'More details about Activities.',
   },
   {title:"Transportation",
     imageKey: "services-page/artistiqueimagery-117.jpg",
-    description:" We provide safe and convenient transportation to and from the facility for participants from surrounding areas."
+    description:" We provide safe and convenient transportation to and from the facility for participants from surrounding areas.",
+    extraImages: ['services-page/t1.jpg', 'services-page/t2.jpg','services-page/t3.jpg'], 
+    details: 'More details about Transport.',
   },
   {
     title:"Nutritional Counseling",
     imageKey: "services-page/artistiqueimagery-119.jpg",
-    description:"Expert advice to promote healthy eating habits and address dietary concerns."
+    description:"Expert advice to promote healthy eating habits and address dietary concerns.",
+    extraImages: ['services-page/nc1.jpg', 'services-page/nc2.jpg','services-page/nc3.jpg'], 
+    details: 'More details about Nutritional Counselling.',
   },
   {  title:"Individual Assessment",
     imageKey: "services-page/artistiqueimagery-101.jpg",
-    description:"Comprehensive evaluation of each participant’s health and personal needs to create a tailored care plan."
+    description:"Comprehensive evaluation of each participant’s health and personal needs to create a tailored care plan.",
+    extraImages: ['services-page/ia1.jpg', 'services-page/ia2.jpg','services-page/ia3.jpg', 'services-page/ia4.jpg','services-page/ia5.jpg','services-page/ia6.jpg'], 
+    details: 'More details about Assessment.',
   },
 
 ];
