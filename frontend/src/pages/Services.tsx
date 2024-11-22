@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { getSignedMediaUrl } from '../lib/aws-config';
-import { serviceData, type ServiceUrl } from '../types/common';
-import ApplicationStructure from '../components/ApplicationStructure';
-import Slider from '../components/Slider';
-import Team from '../components/Team';
-import ServiceInfo from '../components/ServiceInfo';
-import './Services.css';
+import React, { useEffect, useState } from "react";
+import { getSignedMediaUrl } from "../lib/aws-config";
+import { serviceData, type ServiceUrl } from "../types/common";
+import ApplicationStructure from "../components/ApplicationStructure";
+import Slider from "../components/Slider";
+import Team from "../components/Team";
+import ServiceInfo from "../components/ServiceInfo";
+import "./Services.css";
 
 const Services: React.FC = () => {
   const [services, setServices] = useState<ServiceUrl[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showModal, setShowModal] = useState(false);
-  const [selectedService, setSelectedService] = useState<ServiceUrl | null>(null);
+  const [selectedService, setSelectedService] = useState<ServiceUrl | null>(
+    null
+  );
 
   useEffect(() => {
     const loadServiceImages = async () => {
@@ -30,8 +32,8 @@ const Services: React.FC = () => {
         setServices(servicesWithUrls);
         setError(null);
       } catch (error) {
-        console.error('Error loading service images:', error);
-        setError('Error loading images');
+        console.error("Error loading service images:", error);
+        setError("Error loading images");
       } finally {
         setIsLoading(false);
       }
@@ -74,7 +76,7 @@ const Services: React.FC = () => {
               <Team
                 members={[
                   {
-                    image: service.imageUrl || '/images/fallback-image.jpg',
+                    image: service.imageUrl || "/images/fallback-image.jpg",
                   },
                 ]}
               />
@@ -88,7 +90,7 @@ const Services: React.FC = () => {
             onClose={closeModal}
             title={selectedService.title}
             content={selectedService.description}
-            imageUrl={selectedService.imageUrl || '/images/fallback-image.jpg'}
+            imageUrl={selectedService.imageUrl || "/images/fallback-image.jpg"}
             extraImages={selectedService.extraImages}
             details={selectedService.details}
           />

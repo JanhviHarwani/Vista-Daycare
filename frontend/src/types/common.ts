@@ -19,9 +19,8 @@ export interface FormInputProps {
   required?: boolean;
   error?: string;
   id?: string;
-
 }
-export type MediaType = 'video' | 'image';
+export type MediaType = "video" | "image";
 
 export type MediaItem = {
   type: MediaType;
@@ -35,80 +34,79 @@ export type MediaWithUrl = {
   caption: string;
 };
 
-
 export const mediaItems: MediaItem[] = [
   {
-    type: 'video',
-    key: 'landing-page/full_day_care.MP4',
+    type: "video",
+    key: "landing-page/full_day_care.MP4",
     caption: "A Day in Life at Vista Adult Day Care",
   },
   {
-    type: 'video',
-    key: 'landing-page/Gym.MP4',
+    type: "video",
+    key: "landing-page/Gym.MP4",
     caption: "Our Modern Facilities",
   },
   {
-    type: 'image',
-    key: 'landing-page/happy_faces.jpg',
+    type: "image",
+    key: "landing-page/happy_faces.jpg",
     caption: "Happy Faces",
   },
   {
-    type: 'image',
-    key: 'landing-page/team.jpg',
+    type: "image",
+    key: "landing-page/team.jpg",
     caption: "Our Team",
-  }
+  },
 ];
 
 //Eligibility Data
 export const imageGalleryItems: MediaItem[] = [
   {
-    type: 'image',
-    key: 'insurance-page/Anthem.jpg',
-    caption: 'Anthem',
+    type: "image",
+    key: "insurance-page/Anthem.jpg",
+    caption: "Anthem",
   },
   {
-    type: 'image',
-    key: 'insurance-page/California.png',
-    caption: 'California',
+    type: "image",
+    key: "insurance-page/California.png",
+    caption: "California",
   },
   {
-    type: 'image',
-    key: 'insurance-page/Medi-cal.png',
-    caption: 'Medi-cal',
+    type: "image",
+    key: "insurance-page/Medi-cal.png",
+    caption: "Medi-cal",
   },
   {
-    type: 'image',
-    key: 'insurance-page/Medicare.png',
-    caption: 'Medicare',
+    type: "image",
+    key: "insurance-page/Medicare.png",
+    caption: "Medicare",
   },
 ];
 
 //Services Slider Data
 export const slider: MediaItem[] = [
   {
-    type: 'image',
-    key: 'services-page/slider1.jpg',
-    caption: 'Slider',
+    type: "image",
+    key: "services-page/slider1.jpg",
+    caption: "Slider",
   },
   {
-    type: 'image',
-    key: 'services-page/slider2.jpg',
-    caption: 'Slider',
+    type: "image",
+    key: "services-page/slider2.jpg",
+    caption: "Slider",
   },
   {
-    type: 'image',
-    key: 'services-page/slider3.jpg',
-    caption: 'Slider',
+    type: "image",
+    key: "services-page/slider3.jpg",
+    caption: "Slider",
   },
   {
-    type: 'image',
-    key: 'services-page/slider4.jpg',
-    caption: 'Slider',
+    type: "image",
+    key: "services-page/slider4.jpg",
+    caption: "Slider",
   },
   {
-    type: 'image',
-    key: 'services-page/slider5.jpg',
-    caption: 'Slider',
+    type: "image",
+    key: "services-page/slider5.jpg",
+    caption: "Slider",
   },
 ];
 
@@ -120,8 +118,7 @@ export type Testimonial = {
   role: string;
   imageKey: string;
   text_es: string;
-  role_es: string
-
+  role_es: string;
 };
 
 export type TestimonialWithUrl = Testimonial & {
@@ -134,8 +131,9 @@ export const testimonialData: Testimonial[] = [
     rating: 5,
     role: "Long-term Member",
     imageKey: "landing-page/Paco.jpg",
-    text_es: "Me encanta todo aquí. También tengo un mejor amigo aquí en el centro. El recuerdo más querido de este lugar para mí es cuando gané en el juego de Rifa.",
-    role_es: "Miembro a largo plazo"
+    text_es:
+      "Me encanta todo aquí. También tengo un mejor amigo aquí en el centro. El recuerdo más querido de este lugar para mí es cuando gané en el juego de Rifa.",
+    role_es: "Miembro a largo plazo",
   },
   {
     name: "Yolanda Perez",
@@ -143,8 +141,9 @@ export const testimonialData: Testimonial[] = [
     rating: 5,
     role: "Long-term Member",
     imageKey: "landing-page/yolanda.jpg",
-    text_es: "He estado viniendo aquí durante 10 años y he hecho tantos amigos. Sigo regresando aquí porque me siento regenerada, me siento bien y siento que hice algo. ¡Me hace bien cuando regreso a casa!",
-    role_es: "Miembro a largo plazo"
+    text_es:
+      "He estado viniendo aquí durante 10 años y he hecho tantos amigos. Sigo regresando aquí porque me siento regenerada, me siento bien y siento que hice algo. ¡Me hace bien cuando regreso a casa!",
+    role_es: "Miembro a largo plazo",
   },
   {
     name: "Raul Moreno",
@@ -152,11 +151,11 @@ export const testimonialData: Testimonial[] = [
     rating: 5,
     role: "Long-term Member",
     imageKey: "landing-page/raul.jpg",
-    text_es: "Este centro me ha impactado de gran manera debido a mi accidente en el pasado. Se enfocaron en cuidarme, asegurándose de que estuviera bien mental, física y emocionalmente. He estado aquí durante 19 años y su cuidado por mí es inquebrantable.",
-    role_es: "Miembro a largo plazo"
-  }
+    text_es:
+      "Este centro me ha impactado de gran manera debido a mi accidente en el pasado. Se enfocaron en cuidarme, asegurándose de que estuviera bien mental, física y emocionalmente. He estado aquí durante 19 años y su cuidado por mí es inquebrantable.",
+    role_es: "Miembro a largo plazo",
+  },
 ];
-
 
 //Services Provided
 export type Services = {
@@ -164,7 +163,7 @@ export type Services = {
   imageKey: string;
   description: string;
   extraImages?: string[];
-  details?:string;
+  details?: string;
 };
 
 export type ServiceUrl = Services & {
@@ -173,46 +172,333 @@ export type ServiceUrl = Services & {
 
 export const serviceData: Services[] = [
   {
-    title:"Health Services",
+    title: "Health Services",
     imageKey: "services-page/artistiqueimagery-097.jpg",
-    description:"Support and counseling to address emotional and physical well-being and mental health challenges.",
-    extraImages: ['services-page/hs1.jpg', 'services-page/hs2.jpg','services-page/hs3.jpg', 'services-page/hs4.jpg','services-page/hs5.jpg','services-page/hs6.jpg'], 
-    details: 'More details about Health Services.',
+    description:
+      "Support and counseling to address emotional and physical well-being and mental health challenges.",
+    extraImages: [
+      "services-page/hs1.jpg",
+      "services-page/hs2.jpg",
+      "services-page/hs3.jpg",
+      "services-page/hs4.jpg",
+      "services-page/hs5.jpg",
+      "services-page/hs6.jpg",
+    ],
+    details: "More details about Health Services.",
   },
   {
-    title:"Professional Nursing Services",
+    title: "Professional Nursing Services",
     imageKey: "services-page/artistiqueimagery-133.jpg",
-    description:"Skilled nursing care to monitor and manage medical conditions and treatments.",
-    extraImages: ['services-page/pn1.jpg', 'services-page/pn2.jpg','services-page/pn3.jpg'], 
-    details: 'More details about Professional Nursing.',
+    description:
+      "Skilled nursing care to monitor and manage medical conditions and treatments.",
+    extraImages: [
+      "services-page/pn1.jpg",
+      "services-page/pn2.jpg",
+      "services-page/pn3.jpg",
+    ],
+    details: "More details about Professional Nursing.",
   },
   {
-    title:"Activities",
+    title: "Activities",
     imageKey: "services-page/artistiqueimagery-080.jpg",
-    description:"Engaging programs designed to stimulate cognitive and physical health.",
-    extraImages: ['services-page/a1.jpg', 'services-page/a2.jpg','services-page/a3.jpg', 'services-page/a4.jpg','services-page/a5.jpg','services-page/a6.jpg'], 
-    details: 'More details about Activities.',
-  },
-  {title:"Transportation",
-    imageKey: "services-page/artistiqueimagery-117.jpg",
-    description:" We provide safe and convenient transportation to and from the facility for participants from surrounding areas.",
-    extraImages: ['services-page/t1.jpg', 'services-page/t2.jpg','services-page/t3.jpg'], 
-    details: 'More details about Transport.',
+    description:
+      "Engaging programs designed to stimulate cognitive and physical health.",
+    extraImages: [
+      "services-page/a1.jpg",
+      "services-page/a2.jpg",
+      "services-page/a3.jpg",
+      "services-page/a4.jpg",
+      "services-page/a5.jpg",
+      "services-page/a6.jpg",
+    ],
+    details: "More details about Activities.",
   },
   {
-    title:"Nutritional Counseling",
+    title: "Transportation",
+    imageKey: "services-page/artistiqueimagery-117.jpg",
+    description:
+      " We provide safe and convenient transportation to and from the facility for participants from surrounding areas.",
+    extraImages: [
+      "services-page/t1.jpg",
+      "services-page/t2.jpg",
+      "services-page/t3.jpg",
+    ],
+    details: "More details about Transport.",
+  },
+  {
+    title: "Nutritional Counseling",
     imageKey: "services-page/artistiqueimagery-119.jpg",
-    description:"Expert advice to promote healthy eating habits and address dietary concerns.",
-    extraImages: ['services-page/nc1.jpg', 'services-page/nc2.jpg','services-page/nc3.jpg'], 
-    details: 'More details about Nutritional Counselling.',
+    description:
+      "Expert advice to promote healthy eating habits and address dietary concerns.",
+    extraImages: [
+      "services-page/nc1.jpg",
+      "services-page/nc2.jpg",
+      "services-page/nc3.jpg",
+    ],
+    details: "More details about Nutritional Counselling.",
   },
-  {  title:"Individual Assessment",
+  {
+    title: "Individual Assessment",
     imageKey: "services-page/artistiqueimagery-101.jpg",
-    description:"Comprehensive evaluation of each participant’s health and personal needs to create a tailored care plan.",
-    extraImages: ['services-page/ia1.jpg', 'services-page/ia2.jpg','services-page/ia3.jpg', 'services-page/ia4.jpg','services-page/ia5.jpg','services-page/ia6.jpg'], 
-    details: 'More details about Assessment.',
+    description:
+      "Comprehensive evaluation of each participant’s health and personal needs to create a tailored care plan.",
+    extraImages: [
+      "services-page/ia1.jpg",
+      "services-page/ia2.jpg",
+      "services-page/ia3.jpg",
+      "services-page/ia4.jpg",
+      "services-page/ia5.jpg",
+      "services-page/ia6.jpg",
+    ],
+    details: "More details about Assessment.",
   },
+];
 
+//Gallery Provided
+export type Gallery = {
+  title: string;
+  imageKey: string;
+};
+
+export type GalleryEnvUrl = Gallery & {
+  imageUrl: string;
+};
+
+export const GalleryData_Env: Gallery[] = [
+  {
+    title: "Main Entrance2",
+    imageKey: "gallery-page/environment/env_main2.jpg",
+  },
+  {
+    title: "Front door",
+    imageKey: "gallery-page/environment/env_door.jpg",
+  },
+  {
+    title: "Outside of front",
+    imageKey: "gallery-page/environment/env_outside.jpg",
+  },
+  {
+    title: "Main Entrance1",
+    imageKey: "gallery-page/environment/env_main1.jpg",
+  },
+  {
+    title: "Entrance",
+    imageKey: "gallery-page/environment/env_entrance.jpg",
+  },
+  {
+    title: "Gym",
+    imageKey: "gallery-page/environment/env_gym.jpg",
+  },
+  {
+    title: "Parking lot",
+    imageKey: "gallery-page/environment/env_parking.jpg",
+  },
+  {
+    title: "Wall decoration",
+    imageKey: "gallery-page/environment/env_wall.jpg",
+  },
+];
+export const GalleryData_Act: Gallery[] = [
+  {
+    title: "Activity 1",
+    imageKey: "gallery-page/activities/act_act1.jpg",
+  },
+  {
+    title: "Activity 2",
+    imageKey: "gallery-page/activities/act_act2.jpg",
+  },
+  {
+    title: "Activity 3",
+    imageKey: "gallery-page/activities/act_act3.jpg",
+  },
+  {
+    title: "Activity 4",
+    imageKey: "gallery-page/activities/act_act4.jpg",
+  },
+  {
+    title: "Activity 5",
+    imageKey: "gallery-page/activities/act_act5.jpg",
+  },
+  {
+    title: "Activity 6",
+    imageKey: "gallery-page/activities/act_act6.jpg",
+  },
+  {
+    title: "Bingo 1",
+    imageKey: "gallery-page/activities/act_bingo1.jpg",
+  },
+  {
+    title: "Bingo 2",
+    imageKey: "gallery-page/activities/act_bingo2.jpg",
+  },
+  {
+    title: "Bingo 3",
+    imageKey: "gallery-page/activities/act_bingo3.jpg",
+  },
+  {
+    title: "Bingo 4",
+    imageKey: "gallery-page/activities/act_bingo4.jpg",
+  },
+  {
+    title: "Bingo 5",
+    imageKey: "gallery-page/activities/act_bingo5.jpg",
+  },
+  {
+    title: "Bingo 6",
+    imageKey: "gallery-page/activities/act_bingo6.jpg",
+  },
+  {
+    title: "Bingo 7",
+    imageKey: "gallery-page/activities/act_bingo7.jpg",
+  },
+  {
+    title: "Bingo 8",
+    imageKey: "gallery-page/activities/act_bingo8.jpg",
+  },
+  {
+    title: "Gym 1",
+    imageKey: "gallery-page/activities/act_gym1.jpg",
+  },
+  {
+    title: "Gym 2",
+    imageKey: "gallery-page/activities/act_gym2.jpg",
+  },
+  {
+    title: "Gym 3",
+    imageKey: "gallery-page/activities/act_gym3.jpg",
+  },
+  {
+    title: "Gym 4",
+    imageKey: "gallery-page/activities/act_gym4.jpg",
+  },
+  {
+    title: "Gym 5",
+    imageKey: "gallery-page/activities/act_gym5.jpg",
+  },
+  {
+    title: "Gym 6",
+    imageKey: "gallery-page/activities/act_gym6.jpg",
+  },
+];
+
+//Aboutus Provided
+export type Staffs = {
+  title: string;
+  imageKey: string;
+  description: string;
+  id: number;
+};
+
+export type StaffsUrl = Staffs & {
+  imageUrl: string;
+};
+
+export const StaffsData_admin: Staffs[] = [
+  {
+    title: "Founder",
+    imageKey: "aboutus-page/staff_founder.jpg",
+    description: "founder background",
+    id: 1,
+  },
+  {
+    title: "Project Director",
+    imageKey: "aboutus-page/staff_director.jpg",
+    description: "director background",
+    id: 2,
+  },
+  {
+    title: "Office Assist. / Recep.",
+    imageKey: "aboutus-page/staff_recep.jpg",
+    description: "Office Assist. / Recep. background",
+    id: 3,
+  },
+];
+
+export const StaffsData_act: Staffs[] = [
+  {
+    title: "Activities Coordinator",
+    imageKey: "aboutus-page/staff_actCoord.jpg",
+    description: "Activities Coordinator background",
+    id: 1,
+  },
+  {
+    title: "Program Aide",
+    imageKey: "aboutus-page/staff_PAide1.jpg",
+    description: "Program Aide background",
+    id: 2,
+  },
+  {
+    title: "Program Aide",
+    imageKey: "aboutus-page/staff_Paide2.jpg",
+    description: "Program Aide background",
+    id: 3,
+  },
+  {
+    title: "Program Aide",
+    imageKey: "aboutus-page/staff_PAide3.jpg",
+    description: "Program Aide background",
+    id: 4,
+  },
+  {
+    title: "Social Worker",
+    imageKey: "aboutus-page/staff_social.jpg",
+    description: "Social Worker background",
+    id: 2,
+  },
+  {
+    title: "Program Aide / Driver",
+    imageKey: "aboutus-page/staff_driver1.jpg",
+    description: "Program Aide / Driver background",
+    id: 2,
+  },
+  {
+    title: "Program Aide / Driver",
+    imageKey: "aboutus-page/staff_driver2.jpg",
+    description: "Program Aide / Driver background",
+    id: 3,
+  },
+];
+
+export const StaffsData_health: Staffs[] = [
+  {
+    title: "PT/OT Aide",
+    imageKey: "aboutus-page/staff_pt1.jpg",
+    description: "PT/OT Aide background",
+    id: 1,
+  },
+  {
+    title: "PT/OT Aide",
+    imageKey: "aboutus-page/staff_pt2.jpg",
+    description: "PT/OT Aide background",
+    id: 2,
+  },
+  {
+    title: "CNA",
+    imageKey: "aboutus-page/staff_cna.jpg",
+    description: "CNA background",
+    id: 3,
+  },
+  {
+    title: "Program Aide / Kitchen",
+    imageKey: "aboutus-page/staff_kitchen.jpg",
+    description: "Program Aide / Kitchen background",
+    id: 4,
+  },
+  {
+    title: "RD",
+    imageKey: "aboutus-page/staff_rd.jpg",
+    description: "RD background",
+    id: 2,
+  },
+];
+
+export const StaffsData_whole: Staffs[] = [
+  {
+    title: "All Staffs",
+    imageKey: "aboutus-page/staffs.jpg",
+    description: "All Staffs",
+    id: 1,
+  },
 ];
 
 export interface Event {
@@ -229,11 +515,11 @@ export interface Meal {
   quantity: string;
 }
 export interface Contact {
-  id:number;
-  date:string; 
-  name:string;
-  phone:string;
-  email:string;
+  id: number;
+  date: string;
+  name: string;
+  phone: string;
+  email: string;
 }
 // Interface for the API response
 export interface ContactsApiResponse {
