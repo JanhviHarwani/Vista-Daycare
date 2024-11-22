@@ -23,7 +23,7 @@ def process_keywords(keyword_list):
     processed_words = []
     for word in keyword_list:
         processed_words += process_words(word)
-    return processed_words
+    return list(set(processed_words))
 
 
 def process_message(message):
@@ -31,18 +31,13 @@ def process_message(message):
     messages = message.lower().split()
     processed_words = []
     for word in messages:
-        print(word, process_words(word))
         processed_words += process_words(word)
-    print(processed_words)
     return processed_words
 
 
-def process_and_identify(message, keyword_list):
+def process_and_identify(message, processed_keywords):
     """Match the processed user message with processed keyword list."""
     processed_message = process_message(message+ " ")
-    processed_keywords = process_keywords(keyword_list)
-    print(processed_message)
-    print(processed_keywords)
 
     for word in processed_message:
         if word in processed_keywords:

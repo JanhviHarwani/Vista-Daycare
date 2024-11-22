@@ -16,11 +16,23 @@ import { AuthProvider } from './providers/AuthProviders'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';  
 import './components/toast.css';  
+import { I18nextProvider } from 'react-i18next';
+import './i18n';
+import { Helmet } from 'react-helmet';
 function App() {
 
   return (
     <AuthProvider>
     <BrowserRouter>
+    <Helmet>
+          <title>Vista Adult Day Care</title>
+          <meta name="description" content="Vista Daycare offers high-quality adult day care services tailored to support your growth and development." />
+          <meta property="og:title" content="Vista Adult Day Care" />
+          <meta property="og:type" content="website" />
+          {/* Will update this data after deployment */}
+          {/* <meta property="og:url" content="https://vista.com" />
+          <meta property="og:image" content="https://vista/logo.png" /> */}
+    </Helmet>
         <Routes>
         {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />

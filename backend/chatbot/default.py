@@ -2,7 +2,7 @@ def get_greeting(message):
     """
     Responds with a greeting and provides information about the services available at Vista Adult Daycare Center.
     """
-    text = """Hello and welcome to Vista Adult Daycare Center! I’m here to assist you with any questions you may have. We offer services like information about the center, meal options, upcoming events, and even an AI-powered health care bot. Let me know if you need any information on the services we offer!"""
+    text = """Hello Im Rosa and welcome to Vista Adult Daycare Center! I’m here to assist you with any questions you may have. We offer services like information about the center, meal options, upcoming events, and even an AI-powered health care bot. Let me know if you need any information on the services we offer!"""
     return text
 
 
@@ -49,4 +49,12 @@ def get_staff_info(message):
     Provides information about the staff offered at Vista Adult Daycare.
     """
     text = """Our dedicated staff at Vista Adult Daycare are here to provide personalized care and support throughout the day. From experienced caregivers to our nursing team, we ensure a safe and compassionate environment. Our friendly professionals are always ready to assist with anything you need!"""
+    return text
+
+
+def get_thanks(message):
+    """
+    Provides thankyou message
+    """
+    text = """You’re very welcome! If you need more assistance or have any other questions regarding the meals, events, health therapy, contact info, feel free to ask."""
     return text

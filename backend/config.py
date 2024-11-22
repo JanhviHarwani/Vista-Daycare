@@ -8,7 +8,6 @@ load_dotenv()
 
 
 class Config:
-    # Fetch the values from environment variables
     SUPERUSER_USERNAME = os.getenv("SUPERUSER_USERNAME")
     SUPERUSER_PASSWORD = os.getenv("SUPERUSER_PASSWORD")
     JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY")
@@ -16,6 +15,7 @@ class Config:
     pinecone = os.getenv("pinecone")
     openapi = os.getenv("openapi")
     pinecone_index_name = "ai-health-thrapy"
+    questionsFile = "questions.json"
 
     @staticmethod
     def init_meal_table():
@@ -53,6 +53,16 @@ class Config:
         dynamodb = boto3.resource("dynamodb", region_name=Config.AWS_REGION)
         try:
             return dynamodb.Table("Contacts")
+        except ClientError as e:
+            print(f"Error initializing UsersTable: {e}")
+            raise e
+
+    @staticmethod
+    def init_metric_table():
+        """Initialize and return the DynamoDB table object for page users."""
+        dynamodb = boto3.resource("dynamodb", region_name=Config.AWS_REGION)
+        try:
+            return dynamodb.Table("PageVisits")
         except ClientError as e:
             print(f"Error initializing UsersTable: {e}")
             raise e

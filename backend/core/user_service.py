@@ -1,4 +1,3 @@
-# user_service.py
 import bcrypt
 from botocore.exceptions import ClientError
 from config import Config
@@ -9,27 +8,36 @@ user_table = Config.init_user_table()
 
 
 def check_superuser_exists():
-    """Check if a superuser exists, create one if not."""
+    """
+    Check if a superuser exists, create one if not.
+    """
     try:
         response = user_table.get_item(Key={"username": Config.SUPERUSER_USERNAME})
 
         if "Item" not in response:
-            # Superuser doesn't exist, create one
-            create_user(
-                Config.SUPERUSER_USERNAME, Config.SUPERUSER_PASSWORD, role="superuser"
-            )
+            return True
+        else:
+            return False
+            
     except ClientError as e:
         print(f"Error checking for superuser: {e}")
         return False
 
 
 def create_superuser():
-    """Create a superuser if one doesn't already exist."""
-    check_superuser_exists()
+    """
+    Create a superuser if one doesn't already exist.
+    """
+    if check_superuser_exists():
+        create_user(
+            Config.SUPERUSER_USERNAME, Config.SUPERUSER_PASSWORD, role="superuser"
+        )
 
 
 def create_user(username, password, role="admin"):
-    """Create a new user with the given username, password, and role."""
+    """
+    Create a new user with the given username, password, and role.
+    """
     hashed_password = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
     try:
         user_table.put_item(
@@ -46,7 +54,9 @@ def create_user(username, password, role="admin"):
 
 
 def authenticate_user(username, password):
-    """Authenticate user by username and password."""
+    """
+    Authenticate user by username and password.
+    """
     try:
         response = user_table.get_item(Key={"username": username})
         if "Item" in response:
@@ -62,6 +72,9 @@ def authenticate_user(username, password):
 
 
 def create_token(username, user):
+    """
+    Creates a jwt token with HS256 and expiry time 1 hr
+    """
     token = jwt.encode(
         {
             "username": username,
