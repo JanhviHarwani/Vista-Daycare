@@ -95,6 +95,15 @@
   height: 100%; */
   object-fit: cover;
 }
+.service-card {
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+}
+
 
 /* Media Queries */
 @media (max-width: 991px) {

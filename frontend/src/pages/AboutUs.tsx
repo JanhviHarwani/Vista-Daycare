@@ -1,54 +1,108 @@
 import ApplicationStructure from "../components/ApplicationStructure";
 import "./AboutUs.css";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-
-import staffs from "../assets/image/staffs.jpg";
-import founder from "../assets/image/staff_founder.jpg";
-import director from "../assets/image/staff_director.jpg";
-import recep from "../assets/image/staff_recep.jpg";
-import actCoord from "../assets/image/staff_actCoord.jpg";
-import PAide1 from "../assets/image/staff_PAide1.jpg";
-import PAide2 from "../assets/image/staff_PAide2.jpg";
-import PAide3 from "../assets/image/staff_PAide3.jpg";
-import social from "../assets/image/staff_social.jpg";
-import driver1 from "../assets/image/staff_driver1.jpg";
-import driver2 from "../assets/image/staff_driver2.jpg";
-import pt1 from "../assets/image/staff_pt1.jpg";
-import pt2 from "../assets/image/staff_pt2.jpg";
-import cna from "../assets/image/staff_cna.jpg";
-import kitchen from "../assets/image/staff_kitchen.jpg";
-import rd from "../assets/image/staff_rd.jpg";
-import  { useEffect } from 'react';
-//const { t } = useTranslation();
+import {
+  StaffsData_admin,
+  StaffsData_act,
+  StaffsData_health,
+  StaffsData_whole,
+  type StaffsUrl,
+} from "../types/common";
+import { getSignedMediaUrl } from "../lib/aws-config";
 
 function AboutUs() {
-  const { i18n} = useTranslation(); 
-  const { t} = useTranslation(); 
+  const [StaffAdmin, setStaffAdmin] = useState<StaffsUrl[]>([]);
+  const [StaffAct, setStaffAct] = useState<StaffsUrl[]>([]);
+  const [StaffHealth, setStaffHealth] = useState<StaffsUrl[]>([]);
+  const [Staffs, setStaffs] = useState<StaffsUrl[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
+  const { t, i18n } = useTranslation();
   useEffect(() => {
-    const userLanguage = navigator.language || 'en'; 
-    const supportedLanguages = ['en', 'es']; 
-    const defaultLanguage = 'en'; 
-    const languageToUse = supportedLanguages.includes(userLanguage.slice(0, 2)) ? userLanguage.slice(0, 2) : defaultLanguage;
-    if (i18n && typeof i18n.changeLanguage === 'function') {
+    const userLanguage = navigator.language || "en";
+    const supportedLanguages = ["en", "es"];
+    const defaultLanguage = "en";
+    const languageToUse = supportedLanguages.includes(
+      userLanguage.slice(0, 2)
+    )
+      ? userLanguage.slice(0, 2)
+      : defaultLanguage;
+    if (typeof i18n?.changeLanguage === "function") {
       i18n.changeLanguage(languageToUse);
     }
   }, [i18n]);
+
+  useEffect(() => {
+    const loadStaffData = async () => {
+      try {
+        const [admin, act, health, whole] = await Promise.all([
+          Promise.all(
+            StaffsData_admin.map(async (staff) => ({
+              ...staff,
+              imageUrl: await getSignedMediaUrl(staff.imageKey),
+            }))
+          ),
+          Promise.all(
+            StaffsData_act.map(async (staff) => ({
+              ...staff,
+              imageUrl: await getSignedMediaUrl(staff.imageKey),
+            }))
+          ),
+          Promise.all(
+            StaffsData_health.map(async (staff) => ({
+              ...staff,
+              imageUrl: await getSignedMediaUrl(staff.imageKey),
+            }))
+          ),
+          Promise.all(
+            StaffsData_whole.map(async (staff) => ({
+              ...staff,
+              imageUrl: await getSignedMediaUrl(staff.imageKey),
+            }))
+          ),
+        ]);
+
+        setStaffAdmin(admin);
+        setStaffAct(act);
+        setStaffHealth(health);
+        setStaffs(whole);
+        setError(null);
+      } catch (error) {
+        console.error("Error loading staff data:", error);
+        setError("Error loading staff data");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadStaffData();
+  }, []);
+
+  if (isLoading) {
+    return <div>Loading About Us.......</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
     <ApplicationStructure>
-      <div className="whole">
+      <div className="ab_whole">
         <div className="parent-container">
           <h1 style={{ textAlign: "left" }}>
-            <span style={{ fontSize: "1.4em" }}>{t('aboutUs.title')}</span>
+            <span style={{ fontSize: "1.4em" }}> {t('aboutUs.title')} </span> 
           </h1>
           <p style={{ textAlign: "center", lineHeight: "1.6" }}>
           {t('aboutUs.description1')}
             <br />
             <br />
-            {t('aboutUs.description2')}
+          {t('aboutUs.description2')}
             <br />
             <br />
-            {t('aboutUs.description3')}
+          {t('aboutUs.description3')}
           </p>
 
           <h2 style={{ fontSize: "2em", textAlign: "center" }}>
@@ -66,45 +120,36 @@ function AboutUs() {
               lineHeight: "1.6",
             }}
           >
-            {t('aboutUs.missionDescription')}
+             {t('aboutUs.missionDescription')}
           </p>
           <h2 style={{ fontSize: "2em", textAlign: "center" }}>
           {t('aboutUs.meetStaff')}
           </h2>
           <hr />
-          <img className="staffs" src={staffs} />
+          <img className="staffs" src={Staffs[0].imageUrl} alt="Staff Image" />
 
           <h3 className="section-heading" style={{ textAlign: "left" }}>
           {t('aboutUs.adminDepartment')}
           </h3>
           <div className="staff_container">
             <div className="wrapper">
-              <div className="image">
-                <img className="staff_indiv" src={founder} />
-                <div className="content_first">
-                  <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                  {t('aboutUs.founder')}
-                  </h1>
+              {StaffAdmin.map((staff) => (
+                <div
+                  key={staff.id}
+                  className={staff.id === 1 ? "no-margin" : "image"}
+                >
+                  <img
+                    className="staff_indiv"
+                    src={staff.imageUrl}
+                    alt={staff.title}
+                  />
+                  <div className="content">
+                    <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
+                      {staff.title}
+                    </h1>
+                  </div>
                 </div>
-              </div>
-
-              <div className="image">
-                <img className="staff_indiv" src={director} />
-                <div className="content">
-                  <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                  {t('aboutUs.projectDirector')}
-                  </h1>
-                </div>
-              </div>
-
-              <div className="image">
-                <img className="staff_indiv" src={recep} />
-                <div className="content">
-                  <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                  {t('aboutUs.officeAssistant')}
-                  </h1>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
@@ -113,72 +158,23 @@ function AboutUs() {
           </h3>
           <div className="staff_container">
             <div className="wrapper">
-              <div className="image">
-                <img className="staff_indiv" src={actCoord} />
-                <div className="content_first">
-                  <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                  {t('aboutUs.activitiesCoordinator')}
-                  </h1>
+              {StaffAct.map((staff) => (
+                <div
+                  key={staff.id}
+                  className={staff.id === 1 ? "no-margin" : "image"}
+                >
+                  <img
+                    className="staff_indiv"
+                    src={staff.imageUrl}
+                    alt={staff.title}
+                  />
+                  <div className={"content"}>
+                    <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
+                      {staff.title}
+                    </h1>
+                  </div>
                 </div>
-              </div>
-
-              <div className="image">
-                <img className="staff_indiv" src={PAide1} />
-                <div className="content">
-                  <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                  {t('aboutUs.programAide')}
-                  </h1>
-                </div>
-              </div>
-
-              <div className="image">
-                <img className="staff_indiv" src={PAide2} />
-                <div className="content">
-                  <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                  {t('aboutUs.programAide')}
-                  </h1>
-                </div>
-              </div>
-
-              <div className="image">
-                <img className="staff_indiv" src={PAide3} />
-                <div className="content">
-                  <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                  {t('aboutUs.programAide')}
-                  </h1>
-                </div>
-              </div>
-            </div>
-
-            <div className="wrapper">
-              <div className="image">
-                <img className="staff_indiv" src={social} />
-                <div className="content_first">
-                  <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                  {t('aboutUs.socialWorker')}
-                  </h1>
-                </div>
-              </div>
-
-              <div className="image">
-                <img className="staff_indiv" src={driver1} />
-                <div className="content">
-                  <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                  {t('aboutUs.programAide')}/<br />
-                  {t('aboutUs.driver')}
-                  </h1>
-                </div>
-              </div>
-
-              <div className="image">
-                <img className="staff_indiv" src={driver2} />
-                <div className="content">
-                  <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                  {t('aboutUs.programAide')}/<br />
-                  {t('aboutUs.driver')}
-                  </h1>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
@@ -187,53 +183,27 @@ function AboutUs() {
           </h3>
           <div className="staff_container">
             <div className="wrapper">
-              <div className="image">
-                <img className="staff_indiv" src={pt1} />
-                <div className="content_first">
-                  <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                  {t('aboutUs.ptOtAide')}
-                  </h1>
+              {StaffHealth.map((staff) => (
+                <div
+                  key={staff.id}
+                  className={staff.id === 1 ? "no-margin" : "image"}
+                >
+                  <img
+                    className="staff_indiv"
+                    src={staff.imageUrl}
+                    alt={staff.title}
+                  />
+                  <div className={"content"}>
+                    <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
+                      {staff.title}
+                    </h1>
+                  </div>
                 </div>
-              </div>
-
-              <div className="image">
-                <img className="staff_indiv" src={pt2} />
-                <div className="content">
-                  <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                  {t('aboutUs.ptOtAide')}
-                  </h1>
-                </div>
-              </div>
-
-              <div className="image">
-                <img className="staff_indiv" src={cna} />
-                <div className="content">
-                  <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>{t('aboutUs.cna')} </h1>
-                </div>
-              </div>
-
-              <div className="image">
-                <img className="staff_indiv" src={kitchen} />
-                <div className="content">
-                  <h1 style={{ textAlign: "left", fontSize: "1.8em" }}>
-                  {t('aboutUs.kitchenStaff')}
-                  </h1>
-                </div>
-              </div>
-            </div>
-
-            <div className="wrapper">
-              <div className="image">
-                <img className="staff_indiv" src={rd} />
-                <div className="content_first">
-                  <h1 style={{ textAlign: "left", fontSize: "1.8em" }}> {t('aboutUs.rd')}</h1>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
-      
     </ApplicationStructure>
   );
 }

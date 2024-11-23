@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { imageGalleryItems } from '../types/common';
 import { getSignedMediaUrl } from '../lib/aws-config';
 import ApplicationStructure from '../components/ApplicationStructure';
+import { Helmet } from 'react-helmet';
 import './Eligibility.css';
 
 const Eligibility: React.FC = () => {
@@ -10,12 +11,12 @@ const Eligibility: React.FC = () => {
   const [gallery, setGallery] = useState<{ src: string; alt: string }[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const { i18n} = useTranslation(); 
+  const { i18n} = useTranslation();
 
   useEffect(() => {
-    const userLanguage = navigator.language || 'en'; 
-    const supportedLanguages = ['en', 'es']; 
-    const defaultLanguage = 'en'; 
+    const userLanguage = navigator.language || 'en';
+    const supportedLanguages = ['en', 'es'];
+    const defaultLanguage = 'en';
     const languageToUse = supportedLanguages.includes(userLanguage.slice(0, 2)) ? userLanguage.slice(0, 2) : defaultLanguage;
     if (i18n && typeof i18n.changeLanguage === 'function') {
       i18n.changeLanguage(languageToUse);
@@ -53,35 +54,48 @@ const Eligibility: React.FC = () => {
   }
 
   return (
-    <ApplicationStructure>
-      <div className="eligibility-container">
-        <h2 className="section-heading">{t('eligibility.title')}</h2>
-        <div className="title_underline"></div>
-        <h4 className="eligibility-description">
-          {t('eligibility.description.eligibilityCriteria')}
-        </h4>
+    <>
+      <Helmet>
+        <meta name="robots" content="index, follow" />
+        <title>{t('eligibility.title')}</title>
+        <meta name="description" content={t('eligibility.description.eligibilityCriteria')} />
+        <meta property="og:title" content={t('eligibility.title')} />
+        <meta property="og:description" content={t('eligibility.description.eligibilityCriteria')} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={window.location.href} />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
+      <ApplicationStructure>
+        <div className="eligibility-container">
+          <h2 className="section-heading">{t('eligibility.title')}</h2>
+          <div className="title_underline"></div>
+          <h4 className="eligibility-description">
+            {t('eligibility.description.eligibilityCriteria')}
+          </h4>
 
-        <h3 className="section-heading">{t('eligibility.paymentSources.title')}</h3>
-        <div className="payment-sources-container">
-          {Object.values(
-            t('eligibility.paymentSources.sources', { returnObjects: true })
-          ).map((source: any, index) => (
-            <div key={index} className="payment-source-item">
-              <h4 className="payment-source-heading">{source.name}</h4>
-              <p className="payment-source-description">{source.description}</p>
-            </div>
-          ))}
-        </div>
+          <h3 className="section-heading">{t('eligibility.paymentSources.title')}</h3>
+          <div className="payment-sources-container">
+            {Object.values(
+              t('eligibility.paymentSources.sources', { returnObjects: true })
+            ).map((source: any, index) => (
+              <div key={index} className="payment-source-item">
+                <h4 className="payment-source-heading">{source.name}</h4>
+                <p className="payment-source-description">{source.description}</p>
+              </div>
+            ))}
+          </div>
 
-        <div className="image-gallery">
-          {gallery.map((image, index) => (
-            <div key={index} className="image-container">
-              <img src={image.src} alt={image.alt} className="responsive-img" />
-            </div>
-          ))}
+          <div className="image-gallery">
+            {gallery.map((image, index) => (
+              <div key={index} className="image-container">
+                <img src={image.src} alt={image.alt} className="responsive-img" />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </ApplicationStructure>
+      </ApplicationStructure>
+    </>
+
   );
 };
 
