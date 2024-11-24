@@ -4,6 +4,7 @@ import ApplicationStructure from "../components/ApplicationStructure";
 import "./Activities.css"
 import { getSignedMediaUrl } from "../lib/aws-config";
 import { Events, eventsData } from "../types/common";
+//import Spinner from "../components/Spinner";
 
 interface Event {
   start_time: string;
@@ -119,7 +120,13 @@ const Activities: React.FC = () => {
     fetchEvents(); 
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  // if (loading) {
+  //   return (
+  //     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+  //       <Spinner size={60} color="#3498db" />
+  //     </div>
+  //   );
+  // }
   if (error) return <p>{error}</p>;
 
   const groupedDates = Object.keys(events);
@@ -162,9 +169,10 @@ const Activities: React.FC = () => {
     <ApplicationStructure>
       <div className="carousels-wrapper">
         <div className="carousel-container">
+        {groupedDates.length > 4 && (
           <button onClick={handleEventsPrev} className="carousel-button prev">
             ←
-          </button>
+          </button> )}
 
           <div className="carousel">
             {groupedDates.slice(eventsCurrentIndex, eventsCurrentIndex + 4).map((date) => (
@@ -186,16 +194,17 @@ const Activities: React.FC = () => {
               </div>
             ))}
           </div>
-
+          {groupedDates.length > 4 && (
           <button onClick={handleEventsNext} className="carousel-button next">
             →
-          </button>
-        </div>
+          </button> )}
+        </div> 
 
         <div className="carousel-container">
+        {groupedDates.length > 4 && (
           <button onClick={handleMealsPrev} className="carousel-button prev">
             ←
-          </button>
+          </button> )}
 
           <div className="carousel">
             {groupedDates.slice(mealsCurrentIndex, mealsCurrentIndex + 4).map((date) => (
@@ -217,10 +226,10 @@ const Activities: React.FC = () => {
               </div>
             ))}
           </div>
-
+          {groupedDates.length > 4 && (
           <button onClick={handleMealsNext} className="carousel-button next">
             →
-          </button>
+          </button> )}
         </div>
       </div>
     </ApplicationStructure>
