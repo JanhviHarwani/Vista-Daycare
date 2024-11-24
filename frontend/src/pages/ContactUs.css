@@ -13,10 +13,10 @@
 .whole_contact {
   display: flex;
   justify-content: space-between;
-  margin-top: 30px;
-  margin-left: 100px;
-  margin-right: 200px;
-  margin-bottom: 40px;
+  gap: 20px;
+  margin: 30px auto;
+  max-width: 1200px;
+  padding: 0 20px;
 }
 
 .contact_column {
@@ -24,6 +24,7 @@
   padding: 20px;
   margin: 10px;
   border-radius: 10px;
+  min-width: 250px;
 }
 
 .contact_column h2 {
@@ -224,12 +225,12 @@ button[type="submit"]:hover {
 
 .contact-us-header {
   font-size: 2.5rem;
-  font-weight: 600; /* Slightly bold for emphasis, but not too heavy */
-  color: #333; /* Soft black color for a welcoming feel */
+  font-weight: 600;
+  color: #333;
   text-align: center;
-  margin-top: 40px; /* Space from the top */
-  margin-bottom: 20px; /* Less space below to keep things compact */
-  letter-spacing: 1px; /* A slight letter spacing for elegance */
+  margin-top: 40px;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
   position: relative;
 }
 
@@ -237,13 +238,12 @@ button[type="submit"]:hover {
 .contact-us-header::after {
   content: "";
   position: absolute;
-  bottom: -5px; /* Position the underline just below the text */
+  bottom: -5px;
   left: 50%;
-  transform: translateX(-50%); /* Center the underline */
-  width: 80px; /* Width of the underline */
-  height: 3px; /* Height of the underline */
-  background-color: burlywood; /* Matching the primary button color */
-  border-radius: 5px; /* Rounded corners for a cute effect */
+  transform: translateX(-50%);
+  height: 3px;
+  background-color: burlywood;
+  border-radius: 5px;
 }
 
 /* Make the header responsive */
@@ -256,5 +256,47 @@ button[type="submit"]:hover {
 @media (max-width: 480px) {
   .contact-us-header {
     font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .whole_contact {
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-left: 20px;
+  }
+
+  .contact_column {
+    flex: 1 1 calc(50% - 30px);
+    margin: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .whole_contact {
+    flex-direction: column;
+    gap: 20px;
+    margin-left: 20px;
+  }
+
+  .contact_column {
+    width: 88%;
+    padding: 15px;
+  }
+
+  .contact-us-header {
+    font-size: 1.8rem;
+    margin-left: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .whole_contact {
+    padding: 10px;
+  }
+
+  .contact_column {
+    padding: 10px;
+    font-size: 0.9rem;
   }
 }

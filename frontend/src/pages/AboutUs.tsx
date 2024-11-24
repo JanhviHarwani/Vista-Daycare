@@ -24,9 +24,7 @@ function AboutUs() {
     const userLanguage = navigator.language || "en";
     const supportedLanguages = ["en", "es"];
     const defaultLanguage = "en";
-    const languageToUse = supportedLanguages.includes(
-      userLanguage.slice(0, 2)
-    )
+    const languageToUse = supportedLanguages.includes(userLanguage.slice(0, 2))
       ? userLanguage.slice(0, 2)
       : defaultLanguage;
     if (typeof i18n?.changeLanguage === "function") {
@@ -93,43 +91,35 @@ function AboutUs() {
       <div className="ab_whole">
         <div className="parent-container">
           <h1 style={{ textAlign: "left" }}>
-            <span style={{ fontSize: "1.4em" }}> {t('aboutUs.title')} </span> 
+            <span style={{ fontSize: "1.4em" }}> {t("aboutUs.title")} </span>
           </h1>
-          <p style={{ textAlign: "center", lineHeight: "1.6" }}>
-          {t('aboutUs.description1')}
-            <br />
-            <br />
-          {t('aboutUs.description2')}
-            <br />
-            <br />
-          {t('aboutUs.description3')}
-          </p>
+          <div className="aboutus_description1">
+            <p style={{ textAlign: "center", lineHeight: "1.6" }}>
+              {t("aboutUs.description1")}
+              <br />
+              <br />
+              {t("aboutUs.description2")}
+              <br />
+              <br />
+              {t("aboutUs.description3")}
+            </p>
+          </div>
 
           <h2 style={{ fontSize: "2em", textAlign: "center" }}>
-          {t('aboutUs.missionStatement')}
+            {t("aboutUs.missionStatement")}
           </h2>
           <hr />
-          <p
-            style={{
-              textAlign: "center",
-              backgroundColor: "#F7F3ED",
-              padding: "30px 60px",
-              margin: "20px 80px",
-              border: "8px solid transparent",
-              borderRadius: "15px",
-              lineHeight: "1.6",
-            }}
-          >
-             {t('aboutUs.missionDescription')}
+          <p className="mission-description">
+            {t("aboutUs.missionDescription")}
           </p>
           <h2 style={{ fontSize: "2em", textAlign: "center" }}>
-          {t('aboutUs.meetStaff')}
+            {t("aboutUs.meetStaff")}
           </h2>
           <hr />
           <img className="staffs" src={Staffs[0].imageUrl} alt="Staff Image" />
 
           <h3 className="section-heading" style={{ textAlign: "left" }}>
-          {t('aboutUs.adminDepartment')}
+            {t("aboutUs.adminDepartment")}
           </h3>
           <div className="staff_container">
             <div className="wrapper">
@@ -154,7 +144,7 @@ function AboutUs() {
           </div>
 
           <h3 className="section-heading" style={{ textAlign: "left" }}>
-          {t('aboutUs.activitiesDept')}
+            {t("aboutUs.activitiesDept")}
           </h3>
           <div className="staff_container">
             <div className="wrapper">
@@ -179,7 +169,7 @@ function AboutUs() {
           </div>
 
           <h3 className="section-heading" style={{ textAlign: "left" }}>
-          {t('aboutUs.healthTherapy')}
+            {t("aboutUs.healthTherapy")}
           </h3>
           <div className="staff_container">
             <div className="wrapper">

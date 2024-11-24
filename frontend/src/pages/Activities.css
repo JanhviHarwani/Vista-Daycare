@@ -4,5 +4,11 @@
 }
 
 .act_collection {
-  margin-bottom: 10px;
+  margin-bottom: 25px;
+}
+
+@media (max-width: 768px) {
+  .act_collection h1 {
+    font-size: 2.4rem;
+  }
 }

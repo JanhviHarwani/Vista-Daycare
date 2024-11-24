@@ -1,5 +1,6 @@
 .ab_whole {
-  min-height: calc(100vh - 160px);
+  /* min-height: calc(100vh - 160px); */
+  width: 100%;
   padding-bottom: 80px;
   padding-top: 0;
 }
@@ -33,14 +34,48 @@
 }
 
 .no-margin {
-  margin-top: 0;
+  margin-top: 20px;
   position: relative;
   width: 260px;
   height: 260px;
+  flex-shrink: 0;
+}
+
+.staff_container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1em;
+  flex-wrap: wrap;
+  overflow-x: hidden;
+}
+
+.about-us-description {
+  text-align: center;
+  line-height: 1.6;
+  padding: 0 20px;
+  margin: 0 auto;
+  max-width: 1000px;
+  width: 90%;
+}
+.mission-description {
+  text-align: center;
+  background-color: #f7f3ed;
+  padding: 20px 40px;
+  margin: 20px auto;
+  border: 8px solid transparent;
+  border-radius: 15px;
+  line-height: 1.6;
+  width: 90%;
+  max-width: 1200px;
 }
 
 .staffs {
   width: 100%;
+  max-width: 1200px;
+  height: auto;
+  margin: 20px auto;
+  display: block;
+  text-align: center;
 }
 
 .ab_whole .section-heading {
@@ -59,8 +94,9 @@
   justify-content: flex-start;
   gap: 1em;
   flex-wrap: wrap;
-  overflow-x: auto;
+  overflow-x: hidden;
 }
+
 .staff_indiv {
   height: 260px;
   width: auto;
@@ -74,31 +110,18 @@
     margin-top: 10px;
   }
   .no-margin {
-    margin-top: 0;
+    margin-top: 20px;
     position: relative;
     width: 260px;
     height: 260px;
   }
 }
 
-@media (max-width: 480px) {
-  .image {
-    position: relative;
-    width: 260px;
-    height: 260px;
-    margin-top: 10px;
-  }
-  .no-margin {
-    margin-top: 0;
-    position: relative;
-    width: 260px;
-    height: 260px;
-  }
-}
 .wrapper {
-  display: block;
-  column-count: 4;
-  column-width: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em;
+  justify-content: flex-start;
   padding: 0 12px;
   margin-top: 20px;
 }
@@ -107,6 +130,7 @@
   width: 260px;
   height: 260px;
   margin-top: 20px;
+  flex-shrink: 0;
 }
 
 .content_first {
@@ -157,4 +181,106 @@
 .content_first h1 {
   font-size: 55px;
   color: #f0f0f0;
+}
+@media (max-width: 1200px) {
+  .ab_whole .parent-container {
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+}
+
+@media (max-width: 991px) {
+  .parent-container {
+    padding: 10px;
+  }
+
+  .section-heading {
+    font-size: 1.2rem;
+    padding: 8px 15px;
+  }
+
+  .staffs {
+    width: 80%;
+    max-width: 400px;
+  }
+
+  .content h1 {
+    font-size: 1rem;
+  }
+
+  .ab_whole h1 {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-us-description {
+    font-size: 1.2rem;
+  }
+
+  .mission-description {
+    padding: 20px 30px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .parent-container {
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .ab_whole .parent-container {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .image {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    margin-top: 10px;
+  }
+  .no-margin {
+    margin-top: 0;
+    position: relative;
+    width: 260px;
+    height: 260px;
+  }
+  .about-us-description {
+    font-size: 1rem;
+  }
+
+  .mission-description {
+    padding: 20px 30px;
+    width: 95%;
+  }
+
+  .parent-container {
+    padding: 10px;
+  }
+
+  .section-heading {
+    font-size: 1rem;
+    padding: 6px 10px;
+  }
+
+  .content h1 {
+    font-size: 0.8rem;
+  }
+
+  .staffs {
+    width: 90%;
+    min-width: 350px;
+  }
+  .ab_whole .parent-container {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }
