@@ -110,6 +110,28 @@ export const slider: MediaItem[] = [
   },
 ];
 
+
+// Events Gallery
+export type Events = {
+  title: string;
+  imageKey: string;
+};
+
+export type EventsWithUrl = Events & {
+  imageUrl: string;
+};
+export const eventsData: Events[] = [
+  {
+    title: "No Events",
+    imageKey: "events-page/NoEvents.jpg",
+  }
+  ,
+  {
+    title: "No Meal Plan",
+    imageKey: "events-page/NoMeal.jpg",
+  }
+]
+
 // New Testimonial types
 export type Testimonial = {
   name: string;
