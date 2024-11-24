@@ -15,6 +15,12 @@ const Services: React.FC = () => {
   const [selectedService, setSelectedService] = useState<ServiceUrl | null>(
     null
   );
+  const [language, setLanguage] = useState<'en' | 'es'>('en');
+
+  useEffect(() => {
+    const browserLanguage = navigator.language.slice(0, 2);
+    setLanguage(browserLanguage === 'es' ? 'es' : 'en');
+  }, []);
 
   useEffect(() => {
     const loadServiceImages = async () => {
@@ -71,7 +77,7 @@ const Services: React.FC = () => {
               className="service-card"
               onClick={() => handleCardClick(service)}
             >
-              <h2 className="service-title">{service.title}</h2>
+              <h2 className="service-title"> {language === 'es' ? service.title_es : service.title}</h2>
               <hr className="card-divider" />
               <Team
                 members={[
@@ -80,7 +86,9 @@ const Services: React.FC = () => {
                   },
                 ]}
               />
-              <p className="service-description">{service.description}</p>
+              <p className="service-description">
+              {language === 'es' ? service.description_es : service.description}
+              </p>
             </div>
           ))}
         </div>
@@ -88,11 +96,11 @@ const Services: React.FC = () => {
           <ServiceInfo
             show={showModal}
             onClose={closeModal}
-            title={selectedService.title}
-            content={selectedService.description}
+            title= {language === 'es' ? selectedService.title_es : selectedService.title}
+            content=   {language === 'es' ? selectedService.description_es : selectedService.description}
             imageUrl={selectedService.imageUrl || "/images/fallback-image.jpg"}
             extraImages={selectedService.extraImages}
-            details={selectedService.details}
+            details={language === 'es' ? selectedService.details_es : selectedService.details}
           />
         )}
       </div>

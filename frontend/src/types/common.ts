@@ -182,10 +182,13 @@ export const testimonialData: Testimonial[] = [
 //Services Provided
 export type Services = {
   title: string;
+  title_es: string;
   imageKey: string;
   description: string;
+  description_es: string;
   extraImages?: string[];
   details?: string;
+  details_es?: string
 };
 
 export type ServiceUrl = Services & {
@@ -195,9 +198,12 @@ export type ServiceUrl = Services & {
 export const serviceData: Services[] = [
   {
     title: "Health Services",
+    title_es: "Servicios de Salud",
     imageKey: "services-page/artistiqueimagery-097.jpg",
     description:
       "Support and counseling to address emotional and physical well-being and mental health challenges.",
+    description_es:
+      "Apoyo y asesoramiento para abordar el bienestar emocional y físico, así como los desafíos de la salud mental.",
     extraImages: [
       "services-page/hs1.jpg",
       "services-page/hs2.jpg",
@@ -207,24 +213,32 @@ export const serviceData: Services[] = [
       "services-page/hs6.jpg",
     ],
     details: "More details about Health Services.",
+    details_es: "Más detalles sobre los Servicios de Salud.",
   },
   {
     title: "Professional Nursing Services",
+    title_es: "Servicios Profesionales de Enfermería",
     imageKey: "services-page/artistiqueimagery-133.jpg",
     description:
       "Skilled nursing care to monitor and manage medical conditions and treatments.",
+    description_es:
+      "Atención de enfermería especializada para supervisar y gestionar condiciones médicas y tratamientos.",
     extraImages: [
       "services-page/pn1.jpg",
       "services-page/pn2.jpg",
       "services-page/pn3.jpg",
     ],
     details: "More details about Professional Nursing.",
+    details_es: "Más detalles sobre los Servicios Profesionales de Enfermería.",
   },
   {
     title: "Activities",
+    title_es: "Actividades",
     imageKey: "services-page/artistiqueimagery-080.jpg",
     description:
       "Engaging programs designed to stimulate cognitive and physical health.",
+    description_es:
+      "Programas atractivos diseñados para estimular la salud cognitiva y física.",
     extraImages: [
       "services-page/a1.jpg",
       "services-page/a2.jpg",
@@ -234,36 +248,48 @@ export const serviceData: Services[] = [
       "services-page/a6.jpg",
     ],
     details: "More details about Activities.",
+    details_es: "Más detalles sobre las Actividades.",
   },
   {
     title: "Transportation",
+    title_es: "Transporte",
     imageKey: "services-page/artistiqueimagery-117.jpg",
     description:
       " We provide safe and convenient transportation to and from the facility for participants from surrounding areas.",
+    description_es:
+      "Proporcionamos transporte seguro y conveniente hacia y desde la instalación para los participantes de las áreas circundantes.",
     extraImages: [
       "services-page/t1.jpg",
       "services-page/t2.jpg",
       "services-page/t3.jpg",
     ],
     details: "More details about Transport.",
+    details_es: "Más detalles sobre el Transporte.",
   },
   {
     title: "Nutritional Counseling",
+    title_es: "Asesoramiento Nutricional",
     imageKey: "services-page/artistiqueimagery-119.jpg",
     description:
       "Expert advice to promote healthy eating habits and address dietary concerns.",
+    description_es:
+      "Consejos de expertos para promover hábitos alimenticios saludables y abordar preocupaciones dietéticas.",
     extraImages: [
       "services-page/nc1.jpg",
       "services-page/nc2.jpg",
       "services-page/nc3.jpg",
     ],
     details: "More details about Nutritional Counselling.",
+    details_es: "Más detalles sobre el Asesoramiento Nutricional.",
   },
   {
     title: "Individual Assessment",
+    title_es: "Evaluación Individual",
     imageKey: "services-page/artistiqueimagery-101.jpg",
     description:
       "Comprehensive evaluation of each participant’s health and personal needs to create a tailored care plan.",
+    description_es:
+      "Evaluación integral de la salud y necesidades personales de cada participante para crear un plan de atención personalizado.",
     extraImages: [
       "services-page/ia1.jpg",
       "services-page/ia2.jpg",
@@ -273,8 +299,10 @@ export const serviceData: Services[] = [
       "services-page/ia6.jpg",
     ],
     details: "More details about Assessment.",
+    details_es: "Más detalles sobre la Evaluación.",
   },
 ];
+
 
 //Gallery Provided
 export type Gallery = {
