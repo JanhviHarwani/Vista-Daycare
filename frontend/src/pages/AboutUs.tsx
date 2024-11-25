@@ -10,6 +10,7 @@ import {
   type StaffsUrl,
 } from "../types/common";
 import { getSignedMediaUrl } from "../lib/aws-config";
+import CustomSpinner from "../components/Spinner";
 
 function AboutUs() {
   const [StaffAdmin, setStaffAdmin] = useState<StaffsUrl[]>([]);
@@ -78,9 +79,9 @@ function AboutUs() {
     loadStaffData();
   }, []);
 
-  if (isLoading) {
-    return <div>Loading About Us.......</div>;
-  }
+  // if (isLoading) {
+  //   return <div>Loading About Us.......</div>;
+  // }
 
   if (error) {
     return <div>{error}</div>;
@@ -88,6 +89,11 @@ function AboutUs() {
 
   return (
     <ApplicationStructure>
+      {isLoading? (
+      <div className="loading-container">
+        <CustomSpinner size={60} color="#3498db" />
+      </div>
+    ) : (
       <div className="ab_whole">
         <div className="parent-container">
           <h1 style={{ textAlign: "left" }}>
@@ -123,9 +129,9 @@ function AboutUs() {
           </h3>
           <div className="staff_container">
             <div className="wrapper">
-              {StaffAdmin.map((staff) => (
+              {StaffAdmin.map((staff, index) => (
                 <div
-                  key={staff.id}
+                key={`${staff.id}-${index}`}  
                   className={staff.id === 1 ? "no-margin" : "image"}
                 >
                   <img
@@ -148,9 +154,9 @@ function AboutUs() {
           </h3>
           <div className="staff_container">
             <div className="wrapper">
-              {StaffAct.map((staff) => (
+              {StaffAct.map((staff, index) => (
                 <div
-                  key={staff.id}
+                key={`${staff.id}-${index}`}  
                   className={staff.id === 1 ? "no-margin" : "image"}
                 >
                   <img
@@ -173,9 +179,9 @@ function AboutUs() {
           </h3>
           <div className="staff_container">
             <div className="wrapper">
-              {StaffHealth.map((staff) => (
+              {StaffHealth.map((staff, index) => (
                 <div
-                  key={staff.id}
+                key={`${staff.id}-${index}`}  
                   className={staff.id === 1 ? "no-margin" : "image"}
                 >
                   <img
@@ -194,6 +200,8 @@ function AboutUs() {
           </div>
         </div>
       </div>
+
+      )}
     </ApplicationStructure>
   );
 }

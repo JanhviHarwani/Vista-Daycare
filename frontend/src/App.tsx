@@ -17,6 +17,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';  
 import './components/toast.css';  
 import { I18nextProvider } from 'react-i18next';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './i18n';
 import { Helmet } from 'react-helmet';
 function App() {
