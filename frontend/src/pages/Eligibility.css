@@ -24,11 +24,18 @@
 
 .payment-sources-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 30px;
   max-width: 1200px;
   margin: 0 auto 4rem;
 }
+
+@media (max-width: 768px) {
+  .payment-sources-container {
+    grid-template-columns: repeat(1, 1fr); /* Single column for smaller screens */
+  }
+}
+
 
 .payment-source-item {
   background-color: white;
@@ -56,7 +63,7 @@
   line-height: 1.6;
 }
 
-.image-gallery {
+/* .image-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
@@ -69,7 +76,41 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: 8px; /* Added rounded corners */
-  height: 300px; /* Set fixed height for consistent image container sizing */
+  /* height: 300px; /* Set fixed height for consistent image container sizing 
+} */ 
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Flexible columns */
+  gap: 20px; /* Space between grid items */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.image-container {
+  overflow: hidden;
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-container:hover {
+  transform: scale(1.05); 
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.responsive-img {
+  width: 100%; 
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .image-gallery {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px; 
+  }
 }
 
 .image-container:hover {
