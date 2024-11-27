@@ -13,6 +13,7 @@ type ServiceInfoProps = {
 
 const ServiceInfo: React.FC<ServiceInfoProps> = ({
   show,
+  title,
   onClose,
   extraImages = [],
   details,
@@ -35,7 +36,10 @@ const ServiceInfo: React.FC<ServiceInfoProps> = ({
         <button className="modal-close" onClick={onClose}>
           &times;
         </button>
-        {details && <h2 className="modal-title">{details}</h2>}
+
+        {title && <h2 className="modal-title">{title}</h2>}
+        
+        {details && <p className="modal-details">{details}</p>}
 
         {extraImages.length > 0 && (
           <div className="modal-gallery">
@@ -54,5 +58,5 @@ const ServiceInfo: React.FC<ServiceInfoProps> = ({
     </div>
   );
 };
-  
+
 export default ServiceInfo;
