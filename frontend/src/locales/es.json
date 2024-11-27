@@ -33,6 +33,36 @@
     "contactUs": "Contáctenos",
     "logoText": "CUIDADO DIURNO PARA ADULTOS"
   },
+  "contact": {
+    "title": "Contáctanos",
+    "hours": "Horario de Atención",
+    "monday": "Lunes",
+    "tuesday": "Martes",
+    "wednesday": "Miércoles",
+    "thursday": "Jueves",
+    "friday": "Viernes",
+    "saturday": "Sábado",
+    "sunday": "Domingo",
+    "closed": "Cerrado",
+    "visit": "Ven a Visitarnos",
+    "book": "Reserva una visita",
+    "email": "Correo Electrónico",
+    "phone": "Teléfono",
+    "name": "Tu Nombre",
+    "message": "¡Éxito! Tus datos de contacto han sido enviados.",
+    "enterPhone": "Ingresa tu número de teléfono",
+    "enterEmail": "Ingresa tu dirección de correo electrónico",
+    "enterName": "Ingresa tu nombre"
+
+}
+,
+  "gallery":{
+    "title": "La vida en nuestro centro",
+    "description": "Descubre la vibrante atmósfera, el ambiente de apoyo y las actividades estimulantes que hacen de nuestro centro de cuidado para mayores un lugar especial para estar.",
+    "environment": "Nuestro entorno",
+    "activities": "Actividades",
+    "activitydesc": "Echa un vistazo a las actividades estimulantes que ofrecemos, desde ejercicios en grupo hasta artes creativas, que brindan alegría y conexión a nuestros residentes."
+  },
   "footer": {      
   "copyright": "© 2024 Vista Cuidado de Salud para Adultos Durante el Día. Todos los derechos reservados.",
   "serving": "Con orgullo sirviendo a la comunidad desde 2007."

@@ -6,6 +6,7 @@ import Slider from "../components/Slider";
 import Team from "../components/Team";
 import ServiceInfo from "../components/ServiceInfo";
 import "./Services.css";
+import CustomSpinner from "../components/Spinner";
 
 const Services: React.FC = () => {
   const [services, setServices] = useState<ServiceUrl[]>([]);
@@ -59,7 +60,11 @@ const Services: React.FC = () => {
   };
 
   if (isLoading) {
-    return <div>Loading services...</div>;
+    return (
+      <div className="loading-container">
+        <CustomSpinner size={60} color="#3498db" />
+      </div>
+    );
   }
 
   if (error) {

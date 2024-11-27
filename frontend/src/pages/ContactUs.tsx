@@ -1,7 +1,8 @@
 import ApplicationStructure from "../components/ApplicationStructure";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./ContactUs.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslation } from 'react-i18next';
 import {
   faPhone,
   faEnvelope,
@@ -10,6 +11,17 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function ContactUs() {
+  const { t } = useTranslation();
+  const { i18n} = useTranslation();
+  useEffect(() => {
+    const userLanguage = navigator.language || 'en';
+    const supportedLanguages = ['en', 'es'];
+    const defaultLanguage = 'en';
+    const languageToUse = supportedLanguages.includes(userLanguage.slice(0, 2)) ? userLanguage.slice(0, 2) : defaultLanguage;
+    if (i18n && typeof i18n.changeLanguage === 'function') {
+      i18n.changeLanguage(languageToUse);
+    }
+  }, [i18n]);
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -29,39 +41,39 @@ function ContactUs() {
 
   return (
     <ApplicationStructure>
-      <h1 className="contact-us-header">Contact Us</h1>
+      <h1 className="contact-us-header">{t('contact.title')}</h1>
 
       <div className="whole_contact">
         <div className="contact_column">
-          <h2>Operating Hours</h2>
+          <h2>{t('contact.hours')}</h2>
           <ul>
             <li className="operating-hours-item">
-              <span className="day">Monday</span>
+              <span className="day">{t('contact.monday')}</span>
               <span className="time">7 AM - 2 PM</span>
             </li>
             <li className="operating-hours-item">
-              <span className="day">Tuesday</span>
+              <span className="day">{t('contact.tuesday')}</span>
               <span className="time">7 AM - 2 PM</span>
             </li>
             <li className="operating-hours-item">
-              <span className="day">Wednesday</span>
+              <span className="day">{t('contact.wednesday')}</span>
               <span className="time">7 AM - 2 PM</span>
             </li>
             <li className="operating-hours-item">
-              <span className="day">Thursday</span>
+              <span className="day">{t('contact.thursday')}</span>
               <span className="time">7 AM - 2 PM</span>
             </li>
             <li className="operating-hours-item">
-              <span className="day">Friday</span>
+              <span className="day">{t('contact.friday')}</span>
               <span className="time">7 AM - 2 PM</span>
             </li>
             <li className="operating-hours-item">
-              <span className="day">Saturday</span>
-              <span className="time">Closed</span>
+              <span className="day">{t('contact.saturday')}</span>
+              <span className="time">{t('contact.closed')}</span>
             </li>
             <li className="operating-hours-item">
-              <span className="day">Sunday</span>
-              <span className="time">Closed</span>
+              <span className="day">{t('contact.sunday')}</span>
+              <span className="time">{t('contact.closed')}</span>
             </li>
           </ul>
         </div>
@@ -100,13 +112,12 @@ function ContactUs() {
         </div>
 
         <div className="contact_column" style={{ backgroundColor: "#fbf6e9" }}>
-          <h2>Come and Visit Us</h2>
+          <h2>{t('contact.visit')}</h2>
 
           {/* Success alert box */}
           {submitted && (
             <div className="success-alert">
-              <strong>Success!</strong> Your contact details have been
-              submitted.
+              {t('contact.message')}
             </div>
           )}
 
@@ -120,7 +131,7 @@ function ContactUs() {
             <label
               style={{ marginBottom: "10px", textAlign: "left", width: "100%" }}
             >
-              Your Name:
+              {t('contact.name')}:
               <div style={{ position: "relative", marginTop: "5px" }}>
                 <FontAwesomeIcon
                   icon={faUser}
@@ -137,7 +148,7 @@ function ContactUs() {
                   name="name"
                   value={form.name}
                   onChange={handleChange}
-                  placeholder="Enter your name"
+                  placeholder= {t('contact.enterName')}
                   required
                   style={{
                     padding: "8px 10px 8px 40px",
@@ -152,7 +163,7 @@ function ContactUs() {
             <label
               style={{ marginBottom: "10px", textAlign: "left", width: "100%" }}
             >
-              Phone:
+              {t('contact.phone')}:
               <div style={{ position: "relative", marginTop: "5px" }}>
                 <FontAwesomeIcon
                   icon={faPhone}
@@ -169,7 +180,7 @@ function ContactUs() {
                   name="phone"
                   value={form.phone}
                   onChange={handleChange}
-                  placeholder="Enter your phone number"
+                  placeholder= {t('contact.enterPhone')}
                   required
                   style={{
                     padding: "8px 10px 8px 40px",
@@ -184,7 +195,7 @@ function ContactUs() {
             <label
               style={{ marginBottom: "10px", textAlign: "left", width: "100%" }}
             >
-              Email:
+              {t('contact.email')}:
               <div style={{ position: "relative", marginTop: "5px" }}>
                 <FontAwesomeIcon
                   icon={faEnvelope}
@@ -201,7 +212,7 @@ function ContactUs() {
                   name="email"
                   value={form.email}
                   onChange={handleChange}
-                  placeholder="Enter your email address"
+                  placeholder= {t('contact.enterEmail')}
                   required
                   style={{
                     padding: "8px 10px 8px 40px",
@@ -226,7 +237,7 @@ function ContactUs() {
                 marginTop: "30px",
               }}
             >
-              Book a visit
+              {t('contact.book')}
             </button>
           </form>
         </div>

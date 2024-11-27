@@ -2,14 +2,17 @@ import ApplicationStructure from "../components/ApplicationStructure";
 import "./Gallery.css";
 import CloseIcon from "@mui/icons-material/Close";
 import { useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
 import {
   GalleryData_Env,
   GalleryData_Act,
   type GalleryEnvUrl,
 } from "../types/common";
 import { getSignedMediaUrl } from "../lib/aws-config";
+import CustomSpinner from "../components/Spinner";
 
 function Gallery() {
+  const { t } = useTranslation();
   const [model, setModel] = useState(false);
   const [temImgSrc, setTempImgSrc] = useState("");
   const getImg = (imgSrc: string) => {
@@ -21,7 +24,16 @@ function Gallery() {
   const [activityGallery, setActivityGallery] = useState<GalleryEnvUrl[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
+  const { i18n} = useTranslation();
+  useEffect(() => {
+    const userLanguage = navigator.language || 'en';
+    const supportedLanguages = ['en', 'es'];
+    const defaultLanguage = 'en';
+    const languageToUse = supportedLanguages.includes(userLanguage.slice(0, 2)) ? userLanguage.slice(0, 2) : defaultLanguage;
+    if (i18n && typeof i18n.changeLanguage === 'function') {
+      i18n.changeLanguage(languageToUse);
+    }
+  }, [i18n]);
   useEffect(() => {
     const loadServiceImages = async () => {
       try {
@@ -65,7 +77,9 @@ function Gallery() {
   }, []);
 
   if (isLoading) {
-    return <div>Loading Gallery.......</div>;
+    return   <div className="loading-container">
+    <CustomSpinner size={60} color="#3498db" />
+  </div>
   }
 
   if (error) {
@@ -82,16 +96,14 @@ function Gallery() {
         <div className="gallery-section1">
           <div className="parent-container">
             <h1 style={{ textAlign: "left" }}>
-              <span style={{ fontSize: "1.4em" }}>Life </span> at our center
+              <span style={{ fontSize: "1.4em" }}>{t('gallery.title')}</span>
             </h1>
             <h4 style={{ textAlign: "left" }}>
-              Discover the vibrant atmosphere, supportive environment, and
-              engaging activities that make our elderly daycare center a special
-              place to be.{" "}
+            {t('gallery.description')}
             </h4>
 
             <h3 className="section-heading" style={{ textAlign: "left" }}>
-              Our Environment
+            {t('gallery.environment')}
             </h3>
             <div className="gallery">
               {gallery.map((item, index) => {
@@ -116,12 +128,10 @@ function Gallery() {
         <div className="gallery-section2">
           <div className="parent-container">
             <h3 className="section-heading" style={{ textAlign: "left" }}>
-              Activities
+            {t('gallery.activities')}
             </h3>
             <h4>
-              Take a look at the engaging activities we offer, from group
-              exercises to creative arts, that bring joy and connection to our
-              residents.
+            {t('gallery.activitydesc')}
             </h4>
             <div className="gallery">
               {activityGallery.map((item, index) => {

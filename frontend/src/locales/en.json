@@ -24,6 +24,35 @@
       "kitchenStaff": "Program Aide / Kitchen",
       "rd": "RD"
     },
+    "contact":{
+      "title":"Contact Us",
+      "hours":"Operating Hours",
+      "monday": "Monday",
+      "tuesday":" Tuesday",
+      "wednesday":"Wednesday",
+      "thursday":"Thursday",
+      "friday":"Friday",
+      "saturday":"Saturday",
+      "sunday":"Sunday",
+      "closed":"Closed",
+      "visit":"Come and Visit Us",
+      "book":"Book a visit",
+      "email":"Email",
+      "phone":"Phone",
+      "name":" Your Name",
+      "message":"Success! Your contact details have been submitted.",
+      "enterPhone":"Enter your phone number",
+      "enterEmail":"Enter your email address",
+      "enterName":"Enter your name"
+        },
+    "gallery":{
+      "title":"Life at our center",
+      "description":"Discover the vibrant atmosphere, supportive environment, and engaging activities that make our elderly daycare center a special place to be.",
+      "environment":"Our Environment",
+      "activities": "Activities",
+      "activitydesc":"Take a look at the engaging activities we offer, from group exercises to creative arts, that bring joy and connection to our residents."
+
+    },
     "header":{
       "home": "Home",
       "gallery": "Gallery",
