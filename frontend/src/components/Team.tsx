@@ -16,7 +16,6 @@ const Team: React.FC<TeamProps> = ({ members }) => {
         <div key={index} className="staff_indiv">
           <img
             src={member.image}
-            className="image"
           />
         </div>
       ))}

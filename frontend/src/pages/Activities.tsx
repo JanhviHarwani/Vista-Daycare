@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../lib/axiosInstance";
 import ApplicationStructure from "../components/ApplicationStructure";
-import "./Activities.css";
+import styles from "./Activities.module.css";
 import { getSignedMediaUrl } from "../lib/aws-config";
 import { Events, eventsData } from "../types/common";
 import CustomSpinner from "../components/Spinner";
@@ -163,79 +163,95 @@ const Activities: React.FC = () => {
 
   return (
     <ApplicationStructure>
-          {loadingEvents || loadingImages ? (
-      <div className="loading-container">
+    {loadingEvents || loadingImages ? (
+      <div className={styles.loadingContainer}>
         <CustomSpinner size={60} color="#3498db" />
       </div>
     ) : (
-    <div className="carousels-wrapper">
-      <div className="carousel-container">
-      {groupedDates.length > 4 && (
-        <button onClick={handleEventsPrev} className="carousel-button prev">
-          ←
-        </button> )}
+      <div className={styles.carouselsWrapper}>
+        <div className={styles.carouselContainer}>
+          {groupedDates.length > 4 && (
+            <button onClick={handleEventsPrev} className={styles.carouselButtonPrev}>
+              ←
+            </button>
+          )}
 
-        <div className="carousel">
-          {groupedDates.slice(eventsCurrentIndex, eventsCurrentIndex + 4).map((date) => (
-            <div key={date} className="event-card">
-              <h2>{formatDateDisplay(date)}</h2>
-              {events[date] && events[date].length > 0 ? (
-                events[date].map((event, index) => (
-                  <div key={index} className={`event-item ${event.isHighlight ? "highlight-event" : ""}`}>
-                    <strong>{event.event_name}</strong>
-                    <div>{event.start_time} - {event.end_time}</div>
-                  </div>
-                ))
-              ) : (
-                <div className="no-events">
-                  <p>No events planned</p>
-                  <img src={getNoEventsImage()} alt="No events" />
+          <div className={styles.carousel}>
+            {groupedDates
+              .slice(eventsCurrentIndex, eventsCurrentIndex + 4)
+              .map((date) => (
+                <div key={date} className={styles.eventCard}>
+                  <h2>{formatDateDisplay(date)}</h2>
+                  {events[date] && events[date].length > 0 ? (
+                    events[date].map((event, index) => (
+                      <div
+                        key={index}
+                        className={`${styles.eventItem} ${
+                          event.isHighlight ? styles.highlightEvent : ""
+                        }`}
+                      >
+                        <strong>{event.event_name}</strong>
+                        <div>
+                          {event.start_time} - {event.end_time}
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className={styles.noEvents}>
+                      <p>No events planned</p>
+                      <img src={getNoEventsImage()} alt="No events" />
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          ))}
+              ))}
+          </div>
+
+          {groupedDates.length > 4 && (
+            <button onClick={handleEventsNext} className={styles.carouselButtonNext}>
+              →
+            </button>
+          )}
         </div>
-        {groupedDates.length > 4 && (
-        <button onClick={handleEventsNext} className="carousel-button next">
-          →
-        </button> )}
-      </div> 
 
-      <div className="carousel-container">
-      {groupedDates.length > 4 && (
-        <button onClick={handleMealsPrev} className="carousel-button prev">
-          ←
-        </button> )}
+        <div className={styles.carouselContainer}>
+          {groupedDates.length > 4 && (
+            <button onClick={handleMealsPrev} className={styles.carouselButtonPrev}>
+              ←
+            </button>
+          )}
 
-        <div className="carousel">
-          {groupedDates.slice(mealsCurrentIndex, mealsCurrentIndex + 4).map((date) => (
-            <div key={date} className="event-card">
-            <h2>{formatDateDisplay(date)}</h2>
-              {meals[date] && meals[date].length > 0 ? (
-                meals[date].map((meal, index) => (
-                  <div key={index} className="meal-item">
-                    <strong>{meal.meal_name}</strong>
-                    <div>Quantity: {meal.quantity}</div>
-                  </div>
-                ))
-              ) : (
-                <div className="no-events">
-                  <p>No meals planned</p>
-                  <img src={getNoMealImage()} alt="No meals" />
+          <div className={styles.carousel}>
+            {groupedDates
+              .slice(mealsCurrentIndex, mealsCurrentIndex + 4)
+              .map((date) => (
+                <div key={date} className={styles.eventCard}>
+                  <h2>{formatDateDisplay(date)}</h2>
+                  {meals[date] && meals[date].length > 0 ? (
+                    meals[date].map((meal, index) => (
+                      <div key={index} className={styles.mealItem}>
+                        <strong>{meal.meal_name}</strong>
+                        <div>Quantity: {meal.quantity}</div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className={styles.noEvents}>
+                      <p>No meals planned</p>
+                      <img src={getNoMealImage()} alt="No meals" />
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          ))}
+              ))}
+          </div>
+
+          {groupedDates.length > 4 && (
+            <button onClick={handleMealsNext} className={styles.carouselButtonNext}>
+              →
+            </button>
+          )}
         </div>
-        {groupedDates.length > 4 && (
-        <button onClick={handleMealsNext} className="carousel-button next">
-          →
-        </button> )}
       </div>
-    </div>
     )}
   </ApplicationStructure>
-
   );
 };
 

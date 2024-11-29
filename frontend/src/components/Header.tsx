@@ -61,7 +61,7 @@ function Header() {
             className={css.select}
             aria-label="Additional navigation options"
           >
-            <option value="" disabled hidden>  {t('header.more')}</option>
+            <option value="" disabled>  {t('header.more')}</option>
             <option value="/activities">  {t('header.eventsCalendar')}</option>
             <option value="/eligibility">  {t('header.eligibility')}</option>
             <option value="/admin">  {t('header.adminLogin')}</option>

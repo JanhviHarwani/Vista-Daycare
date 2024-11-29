@@ -1,0 +1,130 @@
+.sliderWrapper {
+  width: 100%;
+  background-color: #f4f1eb;
+  margin-bottom: 40px;
+}
+
+.sliderContainer {
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.slide {
+  position: relative;
+  height: 500px;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slideOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.1)
+  );
+}
+
+.customCarousel .carousel-status{
+  display: none;
+}
+
+.arrowButton {
+  opacity: 0.8;
+  transition: all 0.3s ease !important;
+}
+
+.arrowButton:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.95) !important;
+  animation: pulse 1s infinite;
+}
+
+.carousel {
+  padding: 0px !important;
+}
+
+/* Using :global for third-party carousel classes that can't be modules */
+:global(.carousel .control-dots) {
+  bottom: 20px !important;
+}
+
+:global(.carousel .control-dots .dot) {
+  width: 12px !important;
+  height: 12px !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+:global(.carousel .control-dots .dot.selected) {
+  background: #C41E3A !important;
+  transform: scale(1.2);
+}
+
+.sliderLoading,
+.sliderError {
+  text-align: center;
+  background: white;
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sliderLoading {
+  color: #666;
+}
+
+.sliderError {
+  color: #C41E3A;
+}
+
+@media (max-width: 768px) {
+  .sliderContainer {
+    width: 95%;
+  }
+
+  .slide {
+    height: 300px;
+  }
+
+  .arrowButton {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+:global(.carousel .slide) {
+  transition: opacity 0.5s ease-in-out;
+}
+
+:global(.carousel .control-dots .dot) {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
