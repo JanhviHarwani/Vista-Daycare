@@ -20,7 +20,7 @@
 .sectionHeading {
   font-size: 2.5rem;
   text-align: center;
-  color:#555;
+  color:#000000;
   margin: 3rem 0 1rem;
   position: relative;
   opacity: 0;
@@ -79,7 +79,7 @@
   left: 0;
   width: 4px;
   height: 0;
-  background: #a2845e;
+  background: #dc2626;
   transition: height 0.3s ease;
 }
 
@@ -93,7 +93,7 @@
 }
 
 .paymentSourceHeading {
-  color: #a2845e;
+  color: black;;
   font-size: 1.12em;
   margin-bottom: 1rem;
   font-weight: bold;
@@ -190,7 +190,7 @@
 
 .paymentSourceItem {
   margin-bottom: 15px;
-  border-left: 6px solid #a2845e;
+  border-left: 6px solid #dc2626;
   padding-left: 15px;
   margin-left: 0;
 }
@@ -215,12 +215,13 @@
   font-size: 1.1rem;
   line-height: 1.8;
   text-align: center;
-  border-left: 4px solid #a2845e;
+  border-left: 4px solid #dc2626;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   opacity: 0;
   animation: fadeIn 0.8s ease-out forwards;
   animation-delay: 0.6s;
 }
+
 
 .eligibilityDescription:hover {
   transform: translateY(-5px);
