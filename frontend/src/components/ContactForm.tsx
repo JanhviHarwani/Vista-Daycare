@@ -8,6 +8,9 @@ import {
   faCheckCircle
 } from "@fortawesome/free-solid-svg-icons";
 import './ContactForm.css';
+import axiosInstance from "../lib/axiosInstance";
+import { showError, showSuccess } from "../lib/toast";
+import { getErrorMessage, isNetworkError } from "../lib/errorHandling";
 
 const ContactForm = () => {
   const [form, setForm] = useState({
@@ -18,8 +21,9 @@ const ContactForm = () => {
   
   const [focusedField, setFocusedField] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (e:any) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setForm(prevForm => ({
       ...prevForm,
@@ -27,10 +31,40 @@ const ContactForm = () => {
     }));
   };
 
-  const handleSubmit = (e:any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+    setIsSubmitting(true);
+
+    try {
+      const response = await axiosInstance({
+        method: 'POST',
+        url: '/contact',
+        data: form,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.status === 201) {
+        setSubmitted(true);
+        showSuccess('Thank you for your message!');
+        // Reset form after successful submission
+        setForm({
+          name: '',
+          phone: '',
+          email: '',
+        });
+        setTimeout(() => setSubmitted(false), 3000);
+      }
+    } catch (error) {
+      if (isNetworkError(error)) {
+        showError('Network error. Please try again.');
+      } else {
+        showError(getErrorMessage(error));
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -109,8 +143,12 @@ const ContactForm = () => {
           </div>
         </div>
 
-        <button type="submit" className='formSubmit'>
-          <span>Send Message</span>
+        <button 
+          type="submit" 
+          className='formSubmit'
+          disabled={isSubmitting}
+        >
+          <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
         </button>
       </form>
     </div>

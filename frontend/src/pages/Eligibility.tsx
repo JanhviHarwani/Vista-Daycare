@@ -74,7 +74,7 @@ const Eligibility: React.FC = () => {
           <h4 className={styles.eligibilityDescription}>
             {t('eligibility.description.eligibilityCriteria')}
           </h4>
-
+          <br />
           <h3 className={styles.sectionHeading}>{t('eligibility.paymentSources.title')}</h3>
           <div className={styles.paymentSourcesContainer}>
             {Object.values(

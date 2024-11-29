@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 export type Props = {
-  children: string | JSX.Element | JSX.Element[] | (() => JSX.Element);
+  children: ReactNode
 };
 export interface ModalProps {
   isOpen: boolean;

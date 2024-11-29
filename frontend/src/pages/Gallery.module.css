@@ -1,6 +1,6 @@
 .galleryContainer {
-  max-width: 1400px;
-  margin: 0 auto;
+  /* max-width: 1400px; */
+  /* margin: 0 auto; */
   padding: 2rem;
   min-height: calc(100vh - 160px);
 }
