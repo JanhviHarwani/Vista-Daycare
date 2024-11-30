@@ -2,19 +2,21 @@ import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import css from "./Header.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useTranslation } from 'react-i18next';
-import  { useEffect } from 'react';
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 function Header() {
-  const { i18n} = useTranslation(); 
-  const { t} = useTranslation(); 
+  const { i18n } = useTranslation();
+  const { t } = useTranslation();
 
   useEffect(() => {
-    const userLanguage = navigator.language || 'en'; 
-    const supportedLanguages = ['en', 'es']; 
-    const defaultLanguage = 'en'; 
-    const languageToUse = supportedLanguages.includes(userLanguage.slice(0, 2)) ? userLanguage.slice(0, 2) : defaultLanguage;
-    if (i18n && typeof i18n.changeLanguage === 'function') {
+    const userLanguage = navigator.language || "en";
+    const supportedLanguages = ["en", "es"];
+    const defaultLanguage = "en";
+    const languageToUse = supportedLanguages.includes(userLanguage.slice(0, 2))
+      ? userLanguage.slice(0, 2)
+      : defaultLanguage;
+    if (i18n && typeof i18n.changeLanguage === "function") {
       i18n.changeLanguage(languageToUse);
     }
   }, [i18n]);
@@ -39,21 +41,24 @@ function Header() {
           <>
             <img src={logo} alt="Logo of Adult Day Health Care" />
           </>
-          <h3 className={css.logo_text}>  {t('header.logoText')}</h3>
+          <h3 className={css.logo_text}> {t("header.logoText")}</h3>
         </div>
 
-        <nav className={`${css.nav_wrapper} ${isMobileMenuOpen ? css.open : ''}`} aria-label="Main navigation">
+        <nav
+          className={`${css.nav_wrapper} ${isMobileMenuOpen ? css.open : ""}`}
+          aria-label="Main navigation"
+        >
           <Link className={css.nav_links} to="/">
-          {t('header.home')}
+            {t("header.home")}
           </Link>
           <Link className={css.nav_links} to="/gallery">
-          {t('header.gallery')}
+            {t("header.gallery")}
           </Link>
           <Link className={css.nav_links} to="/services">
-          {t('header.services')}
+            {t("header.services")}
           </Link>
           <Link className={css.nav_links} to="/aboutus">
-          {t('header.aboutUs')}
+            {t("header.aboutUs")}
           </Link>
           <select
             onChange={handleChange}
@@ -61,17 +66,29 @@ function Header() {
             className={css.select}
             aria-label="Additional navigation options"
           >
-            <option value="" disabled hidden>  {t('header.more')}</option>
-            <option value="/activities">  {t('header.eventsCalendar')}</option>
-            <option value="/eligibility">  {t('header.eligibility')}</option>
-            <option value="/admin">  {t('header.adminLogin')}</option>
+            <option value="" disabled>
+              {" "}
+              {t("header.more")}
+            </option>
+            <option value="/activities">
+              {" "}
+              {t("header.activitiesCalendar")}
+            </option>
+            <option value="/eligibility"> {t("header.eligibility")}</option>
+            <option value="/admin"> {t("header.adminLogin")}</option>
           </select>
           <div className={css.button_wrapper_custom}>
-            <button onClick={handleContactClick}aria-label="Go to the contact us page">  {t('header.contactUs')}</button>
+            <button
+              onClick={handleContactClick}
+              aria-label="Go to the contact us page"
+            >
+              {" "}
+              {t("header.contactUs")}
+            </button>
           </div>
         </nav>
 
-        <button 
+        <button
           className={css.mobile_menu_button}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"

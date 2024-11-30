@@ -1,11 +1,10 @@
-.ab_whole {
-  /* min-height: calc(100vh - 160px); */
+.abWhole {
   width: 100%;
   padding-bottom: 80px;
-  padding-top: 0;
+  padding-top: 1rem;
 }
 
-.ab_whole .parent-container {
+.parentContainer {
   text-align: left;
   padding-top: 5px;
   padding-left: 100px;
@@ -14,26 +13,26 @@
   margin-right: 100px;
 }
 
-.ab_whole h2 {
+.abWhole h2 {
   margin-top: 60px;
 }
 
-.ab_whole h3 {
+.abWhole h3 {
   font-size: 1.5rem;
 }
 
-.ab_whole hr {
+.abWhole hr {
   width: 10%;
   margin: 20px auto;
   border: 1px solid #888888;
   margin-bottom: 40px;
 }
 
-.ab_whole img {
+.abWhole img {
   border-radius: 15px;
 }
 
-.no-margin {
+.noMargin {
   margin-top: 20px;
   position: relative;
   width: 260px;
@@ -41,7 +40,7 @@
   flex-shrink: 0;
 }
 
-.staff_container {
+.staffContainer {
   display: flex;
   justify-content: flex-start;
   gap: 1em;
@@ -49,7 +48,7 @@
   overflow-x: hidden;
 }
 
-.about-us-description {
+.aboutUsDescription {
   text-align: center;
   line-height: 1.6;
   padding: 0 20px;
@@ -57,7 +56,8 @@
   max-width: 1000px;
   width: 90%;
 }
-.mission-description {
+
+.missionDescription {
   text-align: center;
   background-color: #f7f3ed;
   padding: 20px 40px;
@@ -78,7 +78,7 @@
   text-align: center;
 }
 
-.ab_whole .section-heading {
+.sectionHeading {
   display: inline-block;
   text-align: left;
   background-color: #d3c7b5;
@@ -89,32 +89,10 @@
   margin-top: 50px;
   margin-bottom: 10px;
 }
-.staff-container {
-  display: flex;
-  justify-content: flex-start;
-  gap: 1em;
-  flex-wrap: wrap;
-  overflow-x: hidden;
-}
 
-.staff_indiv {
+.staffIndiv {
   height: 260px;
   width: auto;
-}
-
-@media (max-width: 991px) {
-  .image {
-    position: relative;
-    width: 260px;
-    height: 260px;
-    margin-top: 10px;
-  }
-  .no-margin {
-    margin-top: 20px;
-    position: relative;
-    width: 260px;
-    height: 260px;
-  }
 }
 
 .wrapper {
@@ -125,6 +103,7 @@
   padding: 0 12px;
   margin-top: 20px;
 }
+
 .image {
   position: relative;
   width: 260px;
@@ -133,7 +112,7 @@
   flex-shrink: 0;
 }
 
-.content_first {
+.contentFirst {
   position: absolute;
   top: 0;
   left: 0;
@@ -149,6 +128,7 @@
   padding-left: 10px;
   border-radius: 15px;
 }
+
 .content {
   position: absolute;
   top: 0;
@@ -174,16 +154,29 @@
   color: #f0f0f0;
 }
 
-.content_first:hover {
+.contentFirst:hover {
   opacity: 1;
 }
 
-.content_first h1 {
+.contentFirst h1 {
   font-size: 55px;
   color: #f0f0f0;
 }
+
+.loadingContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
 @media (max-width: 1200px) {
-  .ab_whole .parent-container {
+  .parentContainer {
     padding-left: 50px;
     padding-right: 50px;
     margin-left: 50px;
@@ -192,11 +185,11 @@
 }
 
 @media (max-width: 991px) {
-  .parent-container {
+  .parentContainer {
     padding: 10px;
   }
 
-  .section-heading {
+  .sectionHeading {
     font-size: 1.2rem;
     padding: 8px 15px;
   }
@@ -210,34 +203,49 @@
     font-size: 1rem;
   }
 
-  .ab_whole h1 {
+  .abWhole h1 {
     font-size: 2.8rem;
+  }
+
+  .image {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    margin-top: 10px;
+  }
+
+  .noMargin {
+    margin-top: 20px;
+    position: relative;
+    width: 260px;
+    height: 260px;
   }
 }
 
 @media (max-width: 768px) {
-  .about-us-description {
+  .aboutUsDescription {
     font-size: 1.2rem;
   }
 
-  .mission-description {
+  .missionDescription {
     padding: 20px 30px;
     width: 100%;
     box-sizing: border-box;
   }
 
-  .parent-container {
+  .parentContainer {
     padding: 10px;
     box-sizing: border-box;
   }
 
-  .ab_whole .parent-container {
+  .parentContainer {
     padding-left: 20px;
     padding-right: 20px;
     margin-left: 20px;
     margin-right: 20px;
   }
 }
+
 @media (max-width: 480px) {
   .image {
     position: relative;
@@ -245,26 +253,28 @@
     height: 260px;
     margin-top: 10px;
   }
-  .no-margin {
+
+  .noMargin {
     margin-top: 0;
     position: relative;
     width: 260px;
     height: 260px;
   }
-  .about-us-description {
+
+  .aboutUsDescription {
     font-size: 1rem;
   }
 
-  .mission-description {
+  .missionDescription {
     padding: 20px 30px;
     width: 95%;
   }
 
-  .parent-container {
+  .parentContainer {
     padding: 10px;
   }
 
-  .section-heading {
+  .sectionHeading {
     font-size: 1rem;
     padding: 6px 10px;
   }
@@ -277,7 +287,8 @@
     width: 90%;
     min-width: 350px;
   }
-  .ab_whole .parent-container {
+
+  .parentContainer {
     padding-left: 10px;
     padding-right: 10px;
     margin-left: 10px;

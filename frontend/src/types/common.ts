@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 export type Props = {
-  children: string | JSX.Element | JSX.Element[] | (() => JSX.Element);
+  children: ReactNode;
 };
 export interface ModalProps {
   isOpen: boolean;
@@ -10,6 +10,16 @@ export interface ModalProps {
   children: ReactNode;
 }
 
+export interface GroupedEvents {
+  [date: string]: Event[];
+}
+export interface GroupedMeals {
+  [date: string]: Meal[];
+}
+export interface CalendarViewProps {
+  events: GroupedEvents;
+  meals: GroupedMeals;
+}
 export interface FormInputProps {
   label: string;
   type: string;
@@ -110,7 +120,6 @@ export const slider: MediaItem[] = [
   },
 ];
 
-
 // Events Gallery
 export type Events = {
   title: string;
@@ -124,13 +133,12 @@ export const eventsData: Events[] = [
   {
     title: "No Events",
     imageKey: "events-page/NoEvents.jpg",
-  }
-  ,
+  },
   {
     title: "No Meal Plan",
     imageKey: "events-page/NoMeal.jpg",
-  }
-]
+  },
+];
 
 // New Testimonial types
 export type Testimonial = {
@@ -188,7 +196,7 @@ export type Services = {
   description_es: string;
   extraImages?: string[];
   details?: string;
-  details_es?: string
+  details_es?: string;
 };
 
 export type ServiceUrl = Services & {
@@ -212,8 +220,10 @@ export const serviceData: Services[] = [
       "services-page/hs5.jpg",
       "services-page/hs6.jpg",
     ],
-    details: "Comprehensive support and therapeutic services aimed at enhancing physical health, promoting recovery, and addressing challenges related to mobility, pain management, and overall physical well-being. Our expert team provides personalized care through physiotherapy, rehabilitation, and wellness programs tailored to meet individual needs. These services focus on improving strength, flexibility, and function while helping clients regain independence and confidence in their daily activities",
-    details_es: "Apoyo integral y servicios terapéuticos enfocados en mejorar la salud física, promover la recuperación y abordar los desafíos relacionados con la movilidad, el manejo del dolor y el bienestar físico general. Nuestro equipo de expertos ofrece atención personalizada a través de fisioterapia, rehabilitación y programas de bienestar adaptados a las necesidades individuales. Estos servicios se centran en mejorar la fuerza, la flexibilidad y la función, ayudando a los clientes a recuperar la independencia y la confianza en sus actividades diarias.",
+    details:
+      "Comprehensive support and therapeutic services aimed at enhancing physical health, promoting recovery, and addressing challenges related to mobility, pain management, and overall physical well-being. Our expert team provides personalized care through physiotherapy, rehabilitation, and wellness programs tailored to meet individual needs. These services focus on improving strength, flexibility, and function while helping clients regain independence and confidence in their daily activities",
+    details_es:
+      "Apoyo integral y servicios terapéuticos enfocados en mejorar la salud física, promover la recuperación y abordar los desafíos relacionados con la movilidad, el manejo del dolor y el bienestar físico general. Nuestro equipo de expertos ofrece atención personalizada a través de fisioterapia, rehabilitación y programas de bienestar adaptados a las necesidades individuales. Estos servicios se centran en mejorar la fuerza, la flexibilidad y la función, ayudando a los clientes a recuperar la independencia y la confianza en sus actividades diarias.",
   },
   {
     title: "Professional Nursing Services",
@@ -228,8 +238,10 @@ export const serviceData: Services[] = [
       "services-page/pn2.jpg",
       "services-page/pn3.jpg",
     ],
-    details: "Expert nursing care designed to closely monitor and manage a variety of medical conditions and treatments. Our skilled professionals provide compassionate support ensuring that patients receive personalized care tailored to their specific needs. This includes medication administration, wound care, health assessments, and ongoing coordination with healthcare providers to promote recovery and overall well-being.",
-    details_es: "Atención de enfermería experta diseñada para monitorear y manejar de cerca una variedad de condiciones médicas y tratamientos. Nuestros profesionales capacitados brindan un apoyo compasivo, asegurando que los pacientes reciban atención personalizada adaptada a sus necesidades específicas. Esto incluye la administración de medicamentos, cuidado de heridas, evaluaciones de salud y una coordinación continua con los proveedores de atención médica para promover la recuperación y el bienestar general.",
+    details:
+      "Expert nursing care designed to closely monitor and manage a variety of medical conditions and treatments. Our skilled professionals provide compassionate support ensuring that patients receive personalized care tailored to their specific needs. This includes medication administration, wound care, health assessments, and ongoing coordination with healthcare providers to promote recovery and overall well-being.",
+    details_es:
+      "Atención de enfermería experta diseñada para monitorear y manejar de cerca una variedad de condiciones médicas y tratamientos. Nuestros profesionales capacitados brindan un apoyo compasivo, asegurando que los pacientes reciban atención personalizada adaptada a sus necesidades específicas. Esto incluye la administración de medicamentos, cuidado de heridas, evaluaciones de salud y una coordinación continua con los proveedores de atención médica para promover la recuperación y el bienestar general.",
   },
   {
     title: "Activities",
@@ -247,8 +259,10 @@ export const serviceData: Services[] = [
       "services-page/a5.jpg",
       "services-page/a6.jpg",
     ],
-    details: "We offer a variety of engaging programs designed to stimulate both cognitive and physical health, promoting overall well-being. Activities such as Bingo, DJ nights, and interactive games are tailored to encourage social interaction, mental sharpness, and physical activity in a fun and supportive environment. These programs not only provide entertainment but also help improve memory, coordination, and mood, enhancing the participants' quality of life.",
-    details_es: "Ofrecemos una variedad de programas atractivos diseñados para estimular tanto la salud cognitiva como física, promoviendo el bienestar general. Actividades como Bingo, noches de DJ y juegos interactivos están adaptadas para fomentar la interacción social, la agudeza mental y la actividad física en un ambiente divertido y de apoyo. Estos programas no solo brindan entretenimiento, sino que también ayudan a mejorar la memoria, la coordinación y el estado de ánimo, mejorando la calidad de vida de los participantes.",
+    details:
+      "We offer a variety of engaging programs designed to stimulate both cognitive and physical health, promoting overall well-being. Activities such as Bingo, DJ nights, and interactive games are tailored to encourage social interaction, mental sharpness, and physical activity in a fun and supportive environment. These programs not only provide entertainment but also help improve memory, coordination, and mood, enhancing the participants' quality of life.",
+    details_es:
+      "Ofrecemos una variedad de programas atractivos diseñados para estimular tanto la salud cognitiva como física, promoviendo el bienestar general. Actividades como Bingo, noches de DJ y juegos interactivos están adaptadas para fomentar la interacción social, la agudeza mental y la actividad física en un ambiente divertido y de apoyo. Estos programas no solo brindan entretenimiento, sino que también ayudan a mejorar la memoria, la coordinación y el estado de ánimo, mejorando la calidad de vida de los participantes.",
   },
   {
     title: "Transportation",
@@ -263,8 +277,10 @@ export const serviceData: Services[] = [
       "services-page/t2.jpg",
       "services-page/t3.jpg",
     ],
-    details: "We offer safe, reliable, and convenient transportation services to ensure participants can travel to and from our facility with ease. Our transportation is designed to accommodate individuals from surrounding areas, providing a stress-free experience and ensuring timely arrival for appointments, programs, or treatments. This service is tailored to enhance accessibility and promote seamless participation in all scheduled activities.",
-    details_es: "Ofrecemos servicios de transporte seguros, confiables y convenientes para garantizar que los participantes puedan viajar hacia y desde nuestras instalaciones con facilidad. Nuestro transporte está diseñado para acomodar a personas de las áreas circundantes, brindando una experiencia sin estrés y asegurando llegadas puntuales a citas, programas o tratamientos. Este servicio está diseñado para mejorar la accesibilidad y promover una participación fluida en todas las actividades programadas.",
+    details:
+      "We offer safe, reliable, and convenient transportation services to ensure participants can travel to and from our facility with ease. Our transportation is designed to accommodate individuals from surrounding areas, providing a stress-free experience and ensuring timely arrival for appointments, programs, or treatments. This service is tailored to enhance accessibility and promote seamless participation in all scheduled activities.",
+    details_es:
+      "Ofrecemos servicios de transporte seguros, confiables y convenientes para garantizar que los participantes puedan viajar hacia y desde nuestras instalaciones con facilidad. Nuestro transporte está diseñado para acomodar a personas de las áreas circundantes, brindando una experiencia sin estrés y asegurando llegadas puntuales a citas, programas o tratamientos. Este servicio está diseñado para mejorar la accesibilidad y promover una participación fluida en todas las actividades programadas.",
   },
   {
     title: "Nutritional Counseling",
@@ -279,8 +295,10 @@ export const serviceData: Services[] = [
       "services-page/nc2.jpg",
       "services-page/nc3.jpg",
     ],
-    details: "We provide expert guidance to help individuals develop and maintain healthy eating habits that support overall well-being. Our nutrition specialists offer personalized advice to address specific dietary concerns, such as food allergies, weight management, and chronic health conditions. Through tailored meal plans and practical tips, we empower clients to make informed choices that lead to a balanced and nutritious lifestyle.",
-    details_es: "Brindamos orientación experta para ayudar a las personas a desarrollar y mantener hábitos alimenticios saludables que apoyen su bienestar general. Nuestros especialistas en nutrición ofrecen consejos personalizados para abordar preocupaciones dietéticas específicas, como alergias alimentarias, manejo del peso y condiciones de salud crónicas. A través de planes de comidas adaptados y consejos prácticos, empoderamos a los clientes para que tomen decisiones informadas que conduzcan a un estilo de vida equilibrado y nutritivo.",
+    details:
+      "We provide expert guidance to help individuals develop and maintain healthy eating habits that support overall well-being. Our nutrition specialists offer personalized advice to address specific dietary concerns, such as food allergies, weight management, and chronic health conditions. Through tailored meal plans and practical tips, we empower clients to make informed choices that lead to a balanced and nutritious lifestyle.",
+    details_es:
+      "Brindamos orientación experta para ayudar a las personas a desarrollar y mantener hábitos alimenticios saludables que apoyen su bienestar general. Nuestros especialistas en nutrición ofrecen consejos personalizados para abordar preocupaciones dietéticas específicas, como alergias alimentarias, manejo del peso y condiciones de salud crónicas. A través de planes de comidas adaptados y consejos prácticos, empoderamos a los clientes para que tomen decisiones informadas que conduzcan a un estilo de vida equilibrado y nutritivo.",
   },
   {
     title: "Individual Assessment",
@@ -298,11 +316,12 @@ export const serviceData: Services[] = [
       "services-page/ia5.jpg",
       "services-page/ia6.jpg",
     ],
-    details: "We conduct a thorough evaluation of each participant’s health status, lifestyle, and personal needs to ensure that every aspect of their well-being is considered. Our team of professionals assesses medical history, physical condition, and personal preferences to develop a customized care plan. This individualized approach helps ensure that each participant receives the most effective and appropriate support to meet their unique goals and needs.",
-    details_es: "Realizamos una evaluación exhaustiva del estado de salud, el estilo de vida y las necesidades personales de cada participante para garantizar que se considere cada aspecto de su bienestar. Nuestro equipo de profesionales evalúa el historial médico, la condición física y las preferencias personales para desarrollar un plan de atención personalizado. Este enfoque individualizado ayuda a garantizar que cada participante reciba el apoyo más eficaz y adecuado para cumplir con sus objetivos y necesidades únicas.",
+    details:
+      "We conduct a thorough evaluation of each participant’s health status, lifestyle, and personal needs to ensure that every aspect of their well-being is considered. Our team of professionals assesses medical history, physical condition, and personal preferences to develop a customized care plan. This individualized approach helps ensure that each participant receives the most effective and appropriate support to meet their unique goals and needs.",
+    details_es:
+      "Realizamos una evaluación exhaustiva del estado de salud, el estilo de vida y las necesidades personales de cada participante para garantizar que se considere cada aspecto de su bienestar. Nuestro equipo de profesionales evalúa el historial médico, la condición física y las preferencias personales para desarrollar un plan de atención personalizado. Este enfoque individualizado ayuda a garantizar que cada participante reciba el apoyo más eficaz y adecuado para cumplir con sus objetivos y necesidades únicas.",
   },
 ];
-
 
 //Gallery Provided
 export type Gallery = {
@@ -555,6 +574,7 @@ export interface Event {
   id: number;
   event_name: string;
   event_date: string;
+  start_time: string;
   end_time: string;
   isHighlight: boolean;
 }
@@ -575,3 +595,18 @@ export interface Contact {
 export interface ContactsApiResponse {
   contacts: Contact[];
 }
+export const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+export const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];

@@ -1,6 +1,6 @@
 /* TeamCard.css */
 
-.team-card {
+.teamCard {
   width: 450px;
   height: 200px;
   border: 1px solid #ddd;
@@ -12,17 +12,17 @@
   margin: 10px;
 }
 
-.team-card-img {
+.teamCardImg {
   width: 100%;
   height: 180px;
   object-fit: cover;
 }
 
-.team-card-container {
+.teamCardContainer {
   padding: 15px;
 }
 
-.team-card-container h2 {
+.teamCardContainer h2 {
   font-size: 1.2em;
   margin: 10px 0 0 0;
   color: #333;

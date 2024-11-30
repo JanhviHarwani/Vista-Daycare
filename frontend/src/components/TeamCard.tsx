@@ -1,5 +1,5 @@
 import React from "react";
-import "./TeamCard.css";
+import css from "./TeamCard.module.css";
 
 type TeamCardProps = {
   image: string;
@@ -8,10 +8,10 @@ type TeamCardProps = {
 
 const TeamCard: React.FC<TeamCardProps> = ({ image, name }) => {
   return (
-    <div className="team-card" role="region" aria-label={`Team member: ${name}`}>
-      <img src={image} alt={`Photo of ${name}`} className="team-card-img" />
+    <div className={css.teamCard} role="region" aria-label={`Team member: ${name}`}>
+      <img src={image} alt={`Photo of ${name}`} className={css.teamCardImg} />
 
-      <div className="team-card-container">
+      <div className={css.teamCardContainer}>
         <h2 tabIndex={0}>{name}</h2>
       </div>
     </div>
