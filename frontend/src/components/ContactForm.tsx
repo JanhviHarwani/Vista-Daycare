@@ -47,7 +47,7 @@ const ContactForm = () => {
 
       if (response.status === 201) {
         setSubmitted(true);
-        showSuccess('Thank you for your message!');
+        // showSuccess("Thank you! We'll be in touch soon.");
         // Reset form after successful submission
         setForm({
           name: '',
@@ -72,7 +72,7 @@ const ContactForm = () => {
       {submitted && (
         <div className="success-message">
           <FontAwesomeIcon icon={faCheckCircle} className="success-icon" />
-          <span>Thank you for your message!</span>
+          <span>Thank you! We'll be in touch soon.</span>
         </div>
       )}
       
