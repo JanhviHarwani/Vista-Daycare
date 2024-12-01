@@ -75,8 +75,12 @@ const Services: React.FC = () => {
         <Slider />
         
         <div className={styles.servicesHeader}>
-          <h1 className={styles.mainTitle}>Our Services</h1>
-          <p className={styles.subtitle}>Comprehensive care tailored to your needs</p>
+          <h1 className={styles.mainTitle}>
+          {language === 'es' ? 'Nuestros Servicios' : 'Our Services'}
+          </h1>
+          <p className={styles.subtitle}>
+          {language === 'es' ? 'Atención integral adaptada a tus necesidades' : 'Comprehensive care tailored to your needs'}
+          </p>
         </div>
 
         <div className={styles.grid}>

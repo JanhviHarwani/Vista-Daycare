@@ -209,9 +209,9 @@ export const serviceData: Services[] = [
     title_es: "Servicios de Salud",
     imageKey: "services-page/artistiqueimagery-097.jpg",
     description:
-      "Support and counseling to address emotional and physical well-being and mental health challenges.",
+      "Comprehensive services for your health.",
     description_es:
-      "Apoyo y asesoramiento para abordar el bienestar emocional y físico, así como los desafíos de la salud mental.",
+      "Servicios integrales para tu salud.",
     extraImages: [
       "services-page/hs1.jpg",
       "services-page/hs2.jpg",
@@ -221,36 +221,36 @@ export const serviceData: Services[] = [
       "services-page/hs6.jpg",
     ],
     details:
-      "Comprehensive support and therapeutic services aimed at enhancing physical health, promoting recovery, and addressing challenges related to mobility, pain management, and overall physical well-being. Our expert team provides personalized care through physiotherapy, rehabilitation, and wellness programs tailored to meet individual needs. These services focus on improving strength, flexibility, and function while helping clients regain independence and confidence in their daily activities",
+      "Vista ADHC offers a broad range of healthcare services that promote faster healing, recovery, and rehabilitation. We aim to help our participants fully live their lives by rendering high-quality services that will enhance their health and overall well-being as well as their independence and self-reliance. Our professional healthcare staff monitor and supervise our participants to ensure that they are in their best health possible and to be able to address their varying and/or immediate care needs.",
     details_es:
-      "Apoyo integral y servicios terapéuticos enfocados en mejorar la salud física, promover la recuperación y abordar los desafíos relacionados con la movilidad, el manejo del dolor y el bienestar físico general. Nuestro equipo de expertos ofrece atención personalizada a través de fisioterapia, rehabilitación y programas de bienestar adaptados a las necesidades individuales. Estos servicios se centran en mejorar la fuerza, la flexibilidad y la función, ayudando a los clientes a recuperar la independencia y la confianza en sus actividades diarias.",
+      "Vista ADHC ofrece una amplia gama de servicios de atención médica que promueven una recuperación, sanación y rehabilitación más rápida. Nuestro objetivo es ayudar a nuestros participantes a vivir plenamente sus vidas brindando servicios de alta calidad que mejoren su salud, bienestar general, independencia y autosuficiencia. Nuestro personal profesional de atención médica monitorea y supervisa a los participantes para garantizar que estén en las mejores condiciones de salud posibles y para poder atender sus necesidades de cuidado inmediatas y/o variadas.",
   },
   {
     title: "Professional Nursing Services",
     title_es: "Servicios Profesionales de Enfermería",
     imageKey: "services-page/artistiqueimagery-133.jpg",
     description:
-      "Skilled nursing care to monitor and manage medical conditions and treatments.",
+      "Skilled nursing care services to maximize overall health potential.",
     description_es:
-      "Atención de enfermería especializada para supervisar y gestionar condiciones médicas y tratamientos.",
+      "Servicios de cuidados de enfermería especializada para maximizar el potencial general de salud.",
     extraImages: [
       "services-page/pn1.jpg",
       "services-page/pn2.jpg",
       "services-page/pn3.jpg",
     ],
     details:
-      "Expert nursing care designed to closely monitor and manage a variety of medical conditions and treatments. Our skilled professionals provide compassionate support ensuring that patients receive personalized care tailored to their specific needs. This includes medication administration, wound care, health assessments, and ongoing coordination with healthcare providers to promote recovery and overall well-being.",
+      "Vista Adult Day Health Care center has registered nurses and licensed practical nurses who are seasoned and skilled in providing basic to advanced health care services. Our RNs and LPNs provide regular monitoring and supervision to each participant to optimize their health and keep them safe and secure in our center. Other than that, our nurses also provide the following: Assistance with Medications, Personal Care (e.g. Assistance with Toileting and Grooming), Monthly Health Education Group Sessions, Liaison with Personal Physician, Caregivers, and Family Members, And More",
     details_es:
-      "Atención de enfermería experta diseñada para monitorear y manejar de cerca una variedad de condiciones médicas y tratamientos. Nuestros profesionales capacitados brindan un apoyo compasivo, asegurando que los pacientes reciban atención personalizada adaptada a sus necesidades específicas. Esto incluye la administración de medicamentos, cuidado de heridas, evaluaciones de salud y una coordinación continua con los proveedores de atención médica para promover la recuperación y el bienestar general.",
+      "El centro Vista Adult Day Health Care cuenta con enfermeras registradas y enfermeras prácticas con licencia, quienes tienen experiencia y habilidades en la prestación de servicios de atención médica básicos y avanzados. Nuestras enfermeras registradas (RNs) y enfermeras prácticas con licencia (LPNs) brindan monitoreo y supervisión regular a cada participante para optimizar su salud y garantizar su seguridad en nuestro centro. Además, nuestras enfermeras también ofrecen los siguientes servicios: Asistencia con medicamentos, Cuidado personal (por ejemplo, ayuda con el uso del baño y el aseo personal), Sesiones grupales mensuales de educación en salud, Enlace con el médico personal, cuidadores y familiares, Y más",
   },
   {
     title: "Activities",
     title_es: "Actividades",
     imageKey: "services-page/artistiqueimagery-080.jpg",
     description:
-      "Engaging programs designed to stimulate cognitive and physical health.",
+      "Social activities to maximize socio-emotional well-being.",
     description_es:
-      "Programas atractivos diseñados para estimular la salud cognitiva y física.",
+      "Actividades sociales para maximizar el bienestar socioemocional.",
     extraImages: [
       "services-page/a1.jpg",
       "services-page/a2.jpg",
@@ -260,54 +260,54 @@ export const serviceData: Services[] = [
       "services-page/a6.jpg",
     ],
     details:
-      "We offer a variety of engaging programs designed to stimulate both cognitive and physical health, promoting overall well-being. Activities such as Bingo, DJ nights, and interactive games are tailored to encourage social interaction, mental sharpness, and physical activity in a fun and supportive environment. These programs not only provide entertainment but also help improve memory, coordination, and mood, enhancing the participants' quality of life.",
+      "Vista Adult Day Health Care Center has a team of Social Workers, Psychologists, a Program Director and Healthcare Professionals who put together fun activities for the seniors daily at the center.  Participants look forward to many of the activities from Bingo, dance parties to holiday celebrations.  Please check out our Activities Calendar for more information.",
     details_es:
-      "Ofrecemos una variedad de programas atractivos diseñados para estimular tanto la salud cognitiva como física, promoviendo el bienestar general. Actividades como Bingo, noches de DJ y juegos interactivos están adaptadas para fomentar la interacción social, la agudeza mental y la actividad física en un ambiente divertido y de apoyo. Estos programas no solo brindan entretenimiento, sino que también ayudan a mejorar la memoria, la coordinación y el estado de ánimo, mejorando la calidad de vida de los participantes.",
+      "El centro Vista Adult Day Health Care cuenta con un equipo de trabajadores sociales, psicólogos, un director de programa y profesionales de la salud que organizan actividades divertidas diariamente para los adultos mayores en el centro. Los participantes disfrutan de muchas actividades, desde bingo y fiestas de baile hasta celebraciones de días festivos. Por favor, consulte nuestro Calendario de Actividades para más información.",
   },
   {
     title: "Transportation",
     title_es: "Transporte",
     imageKey: "services-page/artistiqueimagery-117.jpg",
     description:
-      " We provide safe and convenient transportation to and from the facility for participants from surrounding areas.",
+      "We’ll keep you safe while traveling from your home to the center and back.",
     description_es:
-      "Proporcionamos transporte seguro y conveniente hacia y desde la instalación para los participantes de las áreas circundantes.",
+      "Te mantendremos seguro mientras viajas desde tu hogar al centro y de regreso.",
     extraImages: [
       "services-page/t1.jpg",
       "services-page/t2.jpg",
       "services-page/t3.jpg",
     ],
     details:
-      "We offer safe, reliable, and convenient transportation services to ensure participants can travel to and from our facility with ease. Our transportation is designed to accommodate individuals from surrounding areas, providing a stress-free experience and ensuring timely arrival for appointments, programs, or treatments. This service is tailored to enhance accessibility and promote seamless participation in all scheduled activities.",
+      "Safe, reliable, door-to-door transportation is provided to help you get to the center and back home safely. We have experienced drivers who have great work ethic and love what they do.  They take great care of our participants and keep them safe throughout the whole journey.",
     details_es:
-      "Ofrecemos servicios de transporte seguros, confiables y convenientes para garantizar que los participantes puedan viajar hacia y desde nuestras instalaciones con facilidad. Nuestro transporte está diseñado para acomodar a personas de las áreas circundantes, brindando una experiencia sin estrés y asegurando llegadas puntuales a citas, programas o tratamientos. Este servicio está diseñado para mejorar la accesibilidad y promover una participación fluida en todas las actividades programadas.",
+      "Se proporciona transporte seguro, confiable y puerta a puerta para ayudarte a llegar al centro y regresar a casa de manera segura. Contamos con conductores experimentados que tienen una excelente ética de trabajo y aman lo que hacen. Cuidan con esmero a nuestros participantes y los mantienen seguros durante todo el trayecto.",
   },
   {
     title: "Nutritional Counseling",
     title_es: "Asesoramiento Nutricional",
     imageKey: "services-page/artistiqueimagery-119.jpg",
     description:
-      "Expert advice to promote healthy eating habits and address dietary concerns.",
+      "We serve nutritious and delicious meals to our participants.",
     description_es:
-      "Consejos de expertos para promover hábitos alimenticios saludables y abordar preocupaciones dietéticas.",
+      "Servimos comidas nutritivas y deliciosas a nuestros participantes.",
     extraImages: [
       "services-page/nc1.jpg",
       "services-page/nc2.jpg",
       "services-page/nc3.jpg",
     ],
     details:
-      "We provide expert guidance to help individuals develop and maintain healthy eating habits that support overall well-being. Our nutrition specialists offer personalized advice to address specific dietary concerns, such as food allergies, weight management, and chronic health conditions. Through tailored meal plans and practical tips, we empower clients to make informed choices that lead to a balanced and nutritious lifestyle.",
+      "We have a licensed dietitian who monitors the nutrition intake of every participant in our center. We make sure that every food served matches their dietary needs. Our services include: Dietary Consultation, Nutritional Education and Nutritionally Balanced Hot Meals Served Daily. Meals Provided are: Breakfast, Lunch and Snacks",
     details_es:
-      "Brindamos orientación experta para ayudar a las personas a desarrollar y mantener hábitos alimenticios saludables que apoyen su bienestar general. Nuestros especialistas en nutrición ofrecen consejos personalizados para abordar preocupaciones dietéticas específicas, como alergias alimentarias, manejo del peso y condiciones de salud crónicas. A través de planes de comidas adaptados y consejos prácticos, empoderamos a los clientes para que tomen decisiones informadas que conduzcan a un estilo de vida equilibrado y nutritivo.",
+     "Contamos con un dietista licenciado que supervisa la ingesta nutricional de cada participante en nuestro centro. Nos aseguramos de que cada alimento servido cumpla con sus necesidades dietéticas. Nuestros servicios incluyen: consulta dietética, educación nutricional y comidas calientes equilibradas servidas diariamente. Las comidas proporcionadas son: desayuno, almuerzo y refrigerios.",
   },
   {
     title: "Individual Assessment",
     title_es: "Evaluación Individual",
     imageKey: "services-page/artistiqueimagery-101.jpg",
     description:
-      "Comprehensive evaluation of each participant’s health and personal needs to create a tailored care plan.",
+      "We conduct assessments and evaluations to address their needs immediately as needed.",
     description_es:
-      "Evaluación integral de la salud y necesidades personales de cada participante para crear un plan de atención personalizado.",
+      "Llevamos a cabo evaluaciones y valoraciones para atender sus necesidades de inmediato, según sea necesario.",
     extraImages: [
       "services-page/ia1.jpg",
       "services-page/ia2.jpg",
@@ -317,9 +317,9 @@ export const serviceData: Services[] = [
       "services-page/ia6.jpg",
     ],
     details:
-      "We conduct a thorough evaluation of each participant’s health status, lifestyle, and personal needs to ensure that every aspect of their well-being is considered. Our team of professionals assesses medical history, physical condition, and personal preferences to develop a customized care plan. This individualized approach helps ensure that each participant receives the most effective and appropriate support to meet their unique goals and needs.",
+      "Our nurses provide: Individual Assessments, Blood Glucose Monitoring and High Blood Pressure Monitoring. Our social workers provide: Psychosocial Assessments, Individual Counseling, Family Counseling, Liaison with Community Agencies and Support Groups Daily. Our Physical and Occupational Therapists provide: Individual Assessments, Group exercises, Assistance with obtaining therapy equipment, Therapeutic physical therapy exercises, such as gait and balance training and range of motion exercises, to help them perform daily living tasks on their own and regain their strength and independence and Occupational Therapy exercises - to help our participants towards regaining or learning a new set of skills that they can use to improve their mobility and allow them to do the things they want and need.",
     details_es:
-      "Realizamos una evaluación exhaustiva del estado de salud, el estilo de vida y las necesidades personales de cada participante para garantizar que se considere cada aspecto de su bienestar. Nuestro equipo de profesionales evalúa el historial médico, la condición física y las preferencias personales para desarrollar un plan de atención personalizado. Este enfoque individualizado ayuda a garantizar que cada participante reciba el apoyo más eficaz y adecuado para cumplir con sus objetivos y necesidades únicas.",
+    "Nuestras enfermeras proporcionan: evaluaciones individuales, monitoreo de glucosa en sangre y monitoreo de presión arterial alta. Nuestros trabajadores sociales ofrecen: evaluaciones psicosociales, consejería individual, consejería familiar, enlace con agencias comunitarias y grupos de apoyo diariamente. Nuestros terapeutas físicos y ocupacionales brindan: evaluaciones individuales, ejercicios grupales, asistencia para obtener equipos de terapia, ejercicios terapéuticos de fisioterapia, como entrenamiento de marcha y equilibrio y ejercicios de rango de movimiento, para ayudarles a realizar tareas diarias por sí mismos y recuperar su fuerza e independencia, y ejercicios de terapia ocupacional, para ayudar a nuestros participantes a recuperar o aprender un nuevo conjunto de habilidades que pueden usar para mejorar su movilidad y permitirles hacer las cosas que desean y necesitan."
   },
 ];
 
