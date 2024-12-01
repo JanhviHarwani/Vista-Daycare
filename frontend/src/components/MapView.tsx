@@ -1,8 +1,13 @@
 // LocationMap.tsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import css from "./MapView.module.css";
 
 const MapView: React.FC = () => {
+  const [language, setLanguage] = useState<'en' | 'es'>('en');
+  useEffect(() => {
+    const browserLanguage = navigator.language.slice(0, 2);
+    setLanguage(browserLanguage === 'es' ? 'es' : 'en');
+  }, []);
   return (
     <section className={css.location_section}>
       <div className={css.content_wrapper}>
@@ -29,15 +34,21 @@ const MapView: React.FC = () => {
           <div className={css.location_highlights} >
             <div className={css.highlight_item} aria-label="Location Highlight">
               <div className={css.icon} role="img" aria-label="Map Pin">📍</div>
-              <p>Conveniently located in Maywood</p>
+              <p>
+              {language === 'es' ? 'Ubicado convenientemente en Maywood' : 'Conveniently located in Maywood'}
+              </p>
             </div>
             <div className={css.highlight_item} aria-label="Transport Highlight">
               <div className={css.icon} role="img" aria-label="Bus">🚌</div>
-              <p>Transportation service available</p>
+              <p>
+              {language === 'es' ? 'Servicio de transporte disponible' : 'Transportation service available'}
+              </p>
             </div>
             <div className={css.highlight_item} aria-label="Parking Highlight">
               <div className={css.icon} role="img" aria-label="Parking">🅿️</div>
-              <p>Ample parking available</p>
+              <p>
+              {language === 'es' ? 'Estacionamiento amplio disponible' : 'Ample parking available'}
+              </p>
             </div>
           </div>
         </div>
