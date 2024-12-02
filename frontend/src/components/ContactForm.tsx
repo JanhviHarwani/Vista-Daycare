@@ -25,14 +25,28 @@ const ContactForm = () => {
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    setForm(prevForm => ({
-      ...prevForm,
-      [name]: value
-    }));
+    if (name === 'phone') {
+      const sanitizedValue = value.replace(/[^0-9]/g, '');
+      if (sanitizedValue.length <= 10) { 
+        setForm(prevForm => ({
+          ...prevForm,
+          [name]: sanitizedValue,
+        }));
+      }
+    } else {
+      setForm(prevForm => ({
+        ...prevForm,
+        [name]: value
+      }));
+    }
   };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    if (form.phone.length !== 10) {
+      showError('Phone number must be exactly 10 digits.');
+      return;
+    }
     setIsSubmitting(true);
 
     try {
