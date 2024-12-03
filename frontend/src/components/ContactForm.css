@@ -1,0 +1,173 @@
+.form-wrapper {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    border-radius: 16px;
+    transition: transform 0.3s ease;
+    padding:10px;
+}
+.form-wrapper:hover {
+    transform: translateY(-5px);
+}
+
+.success-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    padding: 16px;
+    background-color: rgba(162, 132, 94, 0.1);
+    color: #8b7350;
+    border-radius: 12px;
+    font-weight: 500;
+    animation: slideDown 0.3s ease-out;
+}
+.success-icon {
+    color: #a2845e;
+    animation: pulse 1.5s infinite;
+}
+
+.form-field {
+    margin-bottom: 24px;
+    position: relative;
+    transition: transform 0.2s ease;
+}
+
+.form-field:hover {
+    transform: translateX(5px);
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #333;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    transform-origin: left;
+}
+  
+.form-field label.focused {
+    color: #a2845e;
+    transform: scale(1.05);
+}
+
+.input-wrapper {
+    position: relative;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.input-wrapper.focused {
+    border-color: #a2845e;
+    box-shadow: 0 4px 20px rgba(162, 132, 94, 0.15);
+    transform: translateY(-2px);
+}
+  
+.field-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    transition: all 0.3s ease;
+}
+
+.field-icon.focused {
+    color: #a2845e;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding: 12px 16px 12px 40px;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    color: #333;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+  
+  .input-wrapper input::placeholder {
+    color: #9ca3af;
+  }
+  
+  .input-wrapper input:focus {
+    outline: none;
+  }
+  
+  .formSubmit {
+    width: 100%;
+    padding: 14px 24px;
+    background-color: #a2845e;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+}
+  
+  /* button[type="submit"]:hover {
+    background-color: #8b7350;
+  } */
+  .formSubmit:hover {
+    background-color: #8b7350;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(162, 132, 94, 0.2);
+}
+
+.formSubmit:active {
+    transform: translateY(1px);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Media Queries */
+@media (max-width: 640px) {
+    .form-wrapper {
+        padding: 24px;
+        border-radius: 12px;
+    }
+
+    .input-wrapper input {
+        font-size: 16px;
+    }
+
+    .formSubmit {
+        padding: 12px 20px;
+    }
+}
+  /* Removed dark mode support since it doesn't match the website's theme */

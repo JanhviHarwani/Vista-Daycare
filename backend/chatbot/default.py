@@ -22,7 +22,7 @@ def get_contact_info(message):
             Vista Adult Daycare Center
             Address: 123 Wellness Ave, Suite 101, Healthy City, HC 45678
             Phone: (555) 987-6543
-            Email: info@vistadaycare.com
+            Email: info@vistaadhc.com
             Website: www.vistadaycare.com
             We’re here to help, and we look forward to hearing from you! """
     return text

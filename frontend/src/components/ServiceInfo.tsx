@@ -1,5 +1,6 @@
 import React from 'react';
-import './ServiceInfo.css';
+import styles from './ServiceInfo.module.css';
+import { Link } from 'react-router-dom';
 
 type ServiceInfoProps = {
   show: boolean;
@@ -9,39 +10,91 @@ type ServiceInfoProps = {
   imageUrl: string;
   extraImages?: string[];
   details?: string;
+  language?:string;
 };
 
-const ServiceInfo: React.FC<ServiceInfoProps> = ( {
-    show,
-    onClose,
-    // title,
-    // content,
-    // imageUrl,
-    extraImages = [],
-    details,
-  }) => {
-    if (!show) return null;
-  
-    return (
-        <div className="modal-overlay" onClick={onClose}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={onClose}>
-              &times;
-            </button>
-            {details && <h2 className="modal-title">{details}</h2>}
-    
-            {extraImages.length > 0 && (
-              <div className="modal-gallery">
-                {extraImages.map((img, index) => (
-                  <div key={index} className="modal-image-container">
-                    <img src={img} alt={`Extra ${index + 1}`} className="modal-image" />
-                  </div>
-                ))}
-              </div>
-            )}
+const ServiceInfo: React.FC<ServiceInfoProps> = ({
+  show,
+  title,
+  onClose,
+  imageUrl,
+  extraImages = [],
+  details,
+  language
+}) => {
+  React.useEffect(() => {
+    if (show) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [show]);
+  const isActivitiesCard = title === "Activities" || title === "Actividades";
+
+  if (!show) return null;
+
+  return (
+    <div className={styles.modalOverlay} onClick={onClose}>
+      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.modalHeader}>
+          <button className={styles.modalClose} onClick={onClose} style={{color:"black"}}>
+            X
+          </button>
+        </div>
+        <div className={styles.modalHero}>
+          <img src={imageUrl} alt={title} className={styles.modalHeroImage} />
+          <div className={styles.modalHeroOverlay}>
+            <h2 className={styles.modalTitle}>{title}</h2>
           </div>
         </div>
-      );
-  };
-  
+
+        {details && (
+          <div className={styles.modalBody}>
+            <div className={styles.modalDetailsContainer}>
+              <p className={styles.modalDetails}>{details}</p>
+              {isActivitiesCard && (
+                <div style={{ textAlign: 'center' }}>
+
+                <Link
+                 
+                  to="/activities" 
+                  className={styles.activitiesLink}
+                >
+                  {language === 'es' 
+                    ? 'Ver Calendario de Actividades' 
+                    : 'View Activities Calendar'}
+                </Link>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {extraImages?.length > 0 && (
+          <div className={styles.modalGallerySection}>
+            <h3 className={styles.galleryTitle}>Gallery</h3>
+            <div className={styles.modalGallery}>
+              {extraImages.map((img, index) => (
+                <div key={index} className={styles.modalImageContainer}>
+                  <img
+                    src={img}
+                    alt={`Gallery ${index + 1}`}
+                    className={styles.modalImage}
+                  />
+                  <div className={styles.imageOverlay}>
+                    <span className={styles.imageNumber}>0{index + 1}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 export default ServiceInfo;

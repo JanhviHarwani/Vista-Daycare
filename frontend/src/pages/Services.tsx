@@ -5,16 +5,21 @@ import ApplicationStructure from "../components/ApplicationStructure";
 import Slider from "../components/Slider";
 import Team from "../components/Team";
 import ServiceInfo from "../components/ServiceInfo";
-import "./Services.css";
+import styles from "./Services.module.css";
+import CustomSpinner from "../components/Spinner";
 
 const Services: React.FC = () => {
   const [services, setServices] = useState<ServiceUrl[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showModal, setShowModal] = useState(false);
-  const [selectedService, setSelectedService] = useState<ServiceUrl | null>(
-    null
-  );
+  const [selectedService, setSelectedService] = useState<ServiceUrl | null>(null);
+  const [language, setLanguage] = useState<'en' | 'es'>('en');
+
+  useEffect(() => {
+    const browserLanguage = navigator.language.slice(0, 2);
+    setLanguage(browserLanguage === 'es' ? 'es' : 'en');
+  }, []);
 
   useEffect(() => {
     const loadServiceImages = async () => {
@@ -53,46 +58,76 @@ const Services: React.FC = () => {
   };
 
   if (isLoading) {
-    return <div>Loading services...</div>;
+    return (
+      <div className={styles.loadingContainer}>
+        <CustomSpinner size={60} color="#C41E3A" />
+      </div>
+    );
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div className={styles.errorMessage}>{error}</div>;
   }
 
   return (
     <ApplicationStructure>
-      <div className="whole">
+      <div className={styles.servicesPage}>
         <Slider />
-        <div className="services-container">
+        
+        <div className={styles.servicesHeader}>
+          <h1 className={styles.mainTitle}>
+          {language === 'es' ? 'Nuestros Servicios' : 'Our Services'}
+          </h1>
+          <p className={styles.subtitle}>
+          {language === 'es' ? 'Atención integral adaptada a tus necesidades' : 'Comprehensive care tailored to your needs'}
+          </p>
+        </div>
+
+        <div className={styles.grid}>
           {services.map((service, index) => (
             <div
               key={index}
-              className="service-card"
+              className={styles.card}
               onClick={() => handleCardClick(service)}
             >
-              <h2 className="service-title">{service.title}</h2>
-              <hr className="card-divider" />
-              <Team
-                members={[
-                  {
-                    image: service.imageUrl || "/images/fallback-image.jpg",
-                  },
-                ]}
-              />
-              <p className="service-description">{service.description}</p>
+              <div className={styles.cardInner}>
+                <div className={styles.imageWrapper}>
+                  <Team
+                    members={[
+                      {
+                        image: service.imageUrl || "/images/fallback-image.jpg",
+                      },
+                    ]}
+                  />
+                  <div className={styles.overlay}>
+                    <span className={styles.learnMoreText}>Learn More</span>
+                  </div>
+                </div>
+                
+                <div className={styles.content}>
+                  <h2 className={styles.title}>
+                    {language === 'es' ? service.title_es : service.title}
+                  </h2>
+                  <div className={styles.divider}></div>
+                  <p className={styles.description}>
+                    {language === 'es' ? service.description_es : service.description}
+                  </p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
+
         {selectedService && (
           <ServiceInfo
             show={showModal}
             onClose={closeModal}
-            title={selectedService.title}
-            content={selectedService.description}
+            title={language === 'es' ? selectedService.title_es : selectedService.title}
+            content={language === 'es' ? selectedService.description_es : selectedService.description}
             imageUrl={selectedService.imageUrl || "/images/fallback-image.jpg"}
             extraImages={selectedService.extraImages}
-            details={selectedService.details}
+            details={language === 'es' ? selectedService.details_es : selectedService.details}
+            language={language} 
           />
         )}
       </div>

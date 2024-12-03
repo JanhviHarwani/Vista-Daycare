@@ -121,12 +121,12 @@
 
 .carousel-button.prev {
   left: 60px;
-  top: 500px;
+  top: 90;
 }
 
 .carousel-button.next {
   right: 60px;
-  top: 500px;
+  top: 90;
 }
 
 .card h4 {
@@ -142,52 +142,102 @@
 
 /* Responsive adjustments */
 
-/* For smaller screens (below 768px) */
 @media (max-width: 768px) {
-  /* Adjust carousel slide to show only one item per row */
   .carousel-slide {
-    flex-direction: column; /* Stack carousel items vertically */
-    align-items: center; /* Center align carousel items */
+    flex-direction: column;
+    align-items: center;
   }
 
   .carousel-item {
-    width: 100%; /* One item per row */
-    margin: 10px 0; /* Adjust margin for spacing */
+    width: 100%;
+    margin: 10px 0;
   }
 
-  /* Adjust card layout for stacking */
   .card-upper {
-    flex-direction: column; /* Stack upper section vertically */
-    align-items: flex-start; /* Align items to the left */
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .card-image-left {
-    width: 100%; /* Make image take full width */
-    padding-right: 0; /* Remove padding */
+    width: 100%;
+    padding-right: 0;
   }
 
   .card-timeline-right {
-    width: 100%; /* Make description take full width */
-    padding-left: 0; /* Remove padding */
+    width: 100%;
+    padding-left: 0;
   }
 
   .card-lower {
-    flex-direction: column; /* Stack lower section vertically */
-    align-items: flex-start; /* Align items to the left */
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .card-description-left {
-    width: 100%; /* Full width for the description */
-    padding-right: 0; /* Remove padding */
+    width: 100%;
+    padding-right: 0;
   }
 
   .card-image-right {
-    width: 100%; /* Make image take full width */
-    padding-left: 0; /* Remove padding */
+    width: 100%;
+    padding-left: 0;
   }
 
   .carousel-button.prev,
   .carousel-button.next {
-    font-size: 18px; /* Slightly smaller buttons */
+    font-size: 18px;
+  }
+
+  .carousel-button.prev {
+    left: 10px;
+    top: 110%;
+    transform: translateY(-50%);
+  }
+
+  .carousel-button.next {
+    right: 10px;
+    top: 110%;
+    transform: translateY(-50%);
+  }
+
+  .carousel-slide {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  .carousel-item {
+    flex: 0 0 100%;
+  }
+
+  .carousel-slide {
+    justify-content: center;
+    scroll-snap-align: center;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 991px) {
+  /* Adjust positioning for the previous button */
+  .carousel-button.prev {
+    left: 10px;
+    top: 100;
+    transform: translateY(-50%);
+  }
+
+  .carousel-button.next {
+    right: 10px;
+    top: 100;
+    transform: translateY(-50%);
+  }
+
+  .carousel-item {
+    flex: 0 0 calc(50% - 16px);
+    margin-left: 5px;
+  }
+
+  .carousel-slide {
+    justify-content: space-around;
   }
 }

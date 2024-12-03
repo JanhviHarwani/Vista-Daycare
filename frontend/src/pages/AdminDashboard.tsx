@@ -6,10 +6,11 @@ import { useAuth } from "../hooks/useAuth";
 import axiosInstance from "../lib/axiosInstance";
 import {
   getErrorMessage,
+  handleAuthError,
   isAuthError,
   isNetworkError,
 } from "../lib/errorHandling";
-import { toast } from "react-toastify"; // You'll need to install this package
+import { toast } from "react-toastify";
 import { showError, showSuccess, authErrorMessages } from "../lib/toast";
 import { Contact, ContactsApiResponse, Event, Meal } from "../types/common";
 import { LogoutIcon, PlusIcon, TrashIcon } from "../components/SVGs";
@@ -62,7 +63,7 @@ const AdminDashboard = () => {
           "Content-Type": "application/json",
         },
       });
-  
+
       if (response.status === 200) {
         fetchEvents();
         showSuccess("Event deleted successfully");
@@ -70,6 +71,7 @@ const AdminDashboard = () => {
     } catch (error) {
       if (isAuthError(error)) {
         showError(authErrorMessages.sessionExpired);
+        handleAuthError(error, logout, () => navigate("/login"));
       } else if (isNetworkError(error)) {
         showError(authErrorMessages.networkError);
       } else {
@@ -113,6 +115,7 @@ const AdminDashboard = () => {
     } catch (error) {
       if (isAuthError(error)) {
         showError(authErrorMessages.sessionExpired);
+        handleAuthError(error, logout, () => navigate("/login"));
       } else if (isNetworkError(error)) {
         showError(authErrorMessages.networkError);
       } else {
@@ -167,6 +170,7 @@ const AdminDashboard = () => {
     } catch (error) {
       if (isAuthError(error)) {
         showError(authErrorMessages.sessionExpired);
+        handleAuthError(error, logout, () => navigate("/login"));
       } else if (isNetworkError(error)) {
         showError(authErrorMessages.networkError);
       } else {
@@ -174,18 +178,6 @@ const AdminDashboard = () => {
       }
     }
   };
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-
-  // Function to toggle highlight status
-  // const toggleHighlight = (eventId: number) => {
-  //   setEvents(
-  //     events.map((event) =>
-  //       event.id === eventId
-  //         ? { ...event, isHighlight: !event.isHighlight }
-  //         : event
-  //     )
-  //   );
-  // };
 
   const handleLogout = () => {
     logout();
@@ -358,11 +350,11 @@ const AdminDashboard = () => {
                             </td>
                             <td style={dashboardStyles.td}>
                               <input
-                              key={`${event.event_date}-${event.event_name}`}
+                                key={`${event.event_date}-${event.event_name}`}
                                 type="checkbox"
                                 checked={event.isHighlight}
                                 // onChange={() => toggleHighlight(event.id)}
-                           
+
                                 style={dashboardStyles.customCheckbox}
                                 aria-label={`Mark ${event.event_name} as highlight of the day`}
                                 disabled
@@ -371,11 +363,18 @@ const AdminDashboard = () => {
                             <td style={dashboardStyles.td}>
                               {event.event_date}
                             </td>
-                            <td style={dashboardStyles.td}>{event.end_time}</td>
+                            <td style={dashboardStyles.td}>
+                              {event.start_time} - {event.end_time}
+                            </td>
                             <td style={dashboardStyles.td}>
                               <button
                                 style={dashboardStyles.deleteButton}
-                                onClick={() => deleteEvent(event.event_date, event.event_name)}
+                                onClick={() =>
+                                  deleteEvent(
+                                    event.event_date,
+                                    event.event_name
+                                  )
+                                }
                                 aria-label={`Delete ${event.event_name}`}
                               >
                                 <TrashIcon />
