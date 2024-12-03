@@ -221,9 +221,9 @@ export const serviceData: Services[] = [
       "services-page/hs6.jpg",
     ],
     details:
-      "Vista ADHC offers a broad range of healthcare services that promote faster healing, recovery, and rehabilitation. We aim to help our participants fully live their lives by rendering high-quality services that will enhance their health and overall well-being as well as their independence and self-reliance. Our professional healthcare staff monitor and supervise our participants to ensure that they are in their best health possible and to be able to address their varying and/or immediate care needs.",
+      "Vista ADHC provides an extensive array of healthcare services designed to support quicker healing, recovery, and rehabilitation. Our mission is to empower participants to live life to the fullest by delivering exceptional services that enhance their health, overall well-being, independence, and self-sufficiency. Our dedicated healthcare professionals closely monitor and supervise participants, ensuring they maintain optimal health while addressing diverse and immediate care needs. Studies show that participants at Adult Day Health Care Centers are able to live independently for longer and delay their enrollment into a nursing care facility, assisted living, hospice etc.",
     details_es:
-      "Vista ADHC ofrece una amplia gama de servicios de atención médica que promueven una recuperación, sanación y rehabilitación más rápida. Nuestro objetivo es ayudar a nuestros participantes a vivir plenamente sus vidas brindando servicios de alta calidad que mejoren su salud, bienestar general, independencia y autosuficiencia. Nuestro personal profesional de atención médica monitorea y supervisa a los participantes para garantizar que estén en las mejores condiciones de salud posibles y para poder atender sus necesidades de cuidado inmediatas y/o variadas.",
+      "Vista ADHC ofrece una amplia gama de servicios de atención médica diseñados para apoyar una curación, recuperación y rehabilitación más rápidas. Nuestra misión es empoderar a los participantes para que vivan la vida al máximo al brindar servicios excepcionales que mejoran su salud, bienestar general, independencia y autosuficiencia. Nuestros dedicados profesionales de la salud supervisan y monitorean de cerca a los participantes, asegurándose de que mantengan una salud óptima mientras atienden diversas necesidades de atención inmediata. Los estudios demuestran que los participantes en Centros de Atención Diurna para Adultos pueden vivir de manera independiente por más tiempo y retrasar su ingreso a instalaciones de cuidado de enfermería, viviendas asistidas, cuidados paliativos, etc.",
   },
   {
     title: "Professional Nursing Services",
@@ -239,9 +239,9 @@ export const serviceData: Services[] = [
       "services-page/pn3.jpg",
     ],
     details:
-      "Vista Adult Day Health Care center has registered nurses and licensed practical nurses who are seasoned and skilled in providing basic to advanced health care services. Our RNs and LPNs provide regular monitoring and supervision to each participant to optimize their health and keep them safe and secure in our center. Other than that, our nurses also provide the following: Assistance with Medications, Personal Care (e.g. Assistance with Toileting and Grooming), Monthly Health Education Group Sessions, Liaison with Personal Physician, Caregivers, and Family Members, And More.",
+      "Vista Adult Day Health Care Center is staffed with highly skilled registered nurses (RNs) and licensed practical nurses (LPNs) who excel in delivering a wide range of healthcare services, from basic to advanced care. Our nurses conduct regular monitoring and supervision of each participant to promote their well-being and ensure their safety within our center. Additionally, our nursing team offers the following services: Personal Care (e.g. Assistance with Toileting and Grooming),Health Education Group Sessions,Liaison with Personal Physician, Caregivers, and Family Members,And More.",
     details_es:
-      "El centro Vista Adult Day Health Care cuenta con enfermeras registradas y enfermeras prácticas con licencia, quienes tienen experiencia y habilidades en la prestación de servicios de atención médica básicos y avanzados. Nuestras enfermeras registradas (RNs) y enfermeras prácticas con licencia (LPNs) brindan monitoreo y supervisión regular a cada participante para optimizar su salud y garantizar su seguridad en nuestro centro. Además, nuestras enfermeras también ofrecen los siguientes servicios: Asistencia con medicamentos, Cuidado personal (por ejemplo, ayuda con el uso del baño y el aseo personal), Sesiones grupales mensuales de educación en salud, Enlace con el médico personal, cuidadores y familiares, Y más.",
+      "El Centro de Cuidado Diurno para Adultos Vista cuenta con un equipo de enfermeros altamente capacitados, que incluye enfermeros registrados (RNs) y enfermeros prácticos con licencia (LPNs), expertos en brindar una amplia gama de servicios de atención médica, desde cuidados básicos hasta avanzados. Nuestros enfermeros realizan un monitoreo y supervisión regular de cada participante para promover su bienestar y garantizar su seguridad dentro de nuestro centro. Además, nuestro equipo de enfermería ofrece los siguientes servicios: Cuidado personal (por ejemplo, asistencia con el uso del baño y el aseo personal), Sesiones grupales de educación en salud, Coordinación con el médico personal, cuidadores y miembros de la familia,¡Y más!",
   },
   {
     title: "Activities",
@@ -260,9 +260,9 @@ export const serviceData: Services[] = [
       "services-page/a6.jpg",
     ],
     details:
-      "Vista Adult Day Health Care Center has a team of Social Workers, Psychologists, a Program Director and Healthcare Professionals who put together fun activities for the seniors daily at the center.  Participants look forward to many of the activities from Bingo, dance parties to holiday celebrations.  Please check out our Activities Calendar for more information.",
+      "Vista Adult Day Health Care Center has a team of Social Workers, Psychologists, a Program Director and Healthcare Professionals who put together fun activities for the seniors daily at the center. Participants look forward to many of the activities from Bingo, dance parties to holiday celebrations. Please check out our Activities Calendar for more information.",
     details_es:
-      "El centro Vista Adult Day Health Care cuenta con un equipo de trabajadores sociales, psicólogos, un director de programa y profesionales de la salud que organizan actividades divertidas diariamente para los adultos mayores en el centro. Los participantes disfrutan de muchas actividades, desde bingo y fiestas de baile hasta celebraciones de días festivos. Por favor, consulte nuestro Calendario de Actividades para más información.",
+      "El Centro de Cuidado Diurno para Adultos Vista cuenta con un equipo de trabajadores sociales, psicólogos, un director de programa y profesionales de la salud que organizan actividades divertidas para los adultos mayores todos los días en el centro. Los participantes disfrutan de muchas de las actividades, desde juegos de bingo y fiestas de baile hasta celebraciones de días festivos. Por favor, consulte nuestro Calendario de Actividades para más información.",
   },
   {
     title: "Transportation",
@@ -278,9 +278,9 @@ export const serviceData: Services[] = [
       "services-page/t3.jpg",
     ],
     details:
-      "Safe, reliable, door-to-door transportation is provided to help you get to the center and back home safely. We have experienced drivers who have great work ethic and love what they do.  They take great care of our participants and keep them safe throughout the whole journey.",
+      "Safe, reliable, door-to-door transportation is provided to help participants get to the center and back home safely. We have experienced drivers who have great work ethic and love what they do. We also have transportation available for special needs and/or disabled participants in wheelchairs. They take great care of our participants and keep them safe throughout the whole journey.",
     details_es:
-      "Se proporciona transporte seguro, confiable y puerta a puerta para ayudarte a llegar al centro y regresar a casa de manera segura. Contamos con conductores experimentados que tienen una excelente ética de trabajo y aman lo que hacen. Cuidan con esmero a nuestros participantes y los mantienen seguros durante todo el trayecto.",
+      "Se ofrece transporte seguro, confiable y de puerta a puerta para ayudar a los participantes a llegar al centro y regresar a casa de manera segura. Contamos con conductores experimentados que tienen una gran ética de trabajo y aman lo que hacen. También disponemos de transporte para participantes con necesidades especiales y/o discapacidades que usan sillas de ruedas. Nuestros conductores cuidan con esmero a los participantes y garantizan su seguridad durante todo el trayecto.",
   },
   {
     title: "Nutritional Counseling",
@@ -296,9 +296,9 @@ export const serviceData: Services[] = [
       "services-page/nc3.jpg",
     ],
     details:
-      "We have a licensed dietitian who monitors the nutrition intake of every participant in our center. We make sure that every food served matches their dietary needs. Our services include: Dietary Consultation, Nutritional Education and Nutritionally Balanced Hot Meals Served Daily. Meals Provided are: Breakfast, Lunch and Snacks.",
+      "We have a licensed dietitian who monitors the nutrition intake of every participant in our center. We make sure that every food served matches their dietary needs. Our services include: Dietary Consultation, Nutritional Education, Nutritionally Balanced Hot Meals Served Daily. Meals Provided: Breakfast, Lunch and Snacks.",
     details_es:
-     "Contamos con un dietista licenciado que supervisa la ingesta nutricional de cada participante en nuestro centro. Nos aseguramos de que cada alimento servido cumpla con sus necesidades dietéticas. Nuestros servicios incluyen: consulta dietética, educación nutricional y comidas calientes equilibradas servidas diariamente. Las comidas proporcionadas son: desayuno, almuerzo y refrigerios.",
+     "Contamos con un dietista licenciado que supervisa la ingesta nutricional de cada participante en nuestro centro. Nos aseguramos de que cada comida servida se ajuste a sus necesidades dietéticas. Nuestros servicios incluyen: Consultas dietéticas, Educación nutricional, Comidas calientes equilibradas y nutritivas servidas diariamente, Comidas proporcionadas: Desayuno, almuerzo y refrigerios.",
   },
   {
     title: "Individual Assessment",
@@ -317,9 +317,9 @@ export const serviceData: Services[] = [
       "services-page/ia6.jpg",
     ],
     details:
-      "Our nurses provide: Individual Assessments, Blood Glucose Monitoring and High Blood Pressure Monitoring. Our social workers provide: Psychosocial Assessments, Individual Counseling, Family Counseling, Liaison with Community Agencies and Support Groups Daily. Our Physical and Occupational Therapists provide: Individual Assessments, Group exercises, Assistance with obtaining therapy equipment, Therapeutic physical therapy exercises, such as gait and balance training and range of motion exercises, to help them perform daily living tasks on their own and regain their strength and independence and Occupational Therapy exercises - to help our participants towards regaining or learning a new set of skills that they can use to improve their mobility and allow them to do the things they want and need.",
+      "Our nurses provide: Individual Assessments, Blood Glucose Monitoring, High Blood Pressure Monitoring. Our social workers provide: Psychosocial Assessments, Individual Counseling, Family Counseling, Liaison with Community Agencies. Our Physical and Occupational Therapists provide: Individual Assessments, Group and individual exercises, Therapeutic physical therapy exercises, such as gait and balance training and range of motion exercises, to help them perform daily living tasks on their own and regain their strength and independence. Occupational Therapy exercises - to help our participants towards regaining or learning a new set of skills that they can use to improve their mobility and allow them to do the things they want and need.",
     details_es:
-    "Nuestras enfermeras proporcionan: evaluaciones individuales, monitoreo de glucosa en sangre y monitoreo de presión arterial alta. Nuestros trabajadores sociales ofrecen: evaluaciones psicosociales, consejería individual, consejería familiar, enlace con agencias comunitarias y grupos de apoyo diariamente. Nuestros terapeutas físicos y ocupacionales brindan: evaluaciones individuales, ejercicios grupales, asistencia para obtener equipos de terapia, ejercicios terapéuticos de fisioterapia, como entrenamiento de marcha y equilibrio y ejercicios de rango de movimiento, para ayudarles a realizar tareas diarias por sí mismos y recuperar su fuerza e independencia, y ejercicios de terapia ocupacional, para ayudar a nuestros participantes a recuperar o aprender un nuevo conjunto de habilidades que pueden usar para mejorar su movilidad y permitirles hacer las cosas que desean y necesitan."
+    "Nuestros enfermeros brindan evaluaciones individuales, monitoreo de glucosa en sangre y monitoreo de presión arterial alta. Nuestros trabajadores sociales brindan evaluaciones psicosociales, asesoramiento individual, asesoramiento familiar y enlace con agencias comunitarias. Nuestros fisioterapeutas y terapeutas ocupacionales brindan evaluaciones individuales, ejercicios grupales e individuales, ejercicios terapéuticos de fisioterapia, como entrenamiento de marcha y equilibrio y ejercicios de rango de movimiento, para ayudar a los participantes a realizar tareas diarias de forma independiente y recuperar su fuerza e independencia. Los ejercicios de terapia ocupacional ayudan a nuestros participantes a recuperar o aprender un nuevo conjunto de habilidades que pueden usar para mejorar su movilidad y permitirles hacer las cosas que quieren y necesitan."
   },
 ];
 
