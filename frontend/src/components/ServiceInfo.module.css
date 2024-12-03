@@ -1,4 +1,39 @@
+.activitiesLink {
+  margin-top: 2rem;
+  display: inline-block; 
+  text-align: center;
+  text-decoration: none;
+  color: rgb(162 132 94);
+  position: relative;
+  transition: transform 0.2s ease, color 0.2s ease;
+  padding: 0 4px; 
+}
 
+.activitiesLink::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: rgb(162 132 94);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.activitiesLink:hover {
+  color: rgb(142 112 74);
+  transform: translateY(-1px);
+}
+
+.activitiesLink:hover::after {
+  transform: scaleX(1);
+}
+
+.activitiesLink:active {
+  transform: translateY(0px);
+}
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -105,7 +140,7 @@
 }
 
 .modalDetailsContainer {
-  background: #f8f9fa;
+  background: #F2EEE8;
   border-radius: 16px;
   padding: 30px;
   box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);

@@ -239,9 +239,9 @@ export const serviceData: Services[] = [
       "services-page/pn3.jpg",
     ],
     details:
-      "Vista Adult Day Health Care center has registered nurses and licensed practical nurses who are seasoned and skilled in providing basic to advanced health care services. Our RNs and LPNs provide regular monitoring and supervision to each participant to optimize their health and keep them safe and secure in our center. Other than that, our nurses also provide the following: Assistance with Medications, Personal Care (e.g. Assistance with Toileting and Grooming), Monthly Health Education Group Sessions, Liaison with Personal Physician, Caregivers, and Family Members, And More",
+      "Vista Adult Day Health Care center has registered nurses and licensed practical nurses who are seasoned and skilled in providing basic to advanced health care services. Our RNs and LPNs provide regular monitoring and supervision to each participant to optimize their health and keep them safe and secure in our center. Other than that, our nurses also provide the following: Assistance with Medications, Personal Care (e.g. Assistance with Toileting and Grooming), Monthly Health Education Group Sessions, Liaison with Personal Physician, Caregivers, and Family Members, And More.",
     details_es:
-      "El centro Vista Adult Day Health Care cuenta con enfermeras registradas y enfermeras prácticas con licencia, quienes tienen experiencia y habilidades en la prestación de servicios de atención médica básicos y avanzados. Nuestras enfermeras registradas (RNs) y enfermeras prácticas con licencia (LPNs) brindan monitoreo y supervisión regular a cada participante para optimizar su salud y garantizar su seguridad en nuestro centro. Además, nuestras enfermeras también ofrecen los siguientes servicios: Asistencia con medicamentos, Cuidado personal (por ejemplo, ayuda con el uso del baño y el aseo personal), Sesiones grupales mensuales de educación en salud, Enlace con el médico personal, cuidadores y familiares, Y más",
+      "El centro Vista Adult Day Health Care cuenta con enfermeras registradas y enfermeras prácticas con licencia, quienes tienen experiencia y habilidades en la prestación de servicios de atención médica básicos y avanzados. Nuestras enfermeras registradas (RNs) y enfermeras prácticas con licencia (LPNs) brindan monitoreo y supervisión regular a cada participante para optimizar su salud y garantizar su seguridad en nuestro centro. Además, nuestras enfermeras también ofrecen los siguientes servicios: Asistencia con medicamentos, Cuidado personal (por ejemplo, ayuda con el uso del baño y el aseo personal), Sesiones grupales mensuales de educación en salud, Enlace con el médico personal, cuidadores y familiares, Y más.",
   },
   {
     title: "Activities",
@@ -296,7 +296,7 @@ export const serviceData: Services[] = [
       "services-page/nc3.jpg",
     ],
     details:
-      "We have a licensed dietitian who monitors the nutrition intake of every participant in our center. We make sure that every food served matches their dietary needs. Our services include: Dietary Consultation, Nutritional Education and Nutritionally Balanced Hot Meals Served Daily. Meals Provided are: Breakfast, Lunch and Snacks",
+      "We have a licensed dietitian who monitors the nutrition intake of every participant in our center. We make sure that every food served matches their dietary needs. Our services include: Dietary Consultation, Nutritional Education and Nutritionally Balanced Hot Meals Served Daily. Meals Provided are: Breakfast, Lunch and Snacks.",
     details_es:
      "Contamos con un dietista licenciado que supervisa la ingesta nutricional de cada participante en nuestro centro. Nos aseguramos de que cada alimento servido cumpla con sus necesidades dietéticas. Nuestros servicios incluyen: consulta dietética, educación nutricional y comidas calientes equilibradas servidas diariamente. Las comidas proporcionadas son: desayuno, almuerzo y refrigerios.",
   },
