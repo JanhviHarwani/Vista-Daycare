@@ -127,6 +127,7 @@ const Services: React.FC = () => {
             imageUrl={selectedService.imageUrl || "/images/fallback-image.jpg"}
             extraImages={selectedService.extraImages}
             details={language === 'es' ? selectedService.details_es : selectedService.details}
+            language={language} 
           />
         )}
       </div>

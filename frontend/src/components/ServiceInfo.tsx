@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './ServiceInfo.module.css';
+import { Link } from 'react-router-dom';
 
 type ServiceInfoProps = {
   show: boolean;
@@ -9,6 +10,7 @@ type ServiceInfoProps = {
   imageUrl: string;
   extraImages?: string[];
   details?: string;
+  language?:string;
 };
 
 const ServiceInfo: React.FC<ServiceInfoProps> = ({
@@ -18,6 +20,7 @@ const ServiceInfo: React.FC<ServiceInfoProps> = ({
   imageUrl,
   extraImages = [],
   details,
+  language
 }) => {
   React.useEffect(() => {
     if (show) {
@@ -29,6 +32,7 @@ const ServiceInfo: React.FC<ServiceInfoProps> = ({
       document.body.style.overflow = "unset";
     };
   }, [show]);
+  const isActivitiesCard = title === "Activities" || title === "Actividades";
 
   if (!show) return null;
 
@@ -51,6 +55,20 @@ const ServiceInfo: React.FC<ServiceInfoProps> = ({
           <div className={styles.modalBody}>
             <div className={styles.modalDetailsContainer}>
               <p className={styles.modalDetails}>{details}</p>
+              {isActivitiesCard && (
+                <div style={{ textAlign: 'center' }}>
+
+                <Link
+                 
+                  to="/activities" 
+                  className={styles.activitiesLink}
+                >
+                  {language === 'es' 
+                    ? 'Ver Calendario de Actividades' 
+                    : 'View Activities Calendar'}
+                </Link>
+                </div>
+              )}
             </div>
           </div>
         )}
