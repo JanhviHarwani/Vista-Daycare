@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPhone,
@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import './ContactForm.css';
 import axiosInstance from "../lib/axiosInstance";
-import { showError, showSuccess } from "../lib/toast";
+import { showError } from "../lib/toast";
 import { getErrorMessage, isNetworkError } from "../lib/errorHandling";
 
 const ContactForm = () => {

@@ -24,7 +24,8 @@ def get_contact_info(message):
             Phone: (555) 987-6543
             Email: info@vistaadhc.com
             Website: www.vistadaycare.com
-            We’re here to help, and we look forward to hearing from you! """
+            We’re here to help, and we look forward to hearing from you! 
+            To add a query got to Contact Us section"""
     return text
 
 

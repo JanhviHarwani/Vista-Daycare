@@ -1,7 +1,7 @@
 // Testimonials.tsx
 import React, { useState, useEffect } from 'react';
 import { getSignedMediaUrl } from '../lib/aws-config';
-import css from './testimonials.module.css';
+import css from './Testimonials.module.css';
 import { testimonialData, type Testimonial } from '../types/common';
 
 const Testimonials: React.FC = () => {
