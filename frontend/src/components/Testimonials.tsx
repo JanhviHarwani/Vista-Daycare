@@ -1,6 +1,6 @@
 // Testimonials.tsx
 import React, { useState, useEffect } from 'react';
-import { getSignedMediaUrl } from '../lib/aws-config';
+import { getCachedSignedMediaUrl } from '../lib/aws-config';
 import css from './Testimonials.module.css';
 import { testimonialData, type Testimonial } from '../types/common';
 
@@ -21,7 +21,7 @@ const Testimonials: React.FC = () => {
         const testimonialsWithUrls = await Promise.all(
           testimonialData.map(async (testimonial) => ({
             ...testimonial,
-            imageUrl: await getSignedMediaUrl(testimonial.imageKey)
+            imageUrl: await getCachedSignedMediaUrl(testimonial.imageKey)
           }))
         );
         setTestimonials(testimonialsWithUrls);

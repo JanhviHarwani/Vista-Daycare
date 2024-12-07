@@ -3,7 +3,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import styles from "./Slider.module.css";
 import { slider } from '../types/common';
-import { getSignedMediaUrl } from '../lib/aws-config';
+import { getCachedSignedMediaUrl } from '../lib/aws-config';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Slider = () => {
@@ -17,7 +17,7 @@ const Slider = () => {
         setIsLoading(true);
         const signedUrls = await Promise.all(
           slider.map(async (item) => ({
-            src: await getSignedMediaUrl(item.key),
+            src: await getCachedSignedMediaUrl(item.key),
             alt: item.caption || "Gallery Image",
           }))
         );

@@ -9,7 +9,7 @@ import {
   StaffsData_whole,
   type StaffsUrl,
 } from "../types/common";
-import { getSignedMediaUrl } from "../lib/aws-config";
+import { getCachedSignedMediaUrl } from "../lib/aws-config";
 import CustomSpinner from "../components/Spinner";
 
 function AboutUs() {
@@ -40,25 +40,25 @@ function AboutUs() {
           Promise.all(
             StaffsData_admin.map(async (staff) => ({
               ...staff,
-              imageUrl: await getSignedMediaUrl(staff.imageKey),
+              imageUrl: await getCachedSignedMediaUrl(staff.imageKey),
             }))
           ),
           Promise.all(
             StaffsData_act.map(async (staff) => ({
               ...staff,
-              imageUrl: await getSignedMediaUrl(staff.imageKey),
+              imageUrl: await getCachedSignedMediaUrl(staff.imageKey),
             }))
           ),
           Promise.all(
             StaffsData_health.map(async (staff) => ({
               ...staff,
-              imageUrl: await getSignedMediaUrl(staff.imageKey),
+              imageUrl: await getCachedSignedMediaUrl(staff.imageKey),
             }))
           ),
           Promise.all(
             StaffsData_whole.map(async (staff) => ({
               ...staff,
-              imageUrl: await getSignedMediaUrl(staff.imageKey),
+              imageUrl: await getCachedSignedMediaUrl(staff.imageKey),
             }))
           ),
         ]);

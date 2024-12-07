@@ -8,7 +8,7 @@ import {
   GalleryData_Act,
   type GalleryEnvUrl,
 } from "../types/common";
-import { getSignedMediaUrl } from "../lib/aws-config";
+import { getCachedSignedMediaUrl } from "../lib/aws-config";
 import CustomSpinner from "../components/Spinner";
 
 function Gallery() {
@@ -64,7 +64,7 @@ function Gallery() {
         const envWithUrls = await Promise.all(
           GalleryData_Env.map(async (environment) => ({
             ...environment,
-            imageUrl: await getSignedMediaUrl(environment.imageKey),
+            imageUrl: await getCachedSignedMediaUrl(environment.imageKey),
           }))
         );
         setGallery(envWithUrls);
@@ -82,7 +82,7 @@ function Gallery() {
         const activityWithUrls = await Promise.all(
           GalleryData_Act.map(async (activity) => ({
             ...activity,
-            imageUrl: await getSignedMediaUrl(activity.imageKey),
+            imageUrl: await getCachedSignedMediaUrl(activity.imageKey),
           }))
         );
         setActivityGallery(activityWithUrls);

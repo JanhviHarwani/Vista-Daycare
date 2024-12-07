@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { getSignedMediaUrl } from '../lib/aws-config';
+import { getCachedSignedMediaUrl } from '../lib/aws-config';
 import css from './VideoCarousel.module.css';
 import { mediaItems, MediaWithUrl } from '../types/common';
 
@@ -17,7 +17,7 @@ export const VideoCarousel: React.FC = () => {
         const urls = await Promise.all(
           mediaItems.map(async (item) => ({
             type: item.type,
-            url: await getSignedMediaUrl(item.key),
+            url: await getCachedSignedMediaUrl(item.key),
             caption: item.caption
           }))
         );
