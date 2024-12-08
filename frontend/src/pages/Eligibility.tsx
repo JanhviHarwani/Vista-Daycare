@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { imageGalleryItems } from '../types/common';
-import { getSignedMediaUrl } from '../lib/aws-config';
+import { getCachedSignedMediaUrl } from '../lib/aws-config';
 import ApplicationStructure from '../components/ApplicationStructure';
 import { Helmet } from 'react-helmet';
 import styles from './Eligibility.module.css';
@@ -31,7 +31,7 @@ const Eligibility: React.FC = () => {
         setIsLoading(true);
         const signedUrls = await Promise.all(
           imageGalleryItems.map(async (item) => ({
-            src: await getSignedMediaUrl(item.key),
+            src: await getCachedSignedMediaUrl(item.key),
             alt: item.caption,
           }))
         );

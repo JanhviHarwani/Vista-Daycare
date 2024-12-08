@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getSignedMediaUrl } from "../lib/aws-config";
+import { getCachedSignedMediaUrl } from "../lib/aws-config";
 import { serviceData, type ServiceUrl } from "../types/common";
 import ApplicationStructure from "../components/ApplicationStructure";
 import Slider from "../components/Slider";
@@ -28,9 +28,9 @@ const Services: React.FC = () => {
         const servicesWithUrls = await Promise.all(
           serviceData.map(async (service) => ({
             ...service,
-            imageUrl: await getSignedMediaUrl(service.imageKey),
+            imageUrl: await getCachedSignedMediaUrl(service.imageKey),
             extraImages: await Promise.all(
-              (service.extraImages || []).map((key) => getSignedMediaUrl(key))
+              (service.extraImages || []).map((key) => getCachedSignedMediaUrl(key))
             ),
           }))
         );
