@@ -153,7 +153,7 @@ const CalendarView: React.FC<CalendarViewProps> = ({ events, meals }) => {
               <div className={styles.eventsContainer}>
                 {viewType === "events" &&
                   day.events?.map((event, i) => (
-                    <div key={i} className={styles.eventItem}>
+                    <div key={i} className={`${styles.eventItem} ${event.isHighlight ? styles.highlighted : ''}`}>
                       <div className={styles.eventTime}>
                         {event.start_time}-{event.end_time}
                       </div>
