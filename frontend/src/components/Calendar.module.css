@@ -146,6 +146,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   animation: fadeIn 0.3s ease;
+  display: flex;
+  justify-content: space-between;
 }
 @keyframes fadeIn {
   from {

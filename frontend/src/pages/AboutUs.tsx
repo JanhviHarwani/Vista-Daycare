@@ -92,19 +92,11 @@ function AboutUs() {
       ) : (
         <div className={styles.abWhole}>
           <div className={styles.parentContainer}>
-            <h1 style={{ textAlign: "left" }}>
-              <span style={{ fontSize: "1.4em" }}>{t("aboutUs.title")}</span>
-            </h1>
+            <h1>{t("aboutUs.title")}</h1>
             <div className={styles.aboutUsDescription}>
-              <p style={{ textAlign: "center", lineHeight: "1.6" }}>
-                {t("aboutUs.description1")}
-                <br />
-                <br />
-                {t("aboutUs.description2")}
-                <br />
-                <br />
-                {t("aboutUs.description3")}
-              </p>
+              <p>{t("aboutUs.description1")}</p>
+              <p>{t("aboutUs.description2")}</p>
+              <p>{t("aboutUs.description3")}</p>
             </div>
 
             <h2 style={{ fontSize: "2em", textAlign: "center" }}>
@@ -118,9 +110,13 @@ function AboutUs() {
               {t("aboutUs.meetStaff")}
             </h2>
             <hr />
-            <img className={styles.staffs} src={Staffs[0].imageUrl} alt="Staff Image" />
-
-            <h3 className={styles.sectionHeading} style={{ textAlign: "left" }}>
+            <img
+              className={styles.staffs}
+              src={Staffs[0].imageUrl}
+              alt="Staff Image"
+            />
+            <br />
+            <h3 className={styles.sectionHeading}>
               {t("aboutUs.adminDepartment")}
             </h3>
             <div className={styles.staffContainer}>
@@ -144,7 +140,7 @@ function AboutUs() {
                 ))}
               </div>
             </div>
-
+            <br />
             <h3 className={styles.sectionHeading} style={{ textAlign: "left" }}>
               {t("aboutUs.activitiesDept")}
             </h3>
@@ -169,7 +165,7 @@ function AboutUs() {
                 ))}
               </div>
             </div>
-
+            <br />
             <h3 className={styles.sectionHeading} style={{ textAlign: "left" }}>
               {t("aboutUs.healthTherapy")}
             </h3>

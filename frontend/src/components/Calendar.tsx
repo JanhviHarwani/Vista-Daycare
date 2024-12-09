@@ -164,7 +164,8 @@ const CalendarView: React.FC<CalendarViewProps> = ({ events, meals }) => {
                 {viewType === "meals" &&
                   day.meals?.map((meal, i) => (
                     <div key={i} className={styles.mealItem}>
-                      {meal.meal_name}
+                      <div>{meal.meal_name} </div>
+                      <div>- {meal.quantity}</div>
                     </div>
                   ))}
               </div>
