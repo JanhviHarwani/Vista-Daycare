@@ -58,7 +58,7 @@ const quickResponses = [
   },
 
   {
-    title: "Contact Us",
+    title: "Contact Daycare",
     description: "Need help? Get in touch with our care team",
   },
 ];

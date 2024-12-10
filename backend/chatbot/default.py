@@ -25,7 +25,7 @@ def get_contact_info(message):
             Email: info@vistaadhc.com
             Website: www.vistadaycare.com
             We’re here to help, and we look forward to hearing from you! 
-            To add a query got to Contact Us section"""
+            To schedule a visit or learn more, fill out our "Come and Visit Us" form with your contact information."""
     return text
 
 

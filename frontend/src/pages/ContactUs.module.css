@@ -44,12 +44,12 @@
   right: 0;
   bottom: 0;
   border-radius: 10px;
-  border: 2px solid transparent;
+  border: 2px solid rgba(162, 132, 94, 0.1);
   transition: border-color 0.3s ease-in-out;
 }
 
 .contactColumn:hover::before {
-  border-color: burlywood;
+  border-color: #a2845e;
 }
 
 .contactColumn form {
@@ -110,12 +110,12 @@
   left: 0;
   width: 0;
   height: 2px;
-  background-color: burlywood;
+  background-color: #a2845e;
   transition: width 0.3s ease-in-out;
 }
 
 .contactColumn:hover h2::after {
-  width: 50px;
+  width: 40%;
 }
 
 .operatingHoursItem {
@@ -127,7 +127,7 @@
 
 .operatingHoursItem:hover {
   transform: translateX(10px);
-  color: burlywood;
+  color: #a2845e;
 }
 
 .day {
@@ -162,7 +162,7 @@
   transform: translateX(-50%);
   width: 100px;
   height: 3px;
-  background-color: burlywood;
+  background-color: #a2845e;
   border-radius: 5px;
 }
 
@@ -197,7 +197,7 @@
     margin: 20px auto;
     gap: 20px;
   }
-  
+
   .contactColumn {
     width: 100%;
     margin: 0;
@@ -212,11 +212,11 @@
   .map iframe {
     height: 250px;
   }
-  
+
   form {
     width: 100%;
   }
-  
+
   button[type="submit"] {
     width: 100%;
     margin-top: 20px;
@@ -228,16 +228,16 @@
     width: 95%;
     padding: 10px;
   }
-  
+
   .contactColumn {
     padding: 15px;
   }
-  
+
   .contactUsHeader {
     font-size: 1.8rem;
     margin: 20px 0;
   }
-  
+
   .map iframe {
     height: 200px;
   }
