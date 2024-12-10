@@ -47,7 +47,7 @@ function App() {
         
         {/* Protected Admin Route */}
         <Route 
-          path="/admin" 
+          path="/authorized-access" 
           element={
             <PrivateRoute>
               <AdminDashboard />

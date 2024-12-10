@@ -75,7 +75,6 @@ function Header() {
               {t("header.activitiesCalendar")}
             </option>
             <option value="/eligibility"> {t("header.eligibility")}</option>
-            {/* <option value="/admin"> {t("header.adminLogin")}</option> */}
           </select>
           <div className={css.button_wrapper_custom}>
             <button

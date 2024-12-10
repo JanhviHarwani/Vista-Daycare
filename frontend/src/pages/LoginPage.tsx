@@ -36,7 +36,7 @@ export const LoginPage = () => {
       // Axios automatically throws an error for non-2xx responses
       // so if we get here, we know the request was successful
       localStorage.setItem('token', response.data.token);
-      navigate('/admin');
+      navigate('/authorized-access');
       
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {

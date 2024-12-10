@@ -162,7 +162,7 @@ const ContactForm = () => {
           className='formSubmit'
           disabled={isSubmitting}
         >
-          <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
+          <span>{isSubmitting ? 'Sending...' : 'Schedule a Visit'}</span>
         </button>
       </form>
     </div>

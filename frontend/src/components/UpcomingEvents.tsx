@@ -37,19 +37,8 @@ const UpcomingEvents: React.FC = () => {
   const loadEvents = async () => {
     try {
       setLoading(true);
-      const response = await axiosInstance.get<Event[]>("/events/all");
-
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      const todayString = today.toLocaleDateString("en-CA"); // Returns YYYY-MM-DD in local timezone
-      const upcomingEvents = response.data
-        .filter((event) => {
-          const include = event.event_date >= todayString;
-          return include;
-        })
-        .slice(0, 3);
-
-      setEvents(upcomingEvents);
+      const response = await axiosInstance.get<Event[]>("/events/upcoming");
+      setEvents(response.data);
     } catch (error) {
       const errorMessage = getErrorMessage(error);
       showError(errorMessage);
@@ -85,7 +74,10 @@ const UpcomingEvents: React.FC = () => {
             {events.length > 0 ? (
               events.map((event, index) => {
                 return (
-                  <div key={event.id} className={css.event_card}>
+                  <div
+                    key={`${event.event_name}-${event.event_date}-${event.start_time}`}
+                    className={css.event_card}
+                  >
                     <div className={css.date_circle}>
                       <div className={css.circle_backdrop}></div>
                       <div className={css.date_content}>

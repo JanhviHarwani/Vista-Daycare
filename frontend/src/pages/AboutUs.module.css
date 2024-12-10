@@ -1,16 +1,36 @@
 .abWhole {
   width: 100%;
-  padding-bottom: 80px;
-  padding-top: 1rem;
+  padding: 80px 0;
+  background-color: #fff;
 }
 
 .parentContainer {
-  text-align: left;
-  padding-top: 5px;
-  padding-left: 100px;
-  padding-right: 100px;
-  margin-left: 100px;
-  margin-right: 100px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Title styling */
+.abWhole h1 {
+  font-size: 2.5rem;
+  color: #2d2d2d;
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.abWhole h1::after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: #a2845e;
+  transition: width 0.3s ease;
 }
 
 .abWhole h2 {
@@ -49,12 +69,74 @@
 }
 
 .aboutUsDescription {
-  text-align: center;
-  line-height: 1.6;
-  padding: 0 20px;
+  max-width: 900px;
   margin: 0 auto;
-  max-width: 1000px;
-  width: 90%;
+  padding: 20px;
+  line-height: 1.8;
+  font-size: 1.1rem;
+  color: #444;
+  text-align: center;
+  opacity: 0;
+  animation: slideUp 0.8s ease-out 0.2s forwards;
+}
+
+.aboutUsDescription p {
+  margin-bottom: 1.5rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .abWhole {
+    padding: 60px 0;
+  }
+
+  .parentContainer {
+    padding: 0 20px;
+  }
+
+  .abWhole h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .aboutUsDescription {
+    font-size: 1rem;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .abWhole h1 {
+    font-size: 2rem;
+  }
+
+  .aboutUsDescription {
+    text-align: left;
+    padding: 10px;
+  }
 }
 
 .missionDescription {
@@ -79,13 +161,13 @@
 }
 
 .sectionHeading {
-  display: inline-block;
-  text-align: left;
+  display: flex;
+  width: fit-content;
   background-color: #d3c7b5;
   color: #ffffff;
   padding: 10px 80px;
   border-radius: 5px;
-  margin-left: 15px;
+  /* margin-left: 15px; */
   margin-top: 50px;
   margin-bottom: 10px;
 }
@@ -98,7 +180,7 @@
 .wrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6em;
+  gap: 0.8em;
   justify-content: flex-start;
   padding: 0 12px;
   margin-top: 20px;
@@ -211,7 +293,7 @@
     position: relative;
     width: 260px;
     height: 260px;
-    margin-top: 10px;
+    /* margin-top: 10px; */
   }
 
   .noMargin {
@@ -245,7 +327,16 @@
     margin-right: 20px;
   }
 }
-
+@media (max-width: 637px) {
+  .wrapper {
+    justify-content: center;
+  }
+  .sectionHeading {
+    text-align: center;
+    width: auto;
+    justify-content: center;
+  }
+}
 @media (max-width: 480px) {
   .image {
     position: relative;
