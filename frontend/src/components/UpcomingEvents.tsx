@@ -71,7 +71,7 @@ const UpcomingEvents: React.FC = () => {
           <div className={css.loading_container}>Loading events...</div>
         ) : (
           <div className={css.events_container}>
-            {events.length > 0 ? (
+            {events.length && events.length > 0 ? (
               events.map((event, index) => {
                 return (
                   <div
